@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,15 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
+    'rest_framework',
     'accounts',
     'cmrcss',
     'leads',
     'customer',
+    'pages',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -58,7 +63,9 @@ ROOT_URLCONF = 'crm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,8 +123,22 @@ USE_I18N = True
 USE_TZ = True
 
 
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:5000",
+]
+from corsheaders.defaults import default_headers, default_methods
+CORS_ALLOW_METHODS = list(set(list(default_methods) + ['POST', 'PUT', 'PATCH', 'DELETE']))
+CORS_ALLOW_HEADERS = list(set(list(default_headers)+ ['Authorization', 'Content-Type', 'X-CSRFToken']))
+CORS_ALLOW_CREDENTIALS = True
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticdata')
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'static')
+]
 
 STATIC_URL = 'static/'
 
@@ -125,3 +146,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_RENDERER_CLASSES = [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+DEFAULT_AUTHENTICATION_CLASSES= [
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+if DEBUG:
+    DEFAULT_RENDERER_CLASSES += [
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
+    'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES,
+}
