@@ -10,18 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from datetime import timedelta
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(dotenv_path=os.path.join(BASE_DIR, 'crm', '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#v)wl2+()m^uhday@3*d&f3qe5$3#u$rt3lqr#wo=6cm)p+@zf'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -125,9 +129,9 @@ USE_TZ = True
 
 CORS_ALLOWED_ORIGINS = [
     "https://example.com",
-    "http://localhost:8080",
-    "http://127.0.0.1:5000",
+    "http://localhost:3000",
 ]
+# CORS_ALLOW_ALL_ORIGINS = True
 from corsheaders.defaults import default_headers, default_methods
 CORS_ALLOW_METHODS = list(set(list(default_methods) + ['POST', 'PUT', 'PATCH', 'DELETE']))
 CORS_ALLOW_HEADERS = list(set(list(default_headers)+ ['Authorization', 'Content-Type', 'X-CSRFToken']))
@@ -152,6 +156,7 @@ DEFAULT_RENDERER_CLASSES = [
     ]
 DEFAULT_AUTHENTICATION_CLASSES= [
         'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 if DEBUG:
     DEFAULT_RENDERER_CLASSES += [
@@ -160,4 +165,8 @@ if DEBUG:
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': DEFAULT_AUTHENTICATION_CLASSES,
     'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES,
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=7),
 }
