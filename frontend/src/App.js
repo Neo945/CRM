@@ -13,20 +13,24 @@ function App() {
     if (window.location.pathname !== "/checkout")
       localStorage.removeItem("purchase");
     if (user === null) {
-      lookup("GET", "/accounts/get/", "", null).then(({ data, status }) => {
-        if (status === 200) {
-          if (data.user) {
-            localStorage.setItem("user", JSON.stringify(data.user));
-            setUser(data.user);
+      lookup("GET", "/accounts/get/", "", null)
+        .then(({ data, status }) => {
+          if (status === 200) {
+            if (data.user) {
+              localStorage.setItem("user", JSON.stringify(data.user));
+              setUser(data.user);
+            } else {
+              localStorage.setItem("user", null);
+              setUser(null);
+            }
           } else {
             localStorage.setItem("user", null);
             setUser(null);
           }
-        } else {
-          localStorage.setItem("user", null);
-          setUser(null);
-        }
-      });
+        })
+        .catch((e) => {
+          console.log(e.message);
+        });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

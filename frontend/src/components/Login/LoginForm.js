@@ -1,60 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style.css";
 import { Link } from "react-router-dom";
 import { lookup } from "../../utils";
 
-class loginform extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      fields: {
-        username: "",
-        password: "",
-      },
-      errors: {
-        username: "",
-        password: "",
-      },
-    };
+function Loginform(props) {
+  const [state, setState] = useState({
+    fields: {
+      username: "",
+      password: "",
+    },
+    errors: {
+      username: "",
+      password: "",
+    },
+  });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.submituserRegistrationForm =
-      this.submituserRegistrationForm.bind(this);
-  }
-
-  handleChange(e) {
-    let fields = this.state.fields;
+  function handleChange(e) {
+    let fields = state.fields;
     fields[e.target.name] = e.target.value;
-    this.setState({
+    setState({
+      ...state,
       fields,
     });
   }
 
-  initState() {
+  function initState() {
     let fields = {};
     fields.username = "";
     fields.password = "";
-    this.setState({ fields: fields });
+    setState({ ...state, fields: fields });
   }
 
-  submituserRegistrationForm(e) {
+  function submituserRegistrationForm(e) {
     e.preventDefault();
-    if (this.validateForm()) {
+    if (validateForm()) {
       // alert("Form submitted");
-      console.log(this.state.fields);
-      lookup("POST", "/accounts/login/", "", this.state.fields).then(
+      console.log(state.fields);
+      lookup("POST", "/accounts/login/", "", state.fields).then(
         ({ data, status }) => {
           if (status === 200) {
             console.log(data);
-            // this.props.history("/");
+            initState();
+            // props.history("/");
           }
         }
       );
     }
   }
 
-  validateForm() {
-    let fields = this.state.fields;
+  function validateForm() {
+    let fields = state.fields;
     let errors = {};
     let formIsValid = true;
 
@@ -104,71 +99,70 @@ class loginform extends React.Component {
       }
     }
 
-    this.setState({
+    setState({
+      ...state,
       errors: errors,
     });
     return formIsValid;
   }
 
-  render() {
-    return (
-      <div id="main-registration-container ">
-        <div id="register" className="split left">
-          <div className="centered" />
-          <h3>Login Page</h3>
-          <form
-            method="post"
-            name="userRegistrationForm"
-            onSubmit={this.submituserRegistrationForm}
-          >
-            <label>Username:</label>
-            <input
-              type="text"
-              name="username"
-              autoComplete="username"
-              value={this.state.fields.username}
-              onChange={this.handleChange}
-              id="username"
-            />
-            <div className="errorMsg">{this.state.errors.username}</div>
-            {/* <label>Email ID:</label>
+  return (
+    <div id="main-registration-container ">
+      <div id="register" className="split left">
+        <div className="centered" />
+        <h3>Login Page</h3>
+        <form
+          method="post"
+          name="userRegistrationForm"
+          onSubmit={submituserRegistrationForm}
+        >
+          <label>Username:</label>
+          <input
+            type="text"
+            name="username"
+            autoComplete="username"
+            value={state.fields.username}
+            onChange={handleChange}
+            id="username"
+          />
+          <div className="errorMsg">{state.errors.username}</div>
+          {/* <label>Email ID:</label>
             <input
               type="text"
               name="email"
-              value={this.state.fields.email}
-              onChange={this.handleChange}
+              value={state.fields.email}
+              onChange={handleChange}
               id="email"
             />
-            <div className="errorMsg">{this.state.errors.email}</div> */}
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              autoComplete="current-password"
-              value={this.state.fields.password}
-              onChange={this.handleChange}
-              id="pass"
-            />
-            <div className="errorMsg">{this.state.errors.password}</div>
-            <center>
-              <input type="submit" className="button" value="Login" />
-            </center>
-            <Link to="/register"> Not a user? Sign-up </Link>
-            <br></br>
-            <br></br>
-            <Link to="/forgotpassword"> Forgot Password </Link>
-          </form>
-        </div>
+            <div className="errorMsg">{state.errors.email}</div> */}
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            autoComplete="current-password"
+            value={state.fields.password}
+            onChange={handleChange}
+            id="pass"
+          />
+          <div className="errorMsg">{state.errors.password}</div>
+          <center>
+            <input type="submit" className="button" value="Login" />
+          </center>
+          <Link to="/register"> Not a user? Sign-up </Link>
+          <br></br>
+          <br></br>
+          <Link to="/forgotpassword"> Forgot Password </Link>
+        </form>
+      </div>
 
-        <div className="split right">
-          <div className="centered">
-            <h2>John Doe</h2>
-            <p>Some text here too.</p>
-          </div>
+      <div className="split right">
+        <div className="centered">
+          <h2>John Doe</h2>
+          <p>Some text here too.</p>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default loginform;
+export default Loginform;

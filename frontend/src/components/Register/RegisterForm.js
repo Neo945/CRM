@@ -1,67 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style.css";
 import { Link } from "react-router-dom";
 import { lookup } from "../../utils";
-class RegisterForm extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      fields: {
-        username: "",
-        email: "",
-        mobileno: "",
-        password1: "",
-        password2: "",
-      },
-      errors: {
-        username: "",
-        email: "",
-        mobileno: "",
-        password1: "",
-        password2: "",
-      },
-    };
+function RegisterForm(props) {
+  const [state, setState] = useState({
+    fields: {
+      username: "",
+      email: "",
+      mobileno: "",
+      password1: "",
+      password2: "",
+    },
+    errors: {
+      username: "",
+      email: "",
+      mobileno: "",
+      password1: "",
+      password2: "",
+    },
+  });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.submituserRegistrationForm =
-      this.submituserRegistrationForm.bind(this);
-  }
-
-  handleChange(e) {
-    let fields = this.state.fields;
+  function handleChange(e) {
+    let fields = state.fields;
     fields[e.target.name] = e.target.value;
-    this.setState({
+    setState({
+      ...state,
       fields,
     });
   }
-  initState() {
+  function initState() {
     let fields = {};
     fields.username = "";
     fields.email = "";
     fields.mobileno = "";
     fields.password1 = "";
     fields.password2 = "";
-    this.setState({ fields: fields });
+    setState({ ...state, fields: fields });
   }
 
-  submituserRegistrationForm(e) {
+  function submituserRegistrationForm(e) {
     e.preventDefault();
-    if (this.validateForm()) {
-      // Fetch API call here using this.state.fields
-      lookup("POST", "/accounts/register/", "", this.state.fields).then(
+    if (validateForm()) {
+      // Fetch API call here using state.fields
+      lookup("POST", "/accounts/register/", "", state.fields).then(
         ({ data, status }) => {
           if (status === 200) {
             console.log(data);
-            // this.props.history("/");
+            // props.history("/");
           }
         }
       );
-      this.initState();
+      initState();
     }
   }
 
-  validateForm() {
-    let fields = this.state.fields;
+  function validateForm() {
+    let fields = state.fields;
     let errors = {};
     let formIsValid = true;
 
@@ -133,97 +127,97 @@ class RegisterForm extends React.Component {
       }
     }
 
-    this.setState({
+    setState({
+      ...state,
       errors: errors,
     });
     return formIsValid;
   }
 
-  render() {
-    return (
-      <div id="main-registration-container ">
-        <div id="register" className="split left">
-          <div className="centered" />
-          <h3>Registration page</h3>
-          <form
-            method="post"
-            name="userRegistrationForm"
-            onSubmit={this.submituserRegistrationForm}
-          >
-            <label>Name</label>
-            <input
-              type="text"
-              autoComplete={"username"}
-              name="username"
-              value={this.state.fields.username}
-              onChange={this.handleChange}
-            />
-            <div className="errorMsg">{this.state.errors.username}</div>
-            <label>Email ID:</label>
-            <input
-              type="text"
-              autoComplete={"email"}
-              name="email"
-              value={this.state.fields.email}
-              onChange={this.handleChange}
-            />
-            <div className="errorMsg">{this.state.errors.email}</div>
-            <label>Mobile No:</label>
-            <input
-              type="text"
-              name="mobileno"
-              value={this.state.fields.mobileno}
-              onChange={this.handleChange}
-            />
-            <div className="errorMsg">{this.state.errors.mobileno}</div>
-            <label>Password</label>
-            <input
-              type={this.state.fields.showPassword ? "text" : "password"}
-              name="password1"
-              autoComplete={"new-password"}
-              value={this.state.fields.password1}
-              onChange={this.handleChange}
-            />
-            <div className="errorMsg">{this.state.errors.password1}</div>
-            <label>Confirm Password</label>
-            <input
-              type={this.state.fields.showPassword ? "text" : "password"}
-              name="password2"
-              autoComplete={"new-password"}
-              value={this.state.fields.password2}
-              onChange={this.handleChange}
-            />
-            <div className="errorMsg">{this.state.errors.password2}</div>
-            <label htmlFor="showPassword">Show Password</label>
-            <input
-              type={"checkbox"}
-              id="showPassword"
-              name="showPassword"
-              onChange={(event) => {
-                const fields = { ...this.state.fields };
-                fields[event.target.name] = event.target.checked;
-                this.setState({
-                  fields,
-                });
-              }}
-            />
-            <center>
-              <input type="submit" className="button" value="Register" />
-            </center>
+  return (
+    <div id="main-registration-container ">
+      <div id="register" className="split left">
+        <div className="centered" />
+        <h3>Registration page</h3>
+        <form
+          method="post"
+          name="userRegistrationForm"
+          onSubmit={submituserRegistrationForm}
+        >
+          <label>Name</label>
+          <input
+            type="text"
+            autoComplete={"username"}
+            name="username"
+            value={state.fields.username}
+            onChange={handleChange}
+          />
+          <div className="errorMsg">{state.errors.username}</div>
+          <label>Email ID:</label>
+          <input
+            type="text"
+            autoComplete={"email"}
+            name="email"
+            value={state.fields.email}
+            onChange={handleChange}
+          />
+          <div className="errorMsg">{state.errors.email}</div>
+          <label>Mobile No:</label>
+          <input
+            type="text"
+            name="mobileno"
+            value={state.fields.mobileno}
+            onChange={handleChange}
+          />
+          <div className="errorMsg">{state.errors.mobileno}</div>
+          <label>Password</label>
+          <input
+            type={state.fields.showPassword ? "text" : "password"}
+            name="password1"
+            autoComplete={"new-password"}
+            value={state.fields.password1}
+            onChange={handleChange}
+          />
+          <div className="errorMsg">{state.errors.password1}</div>
+          <label>Confirm Password</label>
+          <input
+            type={state.fields.showPassword ? "text" : "password"}
+            name="password2"
+            autoComplete={"new-password"}
+            value={state.fields.password2}
+            onChange={handleChange}
+          />
+          <div className="errorMsg">{state.errors.password2}</div>
+          <label htmlFor="showPassword">Show Password</label>
+          <input
+            type={"checkbox"}
+            id="showPassword"
+            name="showPassword"
+            onChange={(event) => {
+              const fields = { ...state.fields };
+              fields[event.target.name] = event.target.checked;
+              setState({
+                ...state,
+                fields,
+              });
+            }}
+          />
+          <center>
+            <input type="submit" className="button" value="Register" />
+          </center>
 
-            <Link to="/login"> Already a user? Sign-in </Link>
-          </form>
-        </div>
+          <Link to="/login"> Already a user? Sign-in </Link>
+        </form>
+      </div>
 
-        <div className="split right">
-          <div className="centered">
-            <h2>John Doe</h2>
-            <p>Some text here too.</p>
-          </div>
+      <div className="split right">
+        <div className="centered">
+          <h2>John Doe</h2>
+          <p>Some text here too.</p>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default RegisterForm;
