@@ -1,5 +1,5 @@
 import React from "react";
-import "../style.css";
+import "./ForgotPassword.css";
 import { Link } from "react-router-dom";
 
 class ForgotPassword extends React.Component {
@@ -107,7 +107,7 @@ class ForgotPassword extends React.Component {
     let url = "src/registrationForm/loginform.js";
     return (
       <div id="main-registration-container ">
-        <div id="register" className="split left">
+        <div id="" className="split3 left3">
           <div className="centered" />
           <h3>Forgot Password page</h3>
           <form
@@ -142,7 +142,7 @@ class ForgotPassword extends React.Component {
 
             <label>Re-enter New Password</label>
             <input
-              type="newpassword"
+              type="password"
               placeholder="Confirm New Password"
               name="newpassword"
               value={this.state.fields.password}
@@ -161,7 +161,7 @@ class ForgotPassword extends React.Component {
           </form>
         </div>
 
-        <div className="split right">
+        <div className="split3 right3">
           <div className="centered">
             <h2>John Doe</h2>
             <p>Some text here too.</p>

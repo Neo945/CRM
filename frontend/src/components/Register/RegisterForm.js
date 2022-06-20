@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../style.css";
+import "./Register.css";
 import { Link } from "react-router-dom";
 import { lookup } from "../../utils";
 function RegisterForm(props) {
@@ -136,10 +136,10 @@ function RegisterForm(props) {
 
   return (
     <div id="main-registration-container ">
-      <div id="register" className="split left">
+      <div id="register" className="split2     left2">
         <div className="centered" />
         <h3>Registration page</h3>
-        <form
+        <form className="registerform"
           method="post"
           name="userRegistrationForm"
           onSubmit={submituserRegistrationForm}
@@ -210,7 +210,7 @@ function RegisterForm(props) {
         </form>
       </div>
 
-      <div className="split right">
+      <div className="split2 right2">
         <div className="centered">
           <h2>John Doe</h2>
           <p>Some text here too.</p>

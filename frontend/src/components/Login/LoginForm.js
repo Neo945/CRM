@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../style.css";
+ import './login.css'
 import { Link } from "react-router-dom";
 import { lookup } from "../../utils";
 
@@ -108,10 +108,10 @@ function Loginform(props) {
 
   return (
     <div id="main-registration-container ">
-      <div id="register" className="split left">
+      <div id="register1" className="split1 left1">
         <div className="centered" />
         <h3>Login Page</h3>
-        <form
+        <form className="loginform"
           method="post"
           name="userRegistrationForm"
           onSubmit={submituserRegistrationForm}
@@ -155,7 +155,7 @@ function Loginform(props) {
         </form>
       </div>
 
-      <div className="split right">
+      <div className="split1 right1">
         <div className="centered">
           <h2>John Doe</h2>
           <p>Some text here too.</p>
