@@ -4,8 +4,12 @@ __pycache__/
 venv
 db.sqlite3
 
+static
+
 staticdata
 
 models
+
+index1.html
 
 .env
