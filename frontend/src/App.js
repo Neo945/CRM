@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { useNavigate, Navigate } from "react-router-dom";
 
-import { ForgotPassword, Register, Login } from "./components";
+import { Navbar,ForgotPassword,Register, Login,Leads} from "./components";
+
 import { useEffect, useState } from "react";
 import { lookup } from "./utils";
 function App() {
@@ -51,7 +51,14 @@ function App() {
               <li>
                 <Link to={"/register"}>Register</Link>
               </li>
-            </ol>
+              <li>
+                <Link to={"/navbar"}>HomeDash</Link>
+              </li>
+              <li>
+                <Link to={"/navlead"}>Leads</Link>
+              </li>
+
+            </ol>   
           }
         />
 
@@ -72,7 +79,18 @@ function App() {
           path="/forgotpassword"
           element={<ForgotPassword history={navigate} />}
         />
+        <Route
+          path="/navbar"
+          element={<Navbar history={navigate} />}
+        />
+        <Route
+          path="/navlead"
+          element={<Leads history={navigate} />}
+        />
+
         <Route path="/home" element={<h1>Home</h1>} />
+        
+  
       </Routes>
     </div>
   );
