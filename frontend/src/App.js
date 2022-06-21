@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { useNavigate, Navigate } from "react-router-dom";
 
-import { Navbar,ForgotPassword,Register, Login,Leads, RawData} from "./components";
+import { Navbar,ForgotPassword,Register, Login,Leads} from "./components";
 
 import { useEffect, useState } from "react";
 import { lookup } from "./utils";
@@ -57,9 +57,6 @@ function App() {
               <li>
                 <Link to={"/navlead"}>Leads</Link>
               </li>
-              <li>
-                <Link to={"/RawData"}>RawData</Link>
-              </li>
 
             </ol>   
           }
@@ -89,11 +86,6 @@ function App() {
         <Route
           path="/navlead"
           element={<Leads history={navigate} />}
-        />
-
-        <Route
-          path="/RawData"
-          element={<RawData history={navigate} />}
         />
 
         <Route path="/home" element={<h1>Home</h1>} />
