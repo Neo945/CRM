@@ -136,10 +136,10 @@ function RegisterForm(props) {
 
   return (
     <div id="main-registration-container ">
-      <div id="register" className="split2     left2">
-        <div className="centered" />
+      <div id="rf" className="split2 left2">
         <h3>Registration page</h3>
-        <form className="registerform"
+        <form
+          className="registerform"
           method="post"
           name="userRegistrationForm"
           onSubmit={submituserRegistrationForm}

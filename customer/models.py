@@ -24,12 +24,13 @@ class Linkedin(models.Model):
     description = models.TextField(null=True)
     requirement = models.TextField(null=True)
     linkedin_url = models.URLField(max_length=200, null=True)
+    job = models.ManyToManyField('Job', null=True, through='Customer_Job')
 
     def __str__(self):
         return self.linkedin_url
 
-class Account(models.Model):
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE, null=True)
+class Client(models.Model):
+    operations_account = models.ForeignKey('leads.OperationLead', on_delete=models.CASCADE, null=True)
     operation = models.ForeignKey('leads.Operation', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
@@ -40,12 +41,13 @@ class Account(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     linkedin = models.ForeignKey('Linkedin', on_delete=models.CASCADE, null=True)
+    job = models.ManyToManyField('Job', null=True, through='Client_Job')
 
     def __str__(self):
         return self.name
 
-class Account_Company(models.Model):
-    account = models.ForeignKey('Account', on_delete=models.CASCADE, null=False)
+class Client_Job(models.Model):
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, null=False)
     job = models.ForeignKey('accounts.Job', on_delete=models.CASCADE, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
