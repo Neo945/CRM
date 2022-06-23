@@ -7,14 +7,15 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
 from django.core.mail import send_mail
-from accounts.serializers import UserSerializer
+from accounts.models import Company, Profile
+from accounts.serializers import CompanySerializer, ProfileSerializer, UserSerializer
 
 # Create your views here.
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user(request):
     if request.user.is_authenticated:
-        return Response({'message': "user is authenticated", "success": True, 'user': UserSerializer(request.user).data})
+        return Response({'message': "user is authenticated", "success": True, 'user': ProfileSerializer(Profile.objects.get(user=request.user)).data})
     return Response({'message': "user is not authenticated","success": False})
 
 @api_view(['POST'])
@@ -47,8 +48,10 @@ def reg_view(request):
     }    
     """
     form = UserCreationForm(request.data or None)
-    if form.is_valid():
+    serializer = ProfileSerializer(data=request.data)
+    if form.is_valid() and serializer.is_valid():
         user = form.save(commit=True)
+        serializer.save(user=user)
         return Response({"message":"Register Successful", "sucess": True, "user": UserSerializer(user).data}, status=201)
     return Response({"message":"Register Failed", "sucess": False}, status=400)
 
@@ -88,3 +91,21 @@ def send_email_data(request):
     if send_mail( subject, message, email_from, recipient_list ) != 0:
         return Response({"message":"Email sent successfully", "sucess": True}, status=200)
     return Response({"message":"Email not sent", "sucess": False}, status=400)
+
+@api_view(['POST'])
+def crate_company(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        serializer = CompanySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message":"Company created successfully", "sucess": True}, status=201)
+        return Response({"message":"Company not created", "sucess": False}, status=400)
+    return Response({"message":"User is not authenticated", "sucess": False}, status=400)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_company(request):
+    if request.user.is_authenticated:
+        return Response({"message":"Company created successfully", "sucess": True, "company": CompanySerializer(Company.objects.get(id=request.data['company']['id'])).data}, status=201)
+    return Response({"message":"User is not authenticated", "sucess": False}, status=400)
+
