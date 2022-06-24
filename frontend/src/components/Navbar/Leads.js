@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
+import Navbar from "./Navbar";
+
 class Leads extends Component {
+
   render() {
     const data = [
       {
@@ -82,8 +85,11 @@ class Leads extends Component {
         accessor: "Country",
       },
     ];
+    
     return (
+     
       <div>
+        <Navbar/>
         <ReactTable
           data={data}
           columns={columns}

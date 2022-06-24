@@ -19,7 +19,7 @@ const Navbar= () =>{
     <li>
       <Link to="/goats">Deal</Link>
     </li>
-	<li>
+	<li className='logo'>
       <Link to="/logout">LogOut</Link>
     </li>
 		</ul>
@@ -85,7 +85,13 @@ const Navbar= () =>{
 
             </section>
 
+            <div class="footer">
+                <p>Footer</p>
+                <p>Contact: 9849329003</p>
+            </div>
+
     </header>
+    
 	
   );
 }
