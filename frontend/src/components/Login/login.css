@@ -14,16 +14,32 @@
       border: 2px solid red;
       margin-top: 4%;
       height: 80%;
+     
+    }
+    #username{
+      color: #333333;
+      text-align: justify;
     }
     
-    
+    #pass{
+      color: #333333;
+      text-align: justify;  
+    }
     
     .loginform label, .loginform input {
       display: block;
-      margin-bottom: 10px;
-      width: 90%;
+      font-weight: bolder;
+      width: 50%;
+      color: rgba(42, 21, 162, 0.758);
+      text-align: left;
+      font-size: 13px;
+      letter-spacing: normal  ;
     }
-    
+    .b1> .loginform label, .loginform input {
+      text-align: center;
+      color: white;
+      font-weight: bolder;
+    }
 
     .loginform input {
       padding: 10px;
@@ -31,11 +47,16 @@
     
     }
     
+    .button:hover{
+     
+      background-color:rgba(42, 21, 162, 0.758);
+    }
     .button {
-      background-color: #00BFFF;
+      background-color: blue;
       border-color: #3ac162;
       font-weight: bold;
-      padding: 12px 15px;
+      max-width: 50%;
+      max-height: 50%;
       color: #ffffff;
     }
     
@@ -45,13 +66,13 @@
     }
     
     a{
-      color: gray;
+      color:gray ;
       align-content: center;
       text-decoration: none;
     }
     
     a:hover{
-      color: blue;
+      color:rgba(42, 21, 162, 0.758);
     }
     .sucessMsg {
       color: #6B8E23;
@@ -77,7 +98,7 @@
     
     .right1 {
       right: 0;
-      background-color: red;
+      background-color:rgba(42, 21, 162, 0.758) ;
     }
     
     .centered {
@@ -87,4 +108,8 @@
     
       text-align: center;
     }
-   
+  h2,label{
+    color: rgba(42, 21, 162, 0.758);
+
+  }
+  

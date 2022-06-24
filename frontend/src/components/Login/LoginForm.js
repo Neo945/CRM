@@ -58,29 +58,7 @@ function Loginform(props) {
       errors.username = "*Please enter your username.";
     }
 
-    // if (fields.username.length !== 0) {
-    //   if (!fields.username.match(/^[a-zA-Z ]*$/)) {
-    //     formIsValid = false;
-    //     errors.username = "*Please enter alphabet characters only.";
-    //   }
-    // }
-
-    // if (!fields["emailid"]) {
-    //   formIsValid = false;
-    //   errors["emailid"] = "*Please enter your email-ID.";
-    // }
-
-    // if (typeof fields["emailid"] !== "undefined") {
-    //   //regular expression for email validation
-    //   var pattern = new RegExp(
-    //     /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-    //   );
-    //   if (!pattern.test(fields["emailid"])) {
-    //     formIsValid = false;
-    //     errors["emailid"] = "*Please enter valid email-ID.";
-    //   }
-    // }
-
+   
     if (!fields.password) {
       formIsValid = false;
       errors.password = "*Please enter your password.";
@@ -110,7 +88,7 @@ function Loginform(props) {
     <div id="main-registration-container ">
       <div id="register1" className="split1 left1">
         <div className="centered" />
-        <h3>Login Page</h3>
+        <h2>Login Page</h2>
         <form className="loginform"
           method="post"
           name="userRegistrationForm"
@@ -135,7 +113,8 @@ function Loginform(props) {
               id="email"
             />
             <div className="errorMsg">{state.errors.email}</div> */}
-          <label>Password</label>
+          <br></br>
+          <label>Password:</label>
           <input
             type="password"
             name="password"
@@ -146,7 +125,7 @@ function Loginform(props) {
           />
           <div className="errorMsg">{state.errors.password}</div>
           <center>
-            <input type="submit" className="button" value="Login" />
+            <input type="submit" className="button b1" value="Login" />
           </center>
           <Link to="/register"> Not a user? Sign-up </Link>
           <br></br>
@@ -157,8 +136,7 @@ function Loginform(props) {
 
       <div className="split1 right1">
         <div className="centered">
-          <h2>John Doe</h2>
-          <p>Some text here too.</p>
+        
         </div>
       </div>
     </div>

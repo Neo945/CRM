@@ -65,6 +65,7 @@ function App() {
             </ol>   
           }
         />
+          
 
         <Route
           path="/register"

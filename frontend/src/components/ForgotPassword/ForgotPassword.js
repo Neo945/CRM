@@ -152,7 +152,7 @@ class ForgotPassword extends React.Component {
             <div className="errorMsg">{this.state.errors.password}</div>
 
             <center>
-              <input type="submit" className="button" value="Register" />
+              <input type="submit" className="buttonfp" value="Register" />
             </center>
 
             <a href={url}>

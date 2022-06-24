@@ -70,7 +70,7 @@ h3 {
   text-align: center;
   margin-bottom: 20px;
 }
-h3:after {
+/* h3:after {
   display: block;
   height: 2px;
   background-color: #e67e22;
@@ -78,4 +78,4 @@ h3:after {
   width: 100px;
   margin: 0 auto;
   margin-top: 20px;
-}
+} */
