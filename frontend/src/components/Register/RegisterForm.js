@@ -151,7 +151,9 @@ function RegisterForm(props) {
             name="username"
             value={state.fields.username}
             onChange={handleChange}
+            id = "name1"
           />
+          <br></br>
           <div className="errorMsg">{state.errors.username}</div>
           <label>Email ID:</label>
           <input
@@ -160,7 +162,9 @@ function RegisterForm(props) {
             name="email"
             value={state.fields.email}
             onChange={handleChange}
+            id = "email1"
           />
+          <br></br>
           <div className="errorMsg">{state.errors.email}</div>
           <label>Mobile No:</label>
           <input
@@ -168,19 +172,22 @@ function RegisterForm(props) {
             name="mobileno"
             value={state.fields.mobileno}
             onChange={handleChange}
+            id = "mob1"
           />
-
+          <br></br>
           <div className="errorMsg">{state.errors.mobileno}</div>
         <br></br>
           <label>Password</label>
-
           <input
             type={state.fields.showPassword ? "text" : "password"}
             name="password1"
             autoComplete={"new-password"}
             value={state.fields.password1}
             onChange={handleChange}
+            id = "pass1"
           />
+          <br></br>
+
           <div className="errorMsg">{state.errors.password1}</div>
           <label>Confirm Password</label>
           <input
@@ -189,7 +196,9 @@ function RegisterForm(props) {
             autoComplete={"new-password"}
             value={state.fields.password2}
             onChange={handleChange}
+            id = "newpass1"
           />
+          <br></br>
           <div className="errorMsg">{state.errors.password2}</div>
           <label htmlFor="showPassword">Show Password</label>
           <input
@@ -215,8 +224,7 @@ function RegisterForm(props) {
 
       <div className="split2 right2">
         <div className="centered">
-          <h2>John Doe</h2>
-          <p>Some text here too.</p>
+          
         </div>
       </div>
     </div>

@@ -94,6 +94,7 @@
       left: 0;
       background-color: white ;
       margin-left: 2%  ;
+      overflow: hidden;
     }
     
     .right1 {

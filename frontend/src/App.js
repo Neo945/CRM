@@ -35,6 +35,21 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const navigate = useNavigate();
+
+  const [state, setState] = useState({
+    fields: {}
+  });
+ 
+  const onChange = updatedValue => {
+    setState({
+      ...state,
+      fields: {
+        ...state.fields,
+        ...updatedValue
+      }
+    });
+  };
+
   return (
     <div className="App">
       <Routes>
@@ -94,7 +109,7 @@ function App() {
         />
       <Route
           path="/data"
-          element={<RawData history={navigate} />}
+          element={<RawData onChange={fields => onChange(fields)} history={navigate} />}
         />
 
         <Route path="/home" element={<h1>Home</h1>} />

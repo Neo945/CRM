@@ -363,7 +363,7 @@ function RawData(props) {
             <div className="wrapper1">
               <div className="box">
                 <textarea id="mes"></textarea>
-                <label for="mes"> Customer Requirements </label>
+                <label htmlFor="mes"> Customer Requirements </label>
               </div>
             </div>
 
