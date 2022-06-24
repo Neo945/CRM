@@ -122,6 +122,7 @@ class ForgotPassword extends React.Component {
             <input
               type="text"
               placeholder="Enter Registered Email"
+              
               name="emailid"
               value={this.state.fields.emailid}
               onChange={this.handleChange}
