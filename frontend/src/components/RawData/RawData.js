@@ -25,18 +25,6 @@ function RawData(props) {
     countryError: "",
     pincodeError: "",
     stateError: "",
-    // lcpnError:'',
-    // lcdError:'',
-    // lcpn:'',
-    // lcd:'',
-    // lmn:'',
-    // lemail:'',
-    // lmobileError:'',
-    // lemailError:'',
-    // lcw:'',
-    // lwebsiteError:'',
-    // logid:'',
-    // logidError:'',
     cid: "",
     cidError: "",
   });
@@ -61,12 +49,6 @@ function RawData(props) {
     let countryError = "";
     let pincodeError = "";
     let stateError = "";
-    // let lcpnError = "";
-    // let lcdError = "";
-    // let lemailError = "";
-    // let lmobileError = "";
-    // let lwebsiteError = "";
-    // let logidError = "";
     let cidError = "";
 
     if (!state.cid) {
@@ -83,17 +65,11 @@ function RawData(props) {
       websiteError = "Website cannot be blank";
     }
 
-    // if (!state.lcw) {
-    //   lwebsiteError = "LinkedIN Contact Website cannot be blank";
-    // }
 
     if (!state.email.includes("@")) {
       emailError = "Invalid email";
     }
 
-    // if (!state.lemail.includes("@")) {
-    //   lemailError = "Invalid LinkedIn Contact email";
-    // }
 
     if (!state.company) {
       companyError = "Company Name cannot be blank";
@@ -109,33 +85,11 @@ function RawData(props) {
       mobileError = "Please Enter Valid Mobile Number";
     }
 
-    // if (!state.lmn) {
-    //   lmobileError = "LinkedIn Contact Mobile Number cannot be blank";
-    // }
 
     if (!state.lid) {
       linkedinError = "Linkedin ID cannot be blank";
     }
 
-    // if (!state.logid) {
-    //   logidError = "Log ID cannot be blank";
-    // }
-
-    // if (!state.lcpn) {
-    //   lcpnError = "LinkedIn Contact Person Name cannot be blank";
-    // }
-
-    // else if ((state.lcpn).length > 30) {
-    //   lcpnError = "LinkedIn Contact Person Name cant be greater than 30 letters "
-    // }
-
-    // if (!state.lcpn) {
-    //   lcdError = "LinkedIn Contact Designation cannot be blank";
-    // }
-
-    // else if ((state.lcpn).length > 30) {
-    //   lcdError = "LinkedIn Contact Designation cant be greater than 30 letters "
-    // }
 
     if (!state.street) {
       streetError = "Street cannot be blank";
@@ -177,8 +131,6 @@ function RawData(props) {
       countryError ||
       cidError
     ) {
-      // lcpnError || lcdError || lemailError || lmobileError ||
-      // lwebsiteError || logidError
       setState({
         ...state,
         emailError,
@@ -193,8 +145,6 @@ function RawData(props) {
         cidError,
         pincodeError,
         countryError,
-        // lcpnError, lcdError, lemailError,
-        // lmobileError, lwebsiteError, logidError
       });
       return false;
     }
@@ -210,6 +160,7 @@ function RawData(props) {
       // clear form
       setState(state);
     }
+  
   };
 
   return (
@@ -317,114 +268,6 @@ function RawData(props) {
               </div>
             </div>
 
-            {/* <div className='wrapper'>
-
-                <div className='box'>
-                  <input type="text" placeholder="Enter LinkedIn Company Name" name="company" id="company"
-                    value={state.company}
-                    onChange={e => change(e)}
-                  ></input>
-                  <div style={{ fontSize: 12, color: "red" }}>
-                    {state.companyError}
-                  </div>
-                  <label for="company"> LinkedIn Company Name </label>
-                </div>
-
-                <div className='box'>
-                  <input type="text" placeholder="Enter LinkedIn Contact Person Name" name="lcpn" id="lcpn"
-                    value={state.lcpn}
-                    onChange={e => change(e)}
-                  ></input>
-                  <div style={{ fontSize: 12, color: "red" }}>
-                    {state.lcpnError}
-                  </div>
-                  <label for="lid"> LinkedIn Contact Person Name </label>
-                </div>
-
-              </div>
-
-              <div className='wrapper'>
-
-                <div className='box'>
-                  <input type="text" placeholder="Enter LinkedIn Contact Designation" name="lcd" id="lcd"
-                    value={state.lcd}
-                    onChange={e => change(e)}
-                  ></input>
-                  <div style={{ fontSize: 12, color: "red" }}>
-                    {state.lcdError}
-                  </div>
-                  <label for="company"> LinkedIn Contact Designation </label>
-                </div>
-
-                <div className='box'>
-                  <input type="text" placeholder="Enter LinkedIn Contact Email ID" name="lemail" id="lemail"
-                    value={state.lemail}
-                    onChange={e => change(e)}
-                  ></input>
-                  <div style={{ fontSize: 12, color: "red" }}>
-                    {state.lemailError}
-                  </div>
-                  <label for="lid"> LinkedIn Contact Email ID </label>
-                </div>
-
-              </div>
-
-
-              <div className='wrapper'>
-
-                <div className='box'>
-                  <input type="text" placeholder="Enter LinkedIn Contact Mobile Number" name="lmn" id="lmn"
-                    value={state.lmn}
-                    onChange={e => change(e)}
-                  ></input>
-                  <div style={{ fontSize: 12, color: "red" }}>
-                    {state.lmobileError}
-                  </div>
-                  <label for="company"> LinkedIn Contact Mobile Number </label>
-                </div>
-
-                <div className='box'>
-                  <input type="text" placeholder="Enter LinkedIn Contact Website" name="lcw" id="lcw"
-                    value={state.lcw}
-                    onChange={e => change(e)}
-                  ></input>
-                  <div style={{ fontSize: 12, color: "red" }}>
-                    {state.lwebsiteError}
-                  </div>
-                  <label for="lid"> LinkedIn Contact Website </label>
-                </div>
-
-              </div>
-
-              <div className='wrapper'>
-
-                <div className='box'>
-                  <input type="text" placeholder="Enter Log ID" name="logid" id="logid"
-                    value={state.logid}
-                    onChange={e => change(e)}
-                  ></input>
-                  <div style={{ fontSize: 12, color: "red" }}>
-                    {state.logidError}
-                  </div>
-                  <label for="company"> Log ID  </label>
-                </div>
-
-
-                <div className='box'>
-                  <input type="date" id="dateupdate" name="dateupdate" required></input>
-                  <label> Log Date Update </label>
-                </div>
-              </div>
-
-
-              <div className='wrapper'>
-
-                <div className='box'>
-                  <input type="date" id="dateupdate" name="dateupdate" required></input>
-                  <label> Log Updated By </label>
-                </div>
-
-              </div> */}
 
             <h3> Customer's Address Information </h3>
 
@@ -524,21 +367,6 @@ function RawData(props) {
               </div>
             </div>
 
-            {/* <div className='wrapper1'>
-
-                <div className='box'>
-                  <textarea id="mes" ></textarea>
-                  <label for="mes"> LinkedIn Company Description</label>
-                </div>
-              </div>
-
-              <div className='wrapper1'>
-
-                <div className='box'>
-                  <textarea id="mes" ></textarea>
-                  <label for="mes"> LinkedIn Requirements </label>
-                </div>
-              </div> */}
 
             <div className="wrapper2">
               <center>

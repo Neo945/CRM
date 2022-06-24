@@ -169,8 +169,11 @@ function RegisterForm(props) {
             value={state.fields.mobileno}
             onChange={handleChange}
           />
+
           <div className="errorMsg">{state.errors.mobileno}</div>
+        <br></br>
           <label>Password</label>
+
           <input
             type={state.fields.showPassword ? "text" : "password"}
             name="password1"
@@ -203,7 +206,7 @@ function RegisterForm(props) {
             }}
           />
           <center>
-            <input type="submit" className="button" value="Register" />
+            <input type="submit" className="buttonregister" value="Register" />
           </center>
 
           <Link to="/login"> Already a user? Sign-in </Link>
