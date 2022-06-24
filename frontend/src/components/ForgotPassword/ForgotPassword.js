@@ -110,7 +110,7 @@ class ForgotPassword extends React.Component {
         <div id="" className="split3 left3">
           <div className="centered" />
           <h3>Forgot Password page</h3>
-          <form
+          <form className="fpform"
             method="post"
             name="userRegistrationForm"
             onSubmit={this.submituserRegistrationForm}
@@ -119,7 +119,7 @@ class ForgotPassword extends React.Component {
         <input type="text" name="username" value={this.state.fields.username} onChange={this.handleChange} />
         <div className="errorMsg">{this.state.errors.username}</div> */}
             <label>Registered Email ID</label>
-            <input
+            <input id="fpemail"
               type="text"
               placeholder="Enter Registered Email"
               
@@ -132,7 +132,7 @@ class ForgotPassword extends React.Component {
         <input type="text" name="mobileno" value={this.state.fields.mobileno} onChange={this.handleChange}   />
         <div className="errorMsg">{this.state.errors.mobileno}</div> */}
             <label>Enter New Password</label>
-            <input
+            <input id="fpnewpass"
               type="password"
               placeholder="Enter New Password"
               name="password"
@@ -142,7 +142,7 @@ class ForgotPassword extends React.Component {
             <div className="errorMsg">{this.state.errors.password}</div>
 
             <label>Re-enter New Password</label>
-            <input
+            <input id="fppass"
               type="password"
               placeholder="Confirm New Password"
               name="newpassword"
@@ -164,8 +164,7 @@ class ForgotPassword extends React.Component {
 
         <div className="split3 right3">
           <div className="centered">
-            <h2>John Doe</h2>
-            <p>Some text here too.</p>
+           
           </div>
         </div>
       </div>
