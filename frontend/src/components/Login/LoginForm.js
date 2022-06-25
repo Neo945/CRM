@@ -97,6 +97,7 @@ function Loginform(props) {
           <label>Username:</label>
           <input
             type="text"
+            placeholder="Enter Username"
             name="username"
             autoComplete="username"
             value={state.fields.username}
@@ -118,6 +119,7 @@ function Loginform(props) {
           <input
             type="password"
             name="password"
+            placeholder="Enter Password"
             autoComplete="current-password"
             value={state.fields.password}
             onChange={handleChange}

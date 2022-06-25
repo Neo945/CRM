@@ -6,17 +6,23 @@ const Navbar= () =>{
 		<header class="header">
 	  <div class="mid">
 		<ul class="navbar">
-			 <li>
+    <li>
       <Link to="/navlead">Leads</Link>
     </li>
+
     <li>
-      <Link to="/cats">Contact</Link>
+      <Link to="/marketingpage">Marketing</Link>
+    </li>
+
+    <li>
+      <Link to="/salespage">Sales</Link>
+    </li>
+
+    <li>
+      <Link to="/presalespage">Pre-sales</Link>
     </li>
     <li>
-      <Link to="/sheeps">Order</Link>
-    </li>
-    <li>
-      <Link to="/goats">Deal</Link>
+      <Link to="/operationpage">Operations</Link>
     </li>
 	<li className='logo'>
       <Link to="/logout">LogOut</Link>

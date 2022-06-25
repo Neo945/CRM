@@ -149,6 +149,7 @@ function RegisterForm(props) {
             type="text"
             autoComplete={"username"}
             name="username"
+            placeholder="Enter Name"
             value={state.fields.username}
             onChange={handleChange}
             id = "name1"
@@ -160,6 +161,7 @@ function RegisterForm(props) {
             type="text"
             autoComplete={"email"}
             name="email"
+            placeholder="Enter Email"
             value={state.fields.email}
             onChange={handleChange}
             id = "email1"
@@ -170,6 +172,7 @@ function RegisterForm(props) {
           <input
             type="text"
             name="mobileno"
+            placeholder="Enter Mobile"
             value={state.fields.mobileno}
             onChange={handleChange}
             id = "mob1"
@@ -182,6 +185,7 @@ function RegisterForm(props) {
             type={state.fields.showPassword ? "text" : "password"}
             name="password1"
             autoComplete={"new-password"}
+            placeholder="Enter Password"
             value={state.fields.password1}
             onChange={handleChange}
             id = "pass1"
@@ -194,6 +198,7 @@ function RegisterForm(props) {
             type={state.fields.showPassword ? "text" : "password"}
             name="password2"
             autoComplete={"new-password"}
+            placeholder="Re-enter Password"
             value={state.fields.password2}
             onChange={handleChange}
             id = "newpass1"

@@ -3,25 +3,33 @@ import React from 'react';
 import "./Navbar.css"
 import {  Link } from "react-router-dom";
 import Footer from '../Footer/Footer';
-
+import img from '../images/logo.jpg'
 
 const Navbar= () =>{
   return (
 		<header class="header">
 	  <div class="mid">
+      <img className='img123' src = {img} alt = "logo" height={30} width={30}></img>
 		<ul class="navbar">
 			 <li>
       <Link to="/navlead">Leads</Link>
     </li>
+
     <li>
-      <Link to="/cats">Contact</Link>
+      <Link to="/marketingpage">Marketing</Link>
+    </li>
+
+    <li>
+      <Link to="/salespage">Sales</Link>
+    </li>
+
+    <li>
+      <Link to="/presalespage">Pre-sales</Link>
     </li>
     <li>
-      <Link to="/sheeps">Order</Link>
+      <Link to="/operationpage">Operations</Link>
     </li>
-    <li>
-      <Link to="/goats">Deal</Link>
-    </li>
+
 	<li className='logo'>
       <Link to="/logout">LogOut</Link>
     </li>

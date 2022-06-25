@@ -6,8 +6,15 @@
   margin: auto;
 }
 
+
+
 .container{
   margin-left: 25%;
+  
+}
+
+.full{
+  background-color: skyblue;
 }
 
 
@@ -17,12 +24,15 @@
 
 .navbar {
   display: inline-block;
-  float:left;
+  float: right;
+  /* background-image: url('../images/logo.jpg'); */
 }
 
-.logo{
-  float: right;
+.img123{
+  float: left;
+
 }
+
 
 .navbar li {
   list-style: none;

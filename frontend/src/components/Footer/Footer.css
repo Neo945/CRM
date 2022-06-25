@@ -6,6 +6,7 @@ footer{
   .footer-nav{
     list-style: none;
     float: left;
+    font-size: small;
   }
   .social-links{
     list-style: none;
