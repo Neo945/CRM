@@ -1,10 +1,6 @@
-import CardsHome from '../CardsHome/CardsHome';
 import React from 'react';
-import "./Navbar.css"
+import "./CopyNav.css"
 import {  Link } from "react-router-dom";
-import Footer from '../Footer/Footer';
-
-
 const Navbar= () =>{
   return (
 		<header class="header">
@@ -31,13 +27,11 @@ const Navbar= () =>{
 		<br></br>
 		<br></br>
 		<br></br>
-		<CardsHome></CardsHome>
             {/* <div class="footer">
                 <p>Footer</p>
                 <p>Contact: 9849329003</p>
             </div> */}
-          
-<Footer/>
+
     </header>
     
 	

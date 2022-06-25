@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
+import CopyNav from '../CopyNav/CopyNav';
+import Footer from "../Footer/Footer";
 class Leads extends Component {
+
   render() {
     const data = [
       {
@@ -82,15 +85,20 @@ class Leads extends Component {
         accessor: "Country",
       },
     ];
+    
     return (
+     
       <div>
+        <CopyNav/>
         <ReactTable
           data={data}
           columns={columns}
           defaultPageSize={2}
           pageSizeOptions={[2, 4, 6]}
-        />
+      />
+<br></br>
       </div>
+
     );
   }
 }
