@@ -3,6 +3,7 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import CopyNav from '../CopyNav/CopyNav';
 import Footer from "../Footer/Footer";
+import "./Leads.css"
 class Leads extends Component {
 
   render() {
@@ -90,13 +91,17 @@ class Leads extends Component {
      
       <div>
         <CopyNav/>
+        <button className="rawbutton"> <a href="/data">Create Leads</a></button>
+        <br></br>
+        <br></br>
         <ReactTable
           data={data}
           columns={columns}
-          defaultPageSize={2}
+          defaultPageSize={10}
           pageSizeOptions={[2, 4, 6]}
       />
 <br></br> 
+<Footer></Footer>
       </div>
 
     );

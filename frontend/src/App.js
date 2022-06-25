@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { useNavigate, Navigate } from "react-router-dom";
 
-import { Navbar,ForgotPassword,Register, Login,Leads,RawData, SalesPage} from "./components";
+import { Navbar,ForgotPassword,Register, Login,Leads,RawData, SalesPage,PreSales,OperationsPage,MarketingPage} from "./components";
 
 import { useEffect, useState } from "react";
 import { lookup } from "./utils";
@@ -67,7 +67,7 @@ function App() {
                 <Link to={"/register"}>Register</Link>
               </li>
               <li>
-                <Link to={"/navbar"}>HomeDash</Link>
+                <Link to={"/home"}>HomeDash</Link>
               </li>
               <li>
                 <Link to={"/navlead"}>Leads</Link>
@@ -104,7 +104,7 @@ function App() {
           element={<ForgotPassword history={navigate} />}
         />
         <Route
-          path="/navbar"
+          path="/home"
           element={<Navbar history={navigate} />}
         />
         <Route
@@ -121,9 +121,10 @@ function App() {
           element={<SalesPage history={navigate} />}
         />
 
-        <Route path="/home" element={<h1>Home</h1>} />
-        
-  
+        <Route path="/home" element={<Navbar history={navigate} />} />
+        <Route path="/presales" element={<PreSales history={navigate} />} />
+        <Route path="/operationpage" element={<OperationsPage history={navigate} />} />
+        <Route path="/marketingpage" element={<MarketingPage history={navigate} />} />
       </Routes>
     </div>
   );

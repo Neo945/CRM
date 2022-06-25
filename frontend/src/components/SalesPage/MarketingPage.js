@@ -3,26 +3,26 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import CopyNav from '../CopyNav/CopyNav';
  import Footer from "../Footer/Footer";
-class SalesPage extends Component {
+class MarketingPage extends Component {
 
   render() {
     const data = [
       {
-        Salesid:"1001",
+        Customerid:"1001",
         Marketingid:"1111",
         Name: "Ayaan",
         Email:"abc@gmail.com",
         Phone: 7419638521,
-        SalesDetails: "xyz",
-        SalesPricing: "xyz",
-        Create:"CRM",
+        ReferredSource: "Adv",
+        Createdon:"CRM",
         Createdby:"any"
       },
-        ];
+   
+    ];
     const columns = [
       {
-        Header: "Sales id",
-        accessor: "Salesid",
+        Header: "Customer id",
+        accessor: "Customerid",
       },
       {
         Header: "Marketing id",
@@ -41,16 +41,12 @@ class SalesPage extends Component {
         accessor: "Phone",
       },
       {
-        Header: "Sales Details",
-        accessor: "SalesDetails",
+        Header: "Reffered Source",
+        accessor: "ReferredSource",
       },
       {
-         Header: "Sales Pricing",
-        accessor: "SalesPricing",
-      },
-      {
-        Header: "Created On",
-        accessor: "Create",
+        Header: "Created on",
+        accessor: "Createdon",
       },
       {
         Header: "Created by",
@@ -60,7 +56,7 @@ class SalesPage extends Component {
     
     return (
      
-      <div>
+      <div className="table">
         <CopyNav/>
         <ReactTable
           data={data}
@@ -75,4 +71,4 @@ class SalesPage extends Component {
     );
   }
 }
-export default SalesPage;
+export default MarketingPage;

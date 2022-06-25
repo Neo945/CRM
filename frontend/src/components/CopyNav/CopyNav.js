@@ -7,10 +7,13 @@ const Navbar= () =>{
 	  <div class="mid">
 		<ul class="navbar">
     <li>
-      <Link to="/navlead">Leads</Link>
+      <Link to="/home">Home </Link>
     </li>
 
     <li>
+      <Link to="/navlead">Leads</Link>
+    </li>
+        <li>
       <Link to="/marketingpage">Marketing</Link>
     </li>
 
@@ -19,13 +22,13 @@ const Navbar= () =>{
     </li>
 
     <li>
-      <Link to="/presalespage">Pre-sales</Link>
+      <Link to="/presales">Pre-sales</Link>
     </li>
     <li>
       <Link to="/operationpage">Operations</Link>
     </li>
 	<li className='logo'>
-      <Link to="/logout">LogOut</Link>
+      <Link to="/login">LogOut</Link>
     </li>
 		</ul>
    

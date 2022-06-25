@@ -5,5 +5,7 @@ import Navbar from "./Navbar/Navbar";
 import Leads from "./Navbar/Leads";
 import RawData from "./RawData/RawData";
 import SalesPage from "./SalesPage/salespage";
-
-export { Register, Login, ForgotPassword, Navbar, Leads, RawData, SalesPage };
+import PreSales from "./SalesPage/PreSales";
+import OperationsPage from "./SalesPage/OperationsPage";
+import MarketingPage from "./SalesPage/MarketingPage"
+export { Register, Login, ForgotPassword, Navbar, Leads, RawData, SalesPage,PreSales ,OperationsPage,MarketingPage};

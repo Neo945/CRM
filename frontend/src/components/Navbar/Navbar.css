@@ -1,4 +1,4 @@
-.mid {
+  .mid {
   background-color: rgba(112, 112, 249, 0.346);
   color: black;
   display: inline-block;
@@ -13,9 +13,6 @@
   
 }
 
-.full{
-  background-color: skyblue;
-}
 
 
 .container, .c1 > *{
@@ -23,9 +20,8 @@
 }
 
 .navbar {
-  display: inline-block;
+  /* display: inline-block; */
   float: right;
-  /* background-image: url('../images/logo.jpg'); */
 }
 
 .img123{
@@ -46,8 +42,7 @@
   color: rgb(29, 25, 231);
   font-size: 18px;
   padding: 8px 20px;
-  /* color: black; */
-  
+   
 }
 
 a{
@@ -102,16 +97,6 @@ h3 {
   margin-bottom: 20px;
 }
 
-/* .footer > * {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color:lightcoral;
-  color: black;
-  text-align: center;
-} */
-
 
 .footer-nav li a:link, .footer-nav li a:visited, .social-links li a:link ,.social-links li a:visited{
   text-decoration: none;
@@ -128,19 +113,3 @@ footer p{
 }
 
 
-.social-links li a:link,.socia-links li a:visited{
-  font-size: 160%;
-}
-.ion-social-facebook:hover{
-  color: #3b5998;
-}
-.ion-social-twitter:hover{
-  color: #1da1f2;
-}
-.ion-social-instagram:hover{
-   color: #c32aa3;
-}
-
-.ion-social-googleplus:hover{
-   color: #ea4335;
-}
