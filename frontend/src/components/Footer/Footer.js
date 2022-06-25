@@ -8,16 +8,18 @@ export default class Footer extends Component {
             <div class="row">
                 <div class="col span-1-of-2">
                     <ul class="footer-nav">
-                        <li><a href="#">About us</a></li>
-                        <li><a >Blog</a></li>
-                        <li><a >Press</a></li>
-                        <li><a >iOS App</a></li>
-                        <li><a >Android App</a></li>
+                        <li><a href="#"><b>About us</b></a></li>
+                        <li><a><b>Blog</b></a></li>
+                        <li><a><b>Press</b></a></li>
+                        <li><a><b>iOS App</b></a></li>
+                        <li><a><b>Android App</b></a></li>
                     </ul>
                 </div>
               </div>
             <div class="row">
-                <p>Copyright &copy;  All rights reserved</p>
+                <p><b>Copyright &copy;  All rights reserved</b></p>
+                <p><b>Contact Number: +91 7048328239</b></p>
+                <p><b>Location: Mumbai,Maharashtra.</b></p>
                 
             </div>
         </footer>

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import CopyNav from '../CopyNav/CopyNav';
-import Footer from "../Footer/Footer";
-class Leads extends Component {
+// import Footer from "../Footer/Footer";
+class SalesPage extends Component {
 
   render() {
     const data = [
@@ -65,15 +65,15 @@ class Leads extends Component {
         accessor: "name",
       },
       {
-        Header: "Mobile",
+        Header: "Age",
         accessor: "age",
       },
       {
-        Header: "Linkedin ID",
+        Header: "Code",
         accessor: "code",
       },
       {
-        Header: "Email",
+        Header: "Contact-Number",
         accessor: "phonenumber",
       },
       {
@@ -93,7 +93,7 @@ class Leads extends Component {
         <ReactTable
           data={data}
           columns={columns}
-          defaultPageSize={2}
+          defaultPageSize={10}
           pageSizeOptions={[2, 4, 6]}
       />
 <br></br>
@@ -102,4 +102,4 @@ class Leads extends Component {
     );
   }
 }
-export default Leads;
+export default SalesPage;
