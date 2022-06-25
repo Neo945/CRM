@@ -19,6 +19,7 @@
   margin-bottom: 10%;
   margin-top: 10%;
   max-width: 50%;
+
 }
 .registerform label,
 .registerform input {
@@ -38,11 +39,7 @@
 }
 
 .buttonregister {
-  /* background-color: #00bfff;
-  border-color: #3ac162;
-  font-weight: bold;
-  padding: 12px 15px;
-  color: #ffffff; */
+
   background-color: blue;
   border-color: #3ac162;
   font-weight: bold;
@@ -84,15 +81,12 @@ a:hover {
   overflow-x: hidden;
   padding-top: 20px;
 }
-#rf {
+#rf{
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  margin-left: 5%;
-  margin-bottom: 10%;
-  margin-right: 50%;
+  align-items: center;
 }
+ 
 #rf > form {
   margin: 0;
   max-width: 80%;
@@ -103,7 +97,8 @@ a:hover {
   left: 0;
   width: 50%;
   text-align: center;
-  /* overflow: hidden; */
+
+    
 }
 
 .right2 {

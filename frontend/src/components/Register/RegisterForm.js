@@ -153,7 +153,7 @@ function RegisterForm(props) {
             onChange={handleChange}
             id = "name1"
           />
-          <br></br>
+   
           <div className="errorMsg">{state.errors.username}</div>
           <label>Email ID:</label>
           <input
@@ -164,7 +164,7 @@ function RegisterForm(props) {
             onChange={handleChange}
             id = "email1"
           />
-          <br></br>
+   
           <div className="errorMsg">{state.errors.email}</div>
           <label>Mobile No:</label>
           <input
@@ -174,9 +174,9 @@ function RegisterForm(props) {
             onChange={handleChange}
             id = "mob1"
           />
-          <br></br>
+         
           <div className="errorMsg">{state.errors.mobileno}</div>
-        <br></br>
+       
           <label>Password</label>
           <input
             type={state.fields.showPassword ? "text" : "password"}
@@ -186,7 +186,7 @@ function RegisterForm(props) {
             onChange={handleChange}
             id = "pass1"
           />
-          <br></br>
+   
 
           <div className="errorMsg">{state.errors.password1}</div>
           <label>Confirm Password</label>
@@ -198,7 +198,7 @@ function RegisterForm(props) {
             onChange={handleChange}
             id = "newpass1"
           />
-          <br></br>
+   
           <div className="errorMsg">{state.errors.password2}</div>
           <label htmlFor="showPassword">Show Password</label>
           <input
