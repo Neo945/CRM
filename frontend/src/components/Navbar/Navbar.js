@@ -10,8 +10,12 @@ const Navbar= () =>{
 		<header class="header">
 	  <div class="mid">
       <img className='img123' src = {img} alt = "logo" height={30} width={30}></img>
+    <div>
+
+    </div>
 		<ul class="navbar">
-		<li>
+      <div className='navlist'>		
+      <li>
       <Link to="/home">Home </Link>
     </li>
     	 <li>
@@ -31,11 +35,17 @@ const Navbar= () =>{
     <li>
       <Link to="/operationpage">Operations</Link>
     </li>
-
+    <li>
+      <Link to="/accountspage">Accounts</Link>
+    </li>
+    </div>
+<div className='navlogout'>
 	<li className='logo'>
       <Link to="/login">LogOut</Link>
+      
     </li>
-		</ul>
+		</div>
+    </ul>
    
   </div>
 		<br></br>

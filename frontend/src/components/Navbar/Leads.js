@@ -15,6 +15,8 @@ class Leads extends Component {
         phonenumber: 7419638521,
         city: "Sydney",
         Country: "Australia",
+        Feedback:'Nice',
+        
       },
       {
         name: "Ahana",
@@ -24,6 +26,7 @@ class Leads extends Component {
         phonenumber: 9637411021,
         city: "Nashik",
         Country: "India",
+        Feedback:'Nice',
       },
       {
         name: "Peter",
@@ -33,6 +36,7 @@ class Leads extends Component {
         phonenumber: 7418529630,
         city: "Kolkata",
         Country: "India",
+        Feedback:'Nice',
       },
       {
         name: "Virat",
@@ -42,6 +46,7 @@ class Leads extends Component {
         phonenumber: 4749651741,
         city: "NJ",
         Country: "USA",
+        Feedback:'Nice',
       },
       {
         name: "Rohit",
@@ -50,6 +55,7 @@ class Leads extends Component {
         phonenumber: 7417418963,
         city: "Mumbai",
         Country: "Inida",
+        Feedback:'Nice',
       },
       {
         name: "Dhoni",
@@ -58,6 +64,7 @@ class Leads extends Component {
         phonenumber: 8779143651,
         city: "Pune",
         Country: "India",
+        Feedback:'Nice',
       },
     ];
     const columns = [
@@ -84,6 +91,10 @@ class Leads extends Component {
       {
         Header: "country",
         accessor: "Country",
+      },
+      {
+        Header: "Feedback",
+        accessor: "Feedback",
       },
     ];
     
