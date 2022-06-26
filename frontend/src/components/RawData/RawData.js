@@ -1,32 +1,41 @@
 import React, { useState } from "react";
 import "./rawdata.css";
+import { lookup } from "../../utils";
 
 function RawData(props) {
   const [state, setState] = useState({
-    cname: "",
+    name: "",
     website: "",
     company: "",
     email: "",
-    mobile: "",
-    lid: "",
-    street: "",
-    city: "",
-    state: "",
-    pincode: "",
-    country: "",
+    phone: "",
+    linkedin_url: "",
+    // street: "",
+    // city: "",
+    // state: "",
+    // pincode: "",
+    // country: "",
+    address: "",
     nameError: "",
     emailError: "",
     websiteError: "",
     companyError: "",
-    mobileError: "",
+    phoneError: "",
     linkedinError: "",
-    streetError: "",
-    cityError: "",
-    countryError: "",
-    pincodeError: "",
-    stateError: "",
-    cid: "",
-    cidError: "",
+    addressError: "",
+    // streetError: "",
+    // cityError: "",
+    // countryError: "",
+    // pincodeError: "",
+    // stateError: "",
+    // cid: "",
+    // cidError: "",
+    description: "",
+    descriptionError: "",
+    requirement: "",
+    requirementError: "",
+    designation: "",
+    designationError: "",
   });
 
   const change = (e) => {
@@ -42,22 +51,26 @@ function RawData(props) {
     let emailError = "";
     let websiteError = "";
     let companyError = "";
-    let mobileError = "";
+    let phoneError = "";
     let linkedinError = "";
-    let streetError = "";
-    let cityError = "";
-    let countryError = "";
-    let pincodeError = "";
-    let stateError = "";
-    let cidError = "";
+    // let streetError = "";
+    // let cityError = "";
+    // let countryError = "";
+    // let pincodeError = "";
+    // let stateError = "";
+   // let cidError = "";
+    let addressError = "";
+    let descriptionError = "";
+    let requirementError = "";
+    let designationError = "";
 
-    if (!state.cid) {
-      cidError = "Customer ID cannot be blank";
-    }
+    // if (!state.cid) {
+    //   cidError = "Customer ID cannot be blank";
+    // }
 
-    if (!state.cname) {
+    if (!state.name) {
       nameError = "Lead Owner cannot be blank";
-    } else if (state.cname.length > 30) {
+    } else if (state.name.length > 30) {
       nameError = "Name cant be greater than 30 letters ";
     }
 
@@ -77,59 +90,72 @@ function RawData(props) {
       companyError = "Company Name cant be greater than 50 letters ";
     }
 
-    if (!state.mobile) {
-      mobileError = "Mobile Number cannot be blank";
+    if (!state.phone) {
+      phoneError = "phone Number cannot be blank";
     }
 
-    if (!state.mobile.match(/^[0-9]{10}$/)) {
-      mobileError = "Please Enter Valid Mobile Number";
+    if (!state.phone.match(/^[0-9]{10}$/)) {
+      phoneError = "Please Enter Valid phone Number";
     }
 
 
-    if (!state.lid) {
+    if (!state.linkedin_url) {
       linkedinError = "Linkedin ID cannot be blank";
     }
 
 
-    if (!state.street) {
-      streetError = "Street cannot be blank";
-    } else if (state.street.length > 30) {
-      streetError = "Street Name cant be greater than 30 letters ";
+    if (!state.address) {
+      addressError = "Street cannot be blank";
+    } else if (state.address.length > 30) {
+      addressError = "Street Name cant be greater than 30 letters ";
     }
 
-    if (!state.city) {
-      cityError = "City cannot be blank";
-    } else if (state.city.length > 20) {
-      cityError = "City Name cant be greater than 20 letters ";
+    if (!state.address) {
+      addressError = "City cannot be blank";
+    } else if (state.address.length > 20) {
+      addressError = "City Name cant be greater than 20 letters ";
     }
 
-    if (!state.state) {
-      stateError = "State cannot be blank";
-    } else if (state.state.length > 20) {
-      stateError = "State Name cant be greater than 20 letters ";
+    if (!state.address) {
+      addressError = "State cannot be blank";
+    } else if (state.address.length > 20) {
+      addressError = "State Name cant be greater than 20 letters ";
     }
 
-    if (!state.pincode) {
-      pincodeError = "Pincode cannot be blank";
+    if (!state.address) {
+      addressError = "Pincode cannot be blank";
     }
 
-    if (!state.country) {
-      countryError = "Country cannot be blank";
+    if (!state.address) {
+      addressError = "Country cannot be blank";
+    }
+
+    if (!state.description) {
+      descriptionError = "Description cannot be blank";
+    }
+
+    if (!state.requirement) {
+      requirementError = "Requiremnts cannot be blank";
+    }
+
+    if (!state.designation) {
+      designationError = "Designation cannot be blank";
     }
 
     if (
       emailError ||
       nameError ||
       websiteError ||
-      companyError ||
-      mobileError ||
+      phoneError ||
       linkedinError ||
-      streetError ||
-      cityError ||
-      stateError ||
-      pincodeError ||
-      countryError ||
-      cidError
+      addressError ||
+      // cityError ||
+      // stateError ||
+      descriptionError ||
+      // pincodeError ||
+      // countryError ||
+      requirementError||
+      designationError
     ) {
       setState({
         ...state,
@@ -137,14 +163,16 @@ function RawData(props) {
         nameError,
         websiteError,
         companyError,
-        mobileError,
+        phoneError,
         linkedinError,
-        streetError,
-        cityError,
-        stateError,
-        cidError,
-        pincodeError,
-        countryError,
+        addressError,
+        // cityError,
+        // stateError,
+        // pincodeError,
+        // countryError,
+        descriptionError,
+        designationError,
+        requirementError,
       });
       return false;
     }
@@ -159,6 +187,15 @@ function RawData(props) {
       console.log(state);
       // clear form
       setState(state);
+      lookup("POST", "/customer/create/customer/", "", state.fields).then(
+        ({ data, status }) => {
+          if (status === 200) {
+            console.log(data);
+            // props.history("/");
+          }
+        }
+      );
+
     }
   
   };
@@ -173,7 +210,7 @@ function RawData(props) {
           <form onSubmit={handleSubmit} className="rawform">
             <h3>Contact Information</h3>
             <div className="wrapper">
-              <div className="box">
+              {/* <div className="box">
                 <input
                   type="text"
                   placeholder="Enter Customer ID"
@@ -185,26 +222,24 @@ function RawData(props) {
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.cidError}
                 </div>
-                <label for="cname"> Customer ID </label>
-              </div>
+                <label for="name"> Customer ID </label>
+              </div> */}
 
               <div className="box">
                 <input
                   type="text"
                   placeholder="Enter Customer's Name"
-                  name="cname"
-                  id="cname"
-                  value={state.cname}
+                  name="name"
+                  id="name"
+                  value={state.name}
                   onChange={(e) => change(e)}
                 ></input>
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.nameError}
                 </div>
-                <label for="cname"> Customer Name </label>
+                <label for="name"> Customer Name </label>
               </div>
-            </div>
 
-            <div className="wrapper">
               <div className="box">
                 <input
                   type="email"
@@ -219,28 +254,29 @@ function RawData(props) {
                 </div>
                 <label for="email"> Customer Email ID </label>
               </div>
-
-              <div className="box">
-                <input
-                  type="number"
-                  placeholder="Enter Customer Mobile Number"
-                  name="mobile"
-                  id="mobile"
-                  value={state.mobile}
-                  onChange={(e) => change(e)}
-                ></input>
-                <div style={{ fontSize: 12, color: "red" }}>
-                  {state.mobileError}
-                </div>
-                <label for="mobile"> Customer Mobile Number </label>
-              </div>
             </div>
 
             <div className="wrapper">
+              
+              <div className="box">
+                <input
+                  type="number"
+                  placeholder="Enter Customer phone Number"
+                  name="phone"
+                  id="phone"
+                  value={state.phone}
+                  onChange={(e) => change(e)}
+                ></input>
+                <div style={{ fontSize: 12, color: "red" }}>
+                  {state.phoneError}
+                </div>
+                <label for="phone"> Customer phone Number </label>
+              </div>
+
               <div className="box">
                 <input
                   type="text"
-                  placeholder="Enter Customer Website URL"
+                  placeholder="Enter Customer Website"
                   name="website"
                   id="website"
                   value={state.website}
@@ -251,22 +287,54 @@ function RawData(props) {
                 </div>
                 <label for="website"> Customer Website </label>
               </div>
+            </div>
 
+            <div className="wrapper">
+          
               <div className="box">
                 <input
                   type="text"
-                  placeholder="Enter LinkedIn ID"
-                  name="lid"
-                  id="lid"
-                  value={state.lid}
+                  placeholder="Enter LinkedIn URL"
+                  name="linkedin_url"
+                  id="linkedin_url"
+                  value={state.linkedin_url}
                   onChange={(e) => change(e)}
                 ></input>
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.linkedinError}
                 </div>
-                <label for="lid"> LinkedIn ID </label>
+                <label for="linkedin_url"> LinkedIn ID </label>
               </div>
+
+              <div className='box'>
+                  <input type="text" placeholder="Enter LinkedIn Company Name" name="company" id="company"
+                    value={state.company}
+                    onChange={e => change(e)}
+                  ></input>
+                  <div style={{ fontSize: 12, color: "red" }}>
+                    {state.companyError}
+                  </div>
+                  <label for="company"> LinkedIn Company Name </label>
+                </div>
             </div>
+
+            <div className="wrapper">
+              
+              <div className="box">
+                <input
+                  type="text"
+                  placeholder="Enter Designation"
+                  name="designation"
+                  id="designation"
+                  value={state.designation}
+                  onChange={(e) => change(e)}
+                ></input>
+                <div style={{ fontSize: 12, color: "red" }}>
+                  {state.designationError}
+                </div>
+                <label for="designation"> Designation</label>
+              </div>
+              </div>
 
 
             <h3> Customer's Address Information </h3>
@@ -276,30 +344,30 @@ function RawData(props) {
                 <input
                   type="text"
                   placeholder="Enter Street Name"
-                  name="street"
-                  id="street"
-                  value={state.street}
+                  name="address"
+                  id="address"
+                  value={state.address}
                   onChange={(e) => change(e)}
                 ></input>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {state.streetError}
+                  {state.addressError}
                 </div>
-                <label for="street"> Street </label>
+                <label for="address"> Street Name </label>
               </div>
 
               <div className="box">
                 <input
                   type="text"
                   placeholder="Enter City Name"
-                  name="city"
-                  id="city"
-                  value={state.city}
+                  name="address"
+                  id="address"
+                  value={state.address}
                   onChange={(e) => change(e)}
                 ></input>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {state.cityError}
+                  {state.addressError}
                 </div>
-                <label for="city"> City </label>
+                <label for="address"> City Name </label>
               </div>
             </div>
 
@@ -308,30 +376,30 @@ function RawData(props) {
                 <input
                   type="text"
                   placeholder="Enter State Name"
-                  name="state"
-                  id="state"
-                  value={state.state}
+                  name="address"
+                  id="address"
+                  value={state.address}
                   onChange={(e) => change(e)}
                 ></input>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {state.stateError}
+                  {state.addressError}
                 </div>
-                <label for="state"> State </label>
+                <label for="address"> State Name</label>
               </div>
 
               <div className="box">
                 <input
                   type="number"
                   placeholder="Enter Pincode"
-                  name="pincode"
-                  id="pincode"
-                  value={state.pincode}
+                  name="address"
+                  id="address"
+                  value={state.address}
                   onChange={(e) => change(e)}
                 ></input>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {state.pincodeError}
+                  {state.addressError}
                 </div>
-                <label for="pincode"> Pincode </label>
+                <label for="address"> Pincode </label>
               </div>
             </div>
 
@@ -340,30 +408,42 @@ function RawData(props) {
                 <input
                   type="text"
                   placeholder="Enter Country's Name"
-                  name="country"
-                  id="country"
-                  value={state.country}
+                  name="address"
+                  id="address"
+                  value={state.address}
                   onChange={(e) => change(e)}
                 ></input>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {state.countryError}
+                  {state.addressError}
                 </div>
-                <label for="country"> Country </label>
+                <label for="address"> Country </label>
               </div>
             </div>
 
             <h3> Description Information </h3>
             <div className="wrapper1">
               <div className="box">
-                <textarea id="mes"></textarea>
-                <label for="mes"> Customer Description </label>
+                <textarea id="description" 
+                value={state.description}
+                onChange={(e) => change(e)}
+                ></textarea>
+                <div style={{ fontSize: 12, color: "red" }}>
+                  {state.descriptionError}
+                </div>
+                <label for="description"> Customer Description </label>
               </div>
             </div>
 
             <div className="wrapper1">
               <div className="box">
-                <textarea id="mes"></textarea>
-                <label htmlFor="mes"> Customer Requirements </label>
+                <textarea id="requirement"
+                 value={state.requirement}
+                 onChange={(e) => change(e)}
+                ></textarea>
+                <div style={{ fontSize: 12, color: "red" }}>
+                  {state.requirementError}
+                </div>
+                <label htmlFor="requirement"> Customer Requirements </label>
               </div>
             </div>
 
