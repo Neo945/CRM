@@ -152,9 +152,9 @@ function RegisterForm(props) {
             placeholder="Enter Name"
             value={state.fields.username}
             onChange={handleChange}
-            id = "name1"
+            id="name1"
           />
-   
+
           <div className="errorMsg">{state.errors.username}</div>
           <label>Email ID:</label>
           <input
@@ -164,9 +164,9 @@ function RegisterForm(props) {
             placeholder="Enter Email"
             value={state.fields.email}
             onChange={handleChange}
-            id = "email1"
+            id="email1"
           />
-   
+
           <div className="errorMsg">{state.errors.email}</div>
           <label>Mobile No:</label>
           <input
@@ -175,11 +175,11 @@ function RegisterForm(props) {
             placeholder="Enter Mobile"
             value={state.fields.mobileno}
             onChange={handleChange}
-            id = "mob1"
+            id="mob1"
           />
-         
+
           <div className="errorMsg">{state.errors.mobileno}</div>
-       
+
           <label>Password</label>
           <input
             type={state.fields.showPassword ? "text" : "password"}
@@ -188,9 +188,8 @@ function RegisterForm(props) {
             placeholder="Enter Password"
             value={state.fields.password1}
             onChange={handleChange}
-            id = "pass1"
+            id="pass1"
           />
-   
 
           <div className="errorMsg">{state.errors.password1}</div>
           <label>Confirm Password</label>
@@ -201,11 +200,10 @@ function RegisterForm(props) {
             placeholder="Re-enter Password"
             value={state.fields.password2}
             onChange={handleChange}
-            id = "newpass1"
+            id="newpass1"
           />
-   
+
           <div className="errorMsg">{state.errors.password2}</div>
-          <label htmlFor="showPassword">Show Password</label>
           <input
             type={"checkbox"}
             id="showPassword"
@@ -219,8 +217,34 @@ function RegisterForm(props) {
               });
             }}
           />
+          <label htmlFor="showPassword">Show Password</label>
+
+          <label for="type">Choose type:</label>
+
+          <select name="type" id="type" style={{ display: "block" }}>
+            <option value="MRK">Marketing</option>
+            <option value="OPR">Operations</option>
+            <option value="SLS">Sales</option>
+            <option value="PSLS">Pre Sales</option>
+          </select>
+
+          <div>
+            <input type="text" placeholder="Search.." name="search" />
+            <div>
+              <dev>Options</dev>
+            </div>
+          </div>
           <center>
-            <input type="submit" className="buttonregister" value="Register" />
+            <input
+              type="submit"
+              className="buttonregister"
+              style={{
+                textAlign: "center",
+                color: "white",
+                fontWeight: "normal",
+              }}
+              value="Register"
+            />
           </center>
 
           <Link to="/login"> Already a user? Sign-in </Link>
@@ -228,9 +252,7 @@ function RegisterForm(props) {
       </div>
 
       <div className="split2 right2">
-        <div className="centered">
-          
-        </div>
+        <div className="centered"></div>
       </div>
     </div>
   );

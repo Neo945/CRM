@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
-import CopyNav from '../CopyNav/CopyNav';
+import CopyNav from "../CopyNav/CopyNav";
 import Footer from "../Footer/Footer";
-import "./Leads.css"
+import "./Leads.css";
 class Leads extends Component {
-
   render() {
     const data = [
       {
@@ -15,8 +14,7 @@ class Leads extends Component {
         phonenumber: 7419638521,
         city: "Sydney",
         Country: "Australia",
-        Feedback:'Nice',
-        
+        Feedback: "Nice",
       },
       {
         name: "Ahana",
@@ -26,7 +24,7 @@ class Leads extends Component {
         phonenumber: 9637411021,
         city: "Nashik",
         Country: "India",
-        Feedback:'Nice',
+        Feedback: "Nice",
       },
       {
         name: "Peter",
@@ -36,7 +34,7 @@ class Leads extends Component {
         phonenumber: 7418529630,
         city: "Kolkata",
         Country: "India",
-        Feedback:'Nice',
+        Feedback: "Nice",
       },
       {
         name: "Virat",
@@ -46,7 +44,7 @@ class Leads extends Component {
         phonenumber: 4749651741,
         city: "NJ",
         Country: "USA",
-        Feedback:'Nice',
+        Feedback: "Nice",
       },
       {
         name: "Rohit",
@@ -55,7 +53,7 @@ class Leads extends Component {
         phonenumber: 7417418963,
         city: "Mumbai",
         Country: "Inida",
-        Feedback:'Nice',
+        Feedback: "Nice",
       },
       {
         name: "Dhoni",
@@ -64,7 +62,7 @@ class Leads extends Component {
         phonenumber: 8779143651,
         city: "Pune",
         Country: "India",
-        Feedback:'Nice',
+        Feedback: "Nice",
       },
     ];
     const columns = [
@@ -97,12 +95,14 @@ class Leads extends Component {
         accessor: "Feedback",
       },
     ];
-    
+
     return (
-     
       <div>
-        <CopyNav/>
-        <button className="rawbutton"> <a href="/data">Create Leads</a></button>
+        <CopyNav />
+        <button className="rawbutton">
+          {" "}
+          <a href="/data">Create Leads</a>
+        </button>
         <br></br>
         <br></br>
         <ReactTable
@@ -110,11 +110,15 @@ class Leads extends Component {
           columns={columns}
           defaultPageSize={10}
           pageSizeOptions={[2, 4, 6]}
-      />
-<br></br> 
-<Footer></Footer>
+        />
+        <br></br>
+        <select style={{ display: "block" }}>
+          <option value="All">All</option>
+          <option value="Checked">Checked</option>
+          <option value="Unhecked">Unhecked</option>
+        </select>
+        <Footer></Footer>
       </div>
-
     );
   }
 }

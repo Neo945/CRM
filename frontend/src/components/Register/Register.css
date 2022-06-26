@@ -15,11 +15,14 @@
   height: 80%;
 }
 
-.registerform{
+#showPassword:checked ~ label {
+  color: red !important;
+}
+
+.registerform {
   margin-bottom: 10%;
   margin-top: 10%;
   max-width: 50%;
-
 }
 .registerform label,
 .registerform input {
@@ -39,7 +42,6 @@
 }
 
 .buttonregister {
-
   background-color: blue;
   border-color: #3ac162;
   font-weight: bold;
@@ -48,8 +50,8 @@
   color: #ffffff;
 }
 
-.buttonregister:hover{
-  background-color:rgba(42, 21, 162, 0.758);
+.buttonregister:hover {
+  background-color: rgba(42, 21, 162, 0.758);
 }
 
 .errorMsg {
@@ -64,7 +66,7 @@ a {
 }
 
 a:hover {
-  color:rgba(42, 21, 162, 0.758);
+  color: rgba(42, 21, 162, 0.758);
 }
 
 .sucessMsg {
@@ -81,12 +83,12 @@ a:hover {
   overflow-x: hidden;
   padding-top: 20px;
 }
-#rf{
+#rf {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
- 
+
 #rf > form {
   margin: 0;
   max-width: 80%;
@@ -97,13 +99,11 @@ a:hover {
   left: 0;
   width: 50%;
   text-align: center;
-
-    
 }
 
 .right2 {
   right: 0;
-  background-color:rgba(42, 21, 162, 0.758) ;
+  background-color: rgba(42, 21, 162, 0.758);
 }
 
 .centered {
@@ -113,29 +113,27 @@ a:hover {
   text-align: center;
 }
 
-
-#name1{
+#name1 {
   color: #333333;
   text-align: justify;
 }
 
-#pass1{
+#pass1 {
   color: #333333;
-  text-align: justify;  
+  text-align: justify;
 }
 
-#newpass1{
+#newpass1 {
   color: #333333;
-  text-align: justify;  
+  text-align: justify;
 }
 
-#email1{
+#email1 {
   color: #333333;
-  text-align: justify;  
+  text-align: justify;
 }
 
-#mob1{
+#mob1 {
   color: #333333;
-  text-align: justify;  
+  text-align: justify;
 }
-

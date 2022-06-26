@@ -3,7 +3,19 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { useNavigate, Navigate } from "react-router-dom";
 
-import { Navbar,ForgotPassword,Register, Login,Leads,RawData, SalesPage,PreSales,OperationsPage,MarketingPage, AccountsPage} from "./components";
+import {
+  Navbar,
+  ForgotPassword,
+  Register,
+  Login,
+  Leads,
+  RawData,
+  SalesPage,
+  PreSales,
+  OperationsPage,
+  MarketingPage,
+  AccountsPage,
+} from "./components";
 
 import { useEffect, useState } from "react";
 import { lookup } from "./utils";
@@ -37,16 +49,16 @@ function App() {
   const navigate = useNavigate();
 
   const [state, setState] = useState({
-    fields: {}
+    fields: {},
   });
- 
-  const onChange = updatedValue => {
+
+  const onChange = (updatedValue) => {
     setState({
       ...state,
       fields: {
         ...state.fields,
-        ...updatedValue
-      }
+        ...updatedValue,
+      },
     });
   };
 
@@ -80,12 +92,9 @@ function App() {
               <li>
                 <Link to={"/salespage"}> Sales </Link>
               </li>
-
-
-            </ol>   
+            </ol>
           }
         />
-          
 
         <Route
           path="/register"
@@ -104,30 +113,34 @@ function App() {
           path="/forgotpassword"
           element={<ForgotPassword history={navigate} />}
         />
+        <Route path="/home" element={<Navbar history={navigate} />} />
+        <Route path="/navlead" element={<Leads history={navigate} />} />
         <Route
-          path="/home"
-          element={<Navbar history={navigate} />}
-        />
-        <Route
-          path="/navlead"
-          element={<Leads history={navigate} />}
-        />
-      <Route
           path="/data"
-          element={<RawData onChange={fields => onChange(fields)} history={navigate} />}
+          element={
+            <RawData
+              onChange={(fields) => onChange(fields)}
+              history={navigate}
+            />
+          }
         />
 
-
-      <Route
-          path="/salespage"
-          element={<SalesPage history={navigate} />}
-        />
+        <Route path="/salespage" element={<SalesPage history={navigate} />} />
 
         <Route path="/home" element={<Navbar history={navigate} />} />
         <Route path="/presales" element={<PreSales history={navigate} />} />
-        <Route path="/operationpage" element={<OperationsPage history={navigate} />} />
-        <Route path="/marketingpage" element={<MarketingPage history={navigate} />} />
-        <Route path = "/accountspage" element={<AccountsPage history={navigate} />} />
+        <Route
+          path="/operationpage"
+          element={<OperationsPage history={navigate} />}
+        />
+        <Route
+          path="/marketingpage"
+          element={<MarketingPage history={navigate} />}
+        />
+        <Route
+          path="/accountspage"
+          element={<AccountsPage history={navigate} />}
+        />
       </Routes>
     </div>
   );
