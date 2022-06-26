@@ -11,7 +11,7 @@ class LeadsSerializer(serializers.ModelSerializer):
     customer = CustomerSerializer(read_only=True)
     class Meta:
         model = Leads
-        fields = ('id', 'customer', 'date_updated', 'date_created')
+        fields = ('is_done','id', 'customer', 'date_updated', 'date_created')
 
 class MarketingSerializer(serializers.ModelSerializer):
     leads = LeadsSerializer(read_only=True)
@@ -19,7 +19,7 @@ class MarketingSerializer(serializers.ModelSerializer):
     cmrcss = CMRCSSSerializer(read_only=True)
     class Meta:
         model = MarketingLead
-        fields = ('leads','approved_by','date_created','date_updated','refered_by_name','refered_source','requirements','cmrcss')
+        fields = ('id','is_done','leads','approved_by','date_created','date_updated','refered_by_name','refered_source','requirements','cmrcss')
 
 
 class MarketingCreateSerializer(serializers.ModelSerializer):
@@ -34,7 +34,7 @@ class SalesSerializer(serializers.ModelSerializer):
     cmrcss = CMRCSSSerializer(read_only=True)
     class Meta:
         model = SalesLead
-        fields = ('approved_by','marketinglead','date_created','date_updated','sales_details','sales_pricing','cmrcss')
+        fields = ('id','is_done','approved_by','marketinglead','date_created','date_updated','sales_details','sales_pricing','cmrcss')
 
 class SalesCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,7 +48,7 @@ class PreSalesSerializer(serializers.ModelSerializer):
     approved_by = ProfileSerializer(read_only=True)
     class Meta:
         model = PreSalesLead
-        fields = ('approved_by', 'saleslead','date_created','date_updated', 'proposal_details','proposal_date','cmrcss')
+        fields = ('id','is_done','approved_by', 'saleslead','date_created','date_updated', 'proposal_details','proposal_date','cmrcss')
 
 
 class PreSalesCreateSerializer(serializers.ModelSerializer):
@@ -62,7 +62,7 @@ class OperationSerializer(serializers.ModelSerializer):
     approved_by = ProfileSerializer(read_only=True)
     class Meta:
         model = OperationLead
-        fields = ('presaleslead','approved_by','date_created','date_updated','cmrcss')
+        fields = ('id','is_done','presaleslead','approved_by','date_created','date_updated','cmrcss')
 
 class OperationCreateSerializer(serializers.ModelSerializer):
     class Meta:

@@ -31,22 +31,28 @@ def get_leads(request, leadsid):
 @permission_classes([IsAuthenticated])
 def get_all_leads_by_job(request, jobid):
     costumers = Customer.objects.filter(job=jobid)
-    leads = Leads.objects.filter(customer__in=costumers)
-    return Response({'status': 'success', 'data': LeadsSerializer(leads, many=True).data})
+    if costumers.exists():
+        leads = Leads.objects.filter(customer__in=costumers)
+        return Response({'status': 'success', 'data': LeadsSerializer(leads, many=True).data}, status=200)
+    return Response({'status': 'unsuccess',"data": []}, status=404)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_all_checked_leads_by_job(request, jobid):
     costumers = Customer.objects.filter(job=jobid)
-    leads = Leads.objects.filter(customer__in=costumers).filter(is_done=True)
-    return Response({'status': 'success', 'data': LeadsSerializer(leads, many=True).data})
+    if costumers.exists():
+        leads = Leads.objects.filter(customer__in=costumers).filter(is_done=True)
+        return Response({'status': 'success', 'data': LeadsSerializer(leads, many=True).data}, status=200)
+    return Response({'status': 'unsuccess',"data": []}, status=404)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_all_unchecked_leads_by_job(request, jobid):
     costumers = Customer.objects.filter(job=jobid)
-    leads = Leads.objects.filter(customer__in=costumers).filter(is_done=False)
-    return Response({'status': 'success', 'data': LeadsSerializer(leads, many=True).data})
+    if costumers.exists():
+        leads = Leads.objects.filter(customer__in=costumers).filter(is_done=False)
+        return Response({'status': 'success', 'data': LeadsSerializer(leads, many=True).data}, status=200)
+    return Response({'status': 'unsuccess',"data": []}, status=404)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -117,37 +123,31 @@ def get_all_unchecked_marketing_leads(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def get_marketing_leads_by_job(request, jobid):
-    if request.method == 'POST':
-        job = Job.objects.get(id=jobid)
-        customers = Customer.objects.filter(jobcustomer__id=job)
-        leads = Leads.objects.filter(customer__in=customers)
-        marketingleads = MarketingLead.objects.filter(lead__in=leads)
-        return Response({'status': 'success', 'data': MarketingSerializer(marketingleads, many=True).data})
-    return Response({'status': 'failure'})
+    job = Job.objects.get(id=jobid)
+    customers = Customer.objects.filter(job=job)
+    leads = Leads.objects.filter(customer__in=customers)
+    marketingleads = MarketingLead.objects.filter(leads__in=leads)
+    return Response({'status': 'success', 'data': MarketingSerializer(marketingleads, many=True).data})
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_checked_marketing_leads_by_job(request, jobid):
-    if request.method == 'POST':
-        job = Job.objects.get(id=jobid)
-        customers = Customer.objects.filter(jobcustomer__id=job)
-        leads = Leads.objects.filter(customer__in=customers)
-        marketingleads = MarketingLead.objects.filter(lead__in=leads).filter(is_done=True)
-        return Response({'status': 'success', 'data': MarketingSerializer(marketingleads, many=True).data})
-    return Response({'status': 'failure'})
+    job = Job.objects.get(id=jobid)
+    customers = Customer.objects.filter(job=job)
+    leads = Leads.objects.filter(customer__in=customers)
+    marketingleads = MarketingLead.objects.filter(lead__in=leads).filter(is_done=True)
+    return Response({'status': 'success', 'data': MarketingSerializer(marketingleads, many=True).data})
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_unchecked_marketing_leads_by_job(request, jobid):
-    if request.method == 'POST':
-        job = Job.objects.get(id=jobid)
-        customers = Customer.objects.filter(jobcustomer__id=job)
-        leads = Leads.objects.filter(customer__in=customers)
-        marketingleads = MarketingLead.objects.filter(lead__in=leads).filter(is_done=False)
-        return Response({'status': 'success', 'data': MarketingSerializer(marketingleads, many=True).data})
-    return Response({'status': 'failure'})
+    job = Job.objects.get(id=jobid)
+    customers = Customer.objects.filter(job=job)
+    leads = Leads.objects.filter(customer__in=customers)
+    marketingleads = MarketingLead.objects.filter(lead__in=leads).filter(is_done=False)
+    return Response({'status': 'success', 'data': MarketingSerializer(marketingleads, many=True).data})
 
 
 @api_view(['POST'])
@@ -230,7 +230,7 @@ def get_all_unchecked_sales_leads(request):
 @permission_classes([IsAuthenticated])
 def get_sales_leads_by_job(request, jobid):
     job = Job.objects.get(id=jobid)
-    customers = Customer.objects.filter(jobcustomer__id=job)
+    customers = Customer.objects.filter(job=job)
     leads = Leads.objects.filter(customer__in=customers)
     marketingleads = MarketingLead.objects.filter(lead__in=leads)
     salesleads = SalesLead.objects.filter(marketinglead__in=marketingleads)
@@ -241,7 +241,7 @@ def get_sales_leads_by_job(request, jobid):
 @permission_classes([IsAuthenticated])
 def get_checked_sales_leads_by_job(request, jobid):
     job = Job.objects.get(id=jobid)
-    customers = Customer.objects.filter(jobcustomer__id=job)
+    customers = Customer.objects.filter(job=job)
     leads = Leads.objects.filter(customer__in=customers)
     marketingleads = MarketingLead.objects.filter(lead__in=leads)
     salesleads = SalesLead.objects.filter(marketinglead__in=marketingleads).filter(is_done=True)
@@ -251,7 +251,7 @@ def get_checked_sales_leads_by_job(request, jobid):
 @permission_classes([IsAuthenticated])
 def get_unchecked_sales_leads_by_job(request, jobid):
     job = Job.objects.get(id=jobid)
-    customers = Customer.objects.filter(jobcustomer__id=job)
+    customers = Customer.objects.filter(job=job)
     leads = Leads.objects.filter(customer__in=customers)
     marketingleads = MarketingLead.objects.filter(lead__in=leads)
     salesleads = SalesLead.objects.filter(marketinglead__in=marketingleads).filter(is_done=False)
@@ -338,7 +338,7 @@ def get_all_unchecked_presales_leads(request):
 @permission_classes([IsAuthenticated])
 def get_presales_leads_by_job(request, jobid):
     job = Job.objects.get(id=jobid)
-    customers = Customer.objects.filter(jobcustomer__id=job)
+    customers = Customer.objects.filter(job=job)
     leads = Leads.objects.filter(customer__in=customers)
     marketingleads = MarketingLead.objects.filter(lead__in=leads)
     salesleads = SalesLead.objects.filter(marketinglead__in=marketingleads)
@@ -349,7 +349,7 @@ def get_presales_leads_by_job(request, jobid):
 @permission_classes([IsAuthenticated])
 def get_checked_presales_leads_by_job(request, jobid):
     job = Job.objects.get(id=jobid)
-    customers = Customer.objects.filter(jobcustomer__id=job)
+    customers = Customer.objects.filter(job=job)
     leads = Leads.objects.filter(customer__in=customers)
     marketingleads = MarketingLead.objects.filter(lead__in=leads)
     salesleads = SalesLead.objects.filter(marketinglead__in=marketingleads)
@@ -360,7 +360,7 @@ def get_checked_presales_leads_by_job(request, jobid):
 @permission_classes([IsAuthenticated])
 def get_unchecked_presales_leads_by_job(request, jobid):
     job = Job.objects.get(id=jobid)
-    customers = Customer.objects.filter(jobcustomer__id=job)
+    customers = Customer.objects.filter(job=job)
     leads = Leads.objects.filter(customer__in=customers)
     marketingleads = MarketingLead.objects.filter(lead__in=leads)
     salesleads = SalesLead.objects.filter(marketinglead__in=marketingleads)
@@ -449,7 +449,7 @@ def get_all_unchecked_operations_leads(request):
 @permission_classes([IsAuthenticated])
 def get_operations_leads_by_job(request, jobid):
     job = Job.objects.get(id=jobid)
-    customers = Customer.objects.filter(jobcustomer__id=job)
+    customers = Customer.objects.filter(job=job)
     leads = Leads.objects.filter(customer__in=customers)
     marketingleads = MarketingLead.objects.filter(lead__in=leads)
     salesleads = SalesLead.objects.filter(marketinglead__in=marketingleads)
@@ -462,7 +462,7 @@ def get_operations_leads_by_job(request, jobid):
 @permission_classes([IsAuthenticated])
 def get_checked_operations_leads_by_job(request, jobid):
     job = Job.objects.get(id=jobid)
-    customers = Customer.objects.filter(jobcustomer__id=job)
+    customers = Customer.objects.filter(job=job)
     leads = Leads.objects.filter(customer__in=customers)
     marketingleads = MarketingLead.objects.filter(lead__in=leads)
     salesleads = SalesLead.objects.filter(marketinglead__in=marketingleads)
@@ -474,7 +474,7 @@ def get_checked_operations_leads_by_job(request, jobid):
 @permission_classes([IsAuthenticated])
 def get_unchecked_operations_leads_by_job(request, jobid):
     job = Job.objects.get(id=jobid)
-    customers = Customer.objects.filter(jobcustomer__id=job)
+    customers = Customer.objects.filter(job=job)
     leads = Leads.objects.filter(customer__in=customers)
     marketingleads = MarketingLead.objects.filter(lead__in=leads)
     salesleads = SalesLead.objects.filter(marketinglead__in=marketingleads)

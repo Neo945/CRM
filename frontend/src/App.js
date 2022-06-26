@@ -15,6 +15,7 @@ import {
   OperationsPage,
   MarketingPage,
   AccountsPage,
+  CustomerData,
 } from "./components";
 
 import { useEffect, useState } from "react";
@@ -114,7 +115,11 @@ function App() {
           element={<ForgotPassword history={navigate} />}
         />
         <Route path="/home" element={<Navbar history={navigate} />} />
-        <Route path="/navlead" element={<Leads history={navigate} />} />
+        <Route
+          path="/customers/:jobid"
+          element={<CustomerData history={navigate} />}
+        />
+        <Route path="/navlead/:jobid" element={<Leads history={navigate} />} />
         <Route
           path="/data"
           element={
@@ -134,7 +139,7 @@ function App() {
           element={<OperationsPage history={navigate} />}
         />
         <Route
-          path="/marketingpage"
+          path="/marketingpage/:jobid"
           element={<MarketingPage history={navigate} />}
         />
         <Route

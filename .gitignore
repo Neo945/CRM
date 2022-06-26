@@ -4,11 +4,11 @@ __pycache__/
 venv
 db.sqlite3
 
+models
+
 static
 
 staticdata
-
-models
 
 index1.html
 

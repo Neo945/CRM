@@ -5,9 +5,9 @@ export default class Footer extends Component {
     return (
       <div>
         <footer>
-          <div class="row">
-            <div class="col span-1-of-2">
-              <ul class="footer-nav">
+          <div className="row">
+            <div className="col span-1-of-2">
+              <ul className="footer-nav">
                 <li>
                   <a href="/">
                     <b>About us</b>
@@ -36,7 +36,7 @@ export default class Footer extends Component {
               </ul>
             </div>
           </div>
-          <div class="row">
+          <div className="row">
             <p>
               <b>Copyright &copy; All rights reserved</b>
             </p>

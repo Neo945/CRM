@@ -1,74 +1,96 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
-import CopyNav from '../CopyNav/CopyNav';
- import Footer from "../Footer/Footer";
-class MarketingPage extends Component {
-
-  render() {
-    const data = [
-      {
-        Customerid:"1001",
-        Marketingid:"1111",
-        Name: "Ayaan",
-        Email:"abc@gmail.com",
-        Phone: 7419638521,
-        ReferredSource: "Adv",
-        Createdon:"CRM",
-        Createdby:"any"
-      },
-   
-    ];
-    const columns = [
-      {
-        Header: "Customer id",
-        accessor: "Customerid",
-      },
-      {
-        Header: "Marketing id",
-        accessor: "Marketingid",
-      },
-      {
-        Header: "Name",
-        accessor: "Name",
-      },
-      {
-        Header: "Email",
-        accessor: "Email",
-      },
-      {
-        Header: "Phone",
-        accessor: "Phone",
-      },
-      {
-        Header: "Reffered Source",
-        accessor: "ReferredSource",
-      },
-      {
-        Header: "Created on",
-        accessor: "Createdon",
-      },
-      {
-        Header: "Created by",
-        accessor: "Createdby",
-      },
-    ];
-    
-    return (
-     
-      <div className="table">
-        <CopyNav/>
-        <ReactTable
-          data={data}
-          columns={columns}
-          defaultPageSize={10}
-          pageSizeOptions={[2, 4, 6]}
-      />
-<br></br>
-<Footer></Footer>
-      </div>
-
+import { lookup } from "../../utils";
+import CopyNav from "../CopyNav/CopyNav";
+import Footer from "../Footer/Footer";
+function MarketingPage(props) {
+  let { jobid } = useParams();
+  const [data, setData] = React.useState([]);
+  const [checked, setChecked] = React.useState("All");
+  useEffect(() => {
+    lookup("GET", `/leads/market/job/${jobid}`, "", null).then(
+      ({ data, status }) => {
+        if (status === 200) {
+          console.log(data);
+          setData(data.data);
+        }
+      }
     );
-  }
+  }, []);
+  const columns = [
+    {
+      Header: "ID",
+      accessor: "id",
+    },
+    {
+      Header: "Customer Name",
+      accessor: "leads.customer.name",
+    },
+    {
+      Header: "Customer ID",
+      accessor: "leads.customer.id",
+    },
+    {
+      Header: "Leads id",
+      accessor: "leads.id",
+    },
+    {
+      Header: "Email",
+      accessor: "leads.customer.email",
+    },
+    {
+      Header: "Phone",
+      accessor: "leads.customer.phone",
+    },
+    {
+      Header: "Reffered Source",
+      accessor: "refered_source",
+    },
+    {
+      Header: "Created on",
+      accessor: "date_created",
+    },
+    {
+      Header: "Created by",
+      accessor: "approved_by.first_name",
+    },
+    {
+      Header: "FeedBack",
+      accessor: "cmrcss",
+    },
+  ];
+
+  return (
+    <div className="table">
+      <CopyNav />
+      <ReactTable
+        data={
+          checked === "All"
+            ? data
+            : checked === "Checked"
+            ? data.filter((x) => x.is_done)
+            : data.filter((x) => !x.is_done)
+        }
+        columns={columns}
+        defaultPageSize={10}
+        pageSizeOptions={[2, 4, 6]}
+      />
+      <br></br>
+      <select
+        style={{ display: "block" }}
+        onChange={(e) => {
+          console.log(e.target.value);
+          setChecked(e.target.value);
+        }}
+      >
+        <option value="All">All</option>
+        <option value="Checked">Checked</option>
+        <option value="Unhecked">Unhecked</option>
+      </select>
+      <Footer></Footer>
+    </div>
+  );
 }
 export default MarketingPage;
