@@ -117,6 +117,8 @@ class Leads extends Component {
           <option value="Checked">Checked</option>
           <option value="Unhecked">Unhecked</option>
         </select>
+
+        <br></br>
         <Footer></Footer>
       </div>
     );
