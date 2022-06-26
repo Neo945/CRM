@@ -9,7 +9,6 @@ import "./Leads.css";
 function CustomerData(props) {
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
-  const [checked, setChecked] = React.useState("All");
   useEffect(() => {
     lookup("GET", `/customer/get/job/${jobid}`, "", null).then(
       ({ data, status }) => {
@@ -68,17 +67,7 @@ function CustomerData(props) {
         pageSizeOptions={[2, 4, 6]}
       />
       <br></br>
-      <select
-        style={{ display: "block" }}
-        onChange={(e) => {
-          console.log(e.target.value);
-          setChecked(e.target.value);
-        }}
-      >
-        <option value="All">All</option>
-        <option value="Checked">Checked</option>
-        <option value="Unhecked">Unhecked</option>
-      </select>
+
       <Footer></Footer>
     </div>
   );

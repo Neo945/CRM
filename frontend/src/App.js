@@ -160,7 +160,7 @@ function App() {
           element={<MarketingPage history={navigate} />}
         />
         <Route
-          path="/accountspage"
+          path="/accountspage/:jobid"
           element={<AccountsPage history={navigate} />}
         />
       </Routes>
