@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
+import { useParams } from "react-router-dom";
 import CopyNav from '../CopyNav/CopyNav';
 import { lookup } from "../../utils";
 import Footer from "../Footer/Footer";

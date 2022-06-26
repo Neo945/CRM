@@ -16,6 +16,7 @@ import {
   MarketingPage,
   AccountsPage,
   CustomerData,
+  CreateJob,
 } from "./components";
 
 import { useEffect, useState } from "react";
@@ -93,6 +94,11 @@ function App() {
               <li>
                 <Link to={"/salespage"}> Sales </Link>
               </li>
+
+              <li>
+                <Link to={"/createjob"}> CreateJob </Link>
+              </li>
+
             </ol>
           }
         />
@@ -129,6 +135,17 @@ function App() {
             />
           }
         />
+
+        <Route
+          path="/createjob"
+          element={
+            <CreateJob
+              onChange={(fields) => onChange(fields)}
+              history={navigate}
+            />
+          }
+        />
+
 
         <Route path="/salespage" element={<SalesPage history={navigate} />} />
 

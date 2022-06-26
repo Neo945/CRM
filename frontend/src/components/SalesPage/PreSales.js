@@ -1,12 +1,11 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { lookup } from "../../utils";
-
-import React, { Component } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import CopyNav from '../CopyNav/CopyNav';
  import Footer from "../Footer/Footer";
+
  function PreSales(props) {
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
