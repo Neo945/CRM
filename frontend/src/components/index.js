@@ -8,4 +8,7 @@ import SalesPage from "./SalesPage/salespage";
 import PreSales from "./SalesPage/PreSales";
 import OperationsPage from "./SalesPage/OperationsPage";
 import MarketingPage from "./SalesPage/MarketingPage"
-export { Register, Login, ForgotPassword, Navbar, Leads, RawData, SalesPage,PreSales ,OperationsPage,MarketingPage};
+import AccountsPage from "./SalesPage/AccountsPage";
+
+
+export { Register, Login, ForgotPassword, Navbar, Leads, RawData, SalesPage,PreSales ,OperationsPage,MarketingPage,AccountsPage};

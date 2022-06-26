@@ -27,6 +27,11 @@ const Navbar= () =>{
     <li>
       <Link to="/operationpage">Operations</Link>
     </li>
+
+    <li>
+      <Link to="/accountspage">Accounts</Link>
+    </li>
+
 	<li className='logo'>
       <Link to="/login">LogOut</Link>
     </li>
