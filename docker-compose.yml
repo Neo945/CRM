@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  server:
+    build: .
+    restart: always
+    image: crm
+    environment:
+      - SECRET_KEY=<SECRET_KEY>
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app/server
+    networks:
+      - python-network
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: "db"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+    restart: always
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - python-network
+
+volumes:
+  db_data:
+
+networks:
+  python-network:
+    driver: bridge

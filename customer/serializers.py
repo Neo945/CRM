@@ -1,12 +1,23 @@
 from rest_framework import serializers
-from .models import Account, Customer, Customer_Job, Account_Company, Linkedin
+
+from accounts.serializers import JobSerializer
+from .models import Client, Customer, Customer_Job, Linkedin
+
+class LinkedinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Linkedin
+        fields = '__all__'
 
 class CustomerSerializer(serializers.ModelSerializer):
+    job = JobSerializer(many=True, read_only=True)
+    linkedin = LinkedinSerializer(read_only=True)
+
     class Meta:
         model = Customer
-        fields = '__all__'
-    
-class AccountSerializer(serializers.ModelSerializer):
+        fields = ('id', 'name', 'phone', 'email', 'website', 'description', 'date_created', 'date_updated', 'linkedin', 'job')
+
+class CustomerCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Account
-        fields = '__all__'
+        model = Customer
+        fields = ('name', 'phone', 'email', 'website', 'description')
+
