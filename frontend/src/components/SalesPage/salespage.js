@@ -69,6 +69,16 @@ class SalesPage extends Component {
           pageSizeOptions={[2, 4, 6]}
       />
 <br></br>
+
+
+        <select style={{ display: "block" }}>
+          <option value="All">All</option>
+          <option value="Checked">Checked</option>
+          <option value="Unhecked">Unhecked</option>
+        </select>
+
+<br></br>
+
 <Footer></Footer>
       </div>
 

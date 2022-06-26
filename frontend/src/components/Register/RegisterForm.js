@@ -205,6 +205,7 @@ function RegisterForm(props) {
 
           <div className="errorMsg">{state.errors.password2}</div>
           <input
+            style={{display : 'block'}}
             type={"checkbox"}
             id="showPassword"
             name="showPassword"
@@ -228,12 +229,23 @@ function RegisterForm(props) {
             <option value="PSLS">Pre Sales</option>
           </select>
 
-          <div>
-            <input type="text" placeholder="Search.." name="search" />
+           <div>
+            <input list="dropdown1" type="text" placeholder="Search.." name="search" />
             <div>
-              <dev>Options</dev>
+              <datalist id = "dropdown1">
+                <option value = "Edge">Edge</option>
+                <option value = "Safari">Safari</option>
+                <option value = "Car">Car</option>
+                <option value = "Cart">Cart</option>
+                <option value = "Saffron">Saffron</option>
+              </datalist>
             </div>
-          </div>
+          </div> 
+
+
+
+
+
           <center>
             <input
               type="submit"
