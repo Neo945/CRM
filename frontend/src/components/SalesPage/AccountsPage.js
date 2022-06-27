@@ -6,6 +6,9 @@ import { lookup } from "../../utils";
 import CopyNav from "../CopyNav/CopyNav";
 import Footer from "../Footer/Footer";
 function AccountsPage(props) {
+  const [state, setState] = React.useState({
+    id: "",
+  });
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
   useEffect(() => {
@@ -50,8 +53,6 @@ function AccountsPage(props) {
     },
   ];
 
-
-     
   return (
     <div className="table">
       <CopyNav />
@@ -63,12 +64,35 @@ function AccountsPage(props) {
       />
       <br></br>
       <br></br>
-<label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Accounts ID</label>
-<input style={{ display: "block" }} type="text" placeholder="Enter ID">
-        </input>
-<button style={{ display: "block"  }} type="submit"> Submit</button>
-      
-<br></br>
+
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="id"
+        value={state.id}
+        onChange={(e) => setState({ ...state, id: e.target.value })}
+      ></input>
+      <button
+        style={{ display: "block", marginLeft: "100px" }}
+        type="submit"
+        onClick={() => {
+          lookup(
+            "GET",
+            `/leads/create/client/operation/${state.id}/job/${jobid}`,
+            "",
+            null
+          ).then(({ data, status }) => {
+            if (status === 200) {
+              console.log(data);
+            }
+          });
+        }}
+      >
+        {" "}
+        Submit
+      </button>
+
+      <br></br>
       <Footer></Footer>
     </div>
   );

@@ -1,87 +1,85 @@
-# Musica api
+# CRM api
 
 ## Manual Installation
 
 Clone the repo:
 
 ```bash
-git clone --depth 1 https://github.com/aryan-sharma21/Hipoz-api hipoz-api
+git clone --depth 1 https://github.com/neo945/CRM CRM
+```
+
+Create Virtual Environment:
+
+```bash
+pip install virtualenv
+python -m virtualenv venv
+```
+
+Activate Virtual Environment:
+
+Windows:
+
+```bash
+.\venv\Scripts\activate
+```
+
+Linux:
+
+```bash
+source venv/bin/activate
 ```
 
 Install the dependencies:
 
 ```bash
-yarn install
+pip install -r requirements.txt
 ```
 
 ## Table of Contents
 
--   [Hipoz api](#hipoz-api)
-    -   [Manual Installation](#manual-installation)
-    -   [Table of Contents](#table-of-contents)
-    -   [Features](#features)
-    -   [Commands](#commands)
-    -   [Environment Variables](#environment-variables)
-    -   [Project Structure](#project-structure)
-    -   [API Documentation](#api-documentation)
-        -   [API Endpoints](#api-endpoints)
-    -   [Error Handling](#error-handling)
-    -   [Validation](#validation)
-    -   [Authentication](#authentication)
-    -   [Authorization](#authorization)
-    -   [Logging](#logging)
-    -   [Custom Mongoose Plugins](#custom-mongoose-plugins)
-        -   [toJSON](#tojson)
-        -   [paginate](#paginate)
-    -   [Linting](#linting)
+- [CRM api](#crm-api)
+  - [Manual Installation](#manual-installation)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Commands](#commands)
+  - [Environment Variables](#environment-variables)
+  - [Project Structure](#project-structure)
+  - [API Documentation](#api-documentation)
+    - [API Endpoints](#api-endpoints)
+  - [Error Handling](#error-handling)
+  - [Validation](#validation)
+  - [Authentication](#authentication)
+  - [Authorization](#authorization)
+  - [Logging](#logging)
+  - [Custom Mongoose Plugins](#custom-mongoose-plugins)
+    - [toJSON](#tojson)
+    - [paginate](#paginate)
+  - [Linting](#linting)
 
 ## Technologies
 
--   **NoSQL database**: [MongoDB](https://www.mongodb.com) object data modeling using [Mongoose](https://mongoosejs.com)
--   **Authentication and authorization**: using [passport](http://www.passportjs.org) and [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
--   **Validation**: request data validation using [Joi](https://github.com/hapijs/joi)
--   **Logging**: using [winston](https://github.com/winstonjs/winston) and [morgan](https://github.com/expressjs/morgan)
--   **Testing**: unit and integration tests using [Jest](https://jestjs.io)
--   **Error handling**: centralized error handling mechanism
-<!-- - **API documentation**: with [swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc) and [swagger-ui-express](https://github.com/scottie1984/swagger-ui-express) -->
--   **Process management**: advanced production process management using [PM2](https://pm2.keymetrics.io)
--   **Dependency management**: with [Yarn](https://yarnpkg.com)
--   **Environment variables**: using [dotenv](https://github.com/motdotla/dotenv) and [cross-env](https://github.com/kentcdodds/cross-env#readme)
-    <!-- - **Security**: set security HTTP headers using [helmet](https://helmetjs.github.io) -->
-    <!-- - **Santizing**: sanitize request data against xss and query injection -->
--   **CORS**: Cross-Origin Resource-Sharing enabled using [cors](https://github.com/expressjs/cors)
-    <!-- - **Compression**: gzip compression with [compression](https://github.com/expressjs/compression) -->
-    <!-- - **CI**: continuous integration with [Travis CI](https://travis-ci.org) -->
--   **Docker support**
--   **Linting**: with [ESLint](https://eslint.org)
+- **SQL database**: [SQLite3](https://www.mongodb.com) object data modeling using [Django ORM](https://mongoosejs.com)
+- **Authentication and authorization**: using [Django Session](http://www.passportjs.org) and [Cookie Storage](https://www.npmjs.com/package/jsonwebtoken)
+- **Logging**: using [Django Loggings](https://github.com/winstonjs/winston) and [morgan](https://github.com/expressjs/morgan)
+- **Testing**: using [PostMan](https://jestjs.io)
+- **Process management**: advanced production process management using [PM2](https://pm2.keymetrics.io)
+- **Environment variables**: using [dotenv](https://github.com/motdotla/dotenv) and [cross-env](https://github.com/kentcdodds/cross-env#readme)
+- **CORS**: Cross-Origin Resource-Sharing enabled using [django-cors-headers](https://github.com/expressjs/cors)
+  - **CI/CD**: continuous integration with [GitHub Actions](https://travis-ci.org)
+- **Docker support**
 
 ## Commands
 
 Running locally:
 
 ```bash
-yarn run dev
-```
-
-Running in production:
-
-```bash
-yarn start
+python manage.py runserver
 ```
 
 Testing:
 
 ```bash
-yarn test
-```
-
-Linting:
-
-```bash
-yarn lint
-
-# fix ESLint errors
-yarn lint:fix
+python manage.py test
 ```
 
 ## Environment Variables
@@ -89,28 +87,43 @@ yarn lint:fix
 The environment variables can be found and modified in the `.env` file. They come with these default values:
 
 ```bash
-# Port number
-PORT=5000
+# Ḍjango secret key
+SECRET_KEY=<SECRET_KEY>
 
-# URL of the Mongo DB
-MONGO_URL=mongodb://localhost:27017/database
+# Email SMTP server to send email
+EMAIL_SERVICE=<EMAIL_SERVICE>
 
-# JWT secret key
-JWT_SECRET=mysecretkey
+# User email to send email from
+USER_EMAIL=<USER_EMAIL>
+
+# User email passeword
+USER_PASSWORD=<USER_PASSWORD>
+
+# Linkedin email
+LINKEDIN_EMAIL=<LINKEDIN_EMAIL>
+# Linkedin email
+LINKEDIN_PASSWORD=<LINKEDIN_PASSWORD>
+
+# Encryption key
+KEY=<KEY>
+
+# AWS IAM access key to S3 bucket
+AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+AWS_STORAGE_BUCKET_NAME=<AWS_STORAGE_BUCKET_NAME>
+AWS_S3_REGION_NAME=<AWS_S3_REGION_NAME>
 ```
 
 ## Project Structure
 
 ```
-src\
- |--config\         # Environment variables and configuration related things
- |--controllers\    # Route controllers
- |--middlewares\    # Custom express middlewares
- |--models\         # Mongoose models
- |--routes\         # Routes
- |--utils\          # Utility classes and functions
- |--app.js          # Express app
- |--index.js        # App entry point
+ .\
+ |--crm\         # Environment variables and configuration related things
+ |--accounts\    # Route controllers
+ |--customers\    # Custom express middlewares
+ |--leads\         # Mongoose models
+ |--logs\         # Routes
+ |--cmrcss\          # Utility classes and functions
 ```
 
 ### API Endpoints
@@ -127,13 +140,13 @@ List of available routes:
 To require authentication for certain routes, you can use the `auth` middleware.
 
 ```javascript
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
+const express = require("express");
+const auth = require("../../middlewares/auth");
+const userController = require("../../controllers/user.controller");
 
 const router = express.Router();
 
-router.post('/users', auth(), userController.createUser);
+router.post("/users", auth(), userController.createUser);
 ```
 
 These routes require a valid JWT access token in the Authorization request header using the Bearer schema. If the request does not contain a valid access token, an Unauthorized (401) error is thrown.
@@ -155,13 +168,13 @@ A refresh token is valid for 30 days. You can modify this expiration time by cha
 The `auth` middleware can also be used to require certain rights/permissions to access a route.
 
 ```javascript
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
+const express = require("express");
+const auth = require("../../middlewares/auth");
+const userController = require("../../controllers/user.controller");
 
 const router = express.Router();
 
-router.post('/users', auth('manageUsers'), userController.createUser);
+router.post("/users", auth("manageUsers"), userController.createUser);
 ```
 
 In the example above, an authenticated user can access this route only if that user has the `manageUsers` permission.
@@ -177,14 +190,14 @@ Import the logger from `src/config/logger.js`. It is using the [Winston](https:/
 Logging should be done according to the following severity levels (ascending order from most important to least important):
 
 ```javascript
-const logger = require('<path to src>/config/logger');
+const logger = require("<path to src>/config/logger");
 
-logger.error('message'); // level 0
-logger.warn('message'); // level 1
-logger.info('message'); // level 2
-logger.http('message'); // level 3
-logger.verbose('message'); // level 4
-logger.debug('message'); // level 5
+logger.error("message"); // level 0
+logger.warn("message"); // level 1
+logger.info("message"); // level 2
+logger.http("message"); // level 3
+logger.verbose("message"); // level 4
+logger.debug("message"); // level 5
 ```
 
 In development mode, log messages of all severity levels will be printed to the console.
@@ -200,28 +213,18 @@ Note: API request information (request url, response code, timestamp, etc.) are 
 The app also contains 2 custom mongoose plugins that you can attach to any mongoose model schema. You can find the plugins in `src/models/plugins`.
 
 ```javascript
-const mongoose = require('mongoose');
-const { toJSON, paginate } = require('./plugins');
+const mongoose = require("mongoose");
+const { toJSON, paginate } = require("./plugins");
 
 const userSchema = mongoose.Schema(
-    {
-        /* schema definition here */
-    },
-    { timestamps: true }
+  {
+    /* schema definition here */
+  },
+  { timestamps: true }
 );
 
 userSchema.plugin(toJSON);
 userSchema.plugin(paginate);
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 ```
-
-## Linting
-
-Linting is done using [ESLint](https://eslint.org/) and [Prettier](https://prettier.io).
-
-In this app, ESLint is configured to follow the [Airbnb JavaScript style guide](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) with some modifications. It also extends [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) to turn off all rules that are unnecessary or might conflict with Prettier.
-
-To modify the ESLint configuration, update the `.eslintrc.json` file. To modify the Prettier configuration, update the `.prettierrc` file.
-
-To prevent a certain file or directory from being linted, add it to `.eslintignore` and `.prettierignore`.

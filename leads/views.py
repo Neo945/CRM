@@ -66,10 +66,16 @@ def create_marketing_leads(request, leadid):
         instance = serializer.save(approved_by=Profile.objects.get(user=request.user), leads=lead)
         lead.is_done = True
         lead.save()
-        subject = 'Moving to marketing team'
-        message = "Moving to next stage"
+        fernet = Fernet(settings.KEY)
+        data = {
+            'id': instance.id,
+            'status': 'MRK',
+        }
+        token = fernet.encrypt(json.dumps(data).encode())
+        subject = 'New Sales Feedback'
+        message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
         email_from = settings.EMAIL_HOST_USER
-        recipient_list = [lead.customer.email]
+        recipient_list = [lead.leads.customer.email]
         if send_mail( subject, message, email_from, recipient_list ):
             return Response({'status': 'success', "data": MarketingSerializer(instance).data})
         return Response({'status': 'success',"data": MarketingSerializer(instance).data})
@@ -88,10 +94,16 @@ def create_all_marketing_leads(request):
             instance = serializer.save(approved_by=Profile.objects.get(user=request.user), lead=lead1)
             lead1.is_done = True
             lead1.save()
-            subject = 'New Marketing Feedback'
-            message = "Moving to next stage"
+            fernet = Fernet(settings.KEY)
+            data = {
+                'id': instance.id,
+                'status': 'MRK',
+            }
+            token = fernet.encrypt(json.dumps(data).encode())
+            subject = 'New Sales Feedback'
+            message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
             email_from = settings.EMAIL_HOST_USER
-            recipient_list = [lead1.customer.email]
+            recipient_list = [lead.leads.customer.email]
             if send_mail( subject, message, email_from, recipient_list ):
                 return Response({'status': 'success', "data": MarketingSerializer(instance).data})
             return Response({'status': 'success'})
@@ -169,7 +181,7 @@ def create_sales_leads(request, marketingleadid):
         }
         token = fernet.encrypt(json.dumps(data).encode())
         subject = 'New Sales Feedback'
-        message = "Please give us your feedback on the customer. <a href='http://localhost:8000/customer/feedback/" + str(token) + "'>Click here to give feedback</a>"
+        message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [lead.leads.customer.email]
         if send_mail( subject, message, email_from, recipient_list ):
@@ -197,7 +209,7 @@ def create_all_sales_leads(request):
             }
             token = fernet.encrypt(json.dumps(data).encode())
             subject = 'New Sales Feedback'
-            message = "Please give us your feedback on the customer. <a href='http://localhost:8000/customer/feedback/" + str(token) + "'>Click here to give feedback</a>"
+            message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [lead1.leads.customer.email]
             if send_mail( subject, message, email_from, recipient_list ):
@@ -277,7 +289,7 @@ def create_presales_leads(request, salesleadid):
         }
         token = fernet.encrypt(json.dumps(data).encode())
         subject = 'New PreSales Feedback'
-        message = "Please give us your feedback on the customer. <a href='http://localhost:8000/customer/feedback/" + str(token) + "'>Click here to give feedback</a>"
+        message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [lead.marketinglead.leads.customer.email]
         if send_mail( subject, message, email_from, recipient_list ):
@@ -305,7 +317,7 @@ def create_all_presales_leads(request):
             }
             token = fernet.encrypt(json.dumps(data).encode())
             subject = 'New PreSales Feedback'
-            message = "Please give us your feedback on the customer. <a href='http://localhost:8000/customer/feedback/" + str(token) + "'>Click here to give feedback</a>"
+            message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [lead1.marketinglead.leads.customer.email]
             if send_mail( subject, message, email_from, recipient_list ):
@@ -388,7 +400,7 @@ def create_operation_leads(request, presalesleadid):
         }
         token = fernet.encrypt(json.dumps(data).encode())
         subject = 'New Operation Feedback'
-        message = "Please give us your feedback on the customer. <a href='http://localhost:8000/customer/feedback/" + str(token) + "'>Click here to give feedback</a>"
+        message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [lead.saleslead.marketinglead.lead.customer.email]
         if send_mail( subject, message, email_from, recipient_list ):
@@ -416,7 +428,7 @@ def create_all_operations_leads(request):
             }
             token = fernet.encrypt(json.dumps(data).encode())
             subject = 'New Operation Feedback'
-            message = "Please give us your feedback on the customer. <a href='http://localhost:8000/customer/feedback/" + str(token) + "'>Click here to give feedback</a>"
+            message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [lead1.saleslead.marketinglead.lead.customer.email]
             if send_mail( subject, message, email_from, recipient_list ):
@@ -496,7 +508,7 @@ def create_client_from_operations(request, operationsleadid, jobid):
     }
     token = fernet.encrypt(json.dumps(data).encode())
     subject = 'Whole feedback'
-    message = "Please give us your feedback on the customer. <a href='http://localhost:8000/customer/feedback/" + str(token) + "'>Click here to give feedback</a>"
+    message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [operationslead.presaleslead.saleslead.marketinglead.lead.customer.email]
     send_mail( subject, message, email_from, recipient_list )
@@ -527,7 +539,7 @@ def create_all_client_from_operations(request, jobid):
         }
         token = fernet.encrypt(json.dumps(data).encode())
         subject = 'Whole feedback'
-        message = "Please give us your feedback on the customer. <a href='http://localhost:8000/customer/feedback/" + str(token) + "'>Click here to give feedback</a>"
+        message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token) + "'>Click here to give feedback</a>"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [operationslead.presaleslead.saleslead.marketinglead.lead.customer.email]
         send_mail( subject, message, email_from, recipient_list )

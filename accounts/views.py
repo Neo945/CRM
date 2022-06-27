@@ -139,9 +139,11 @@ def send_email_data(request):
 
 @api_view(['GET'])
 def search_company(request):
-    return Response({"sucess": True, "company": CompanySerializer(Company.objects.filter(Q(name__icontains=request.query_params['str']) | Q(address__icontains=request.query_params['str']))).data})
+    compnay = Company.objects.filter(Q(name__icontains=request.query_params['str']) | Q(address__icontains=request.query_params['str'])).values('id', 'name')
+    return Response({"sucess": True, "company": list(compnay)})
 
 
 @api_view(['GET'])
 def search_job(request):
-    return Response({"sucess": True, "company": JobSerializer(Job.objects.filter(Q(name__icontains=request.query_params['str']) | Q(requirements__icontains=request.query_params['str']))).data})
+    job = Job.objects.filter(Q(title__icontains=request.query_params['str']) | Q(description__icontains=request.query_params['str'])).values('id', 'title')
+    return Response({"sucess": True, "company": list(job)})

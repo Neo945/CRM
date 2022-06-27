@@ -4,9 +4,9 @@ from .models import CMRCSS
 class CMRCSSCreateSerializer(ModelSerializer):
     class Meta:
         model = CMRCSS
-        fields = '__all__'
+        fields = ['liked', 'feedback']
 
 class CMRCSSSerializer(ModelSerializer):
     class Meta:
         model = CMRCSS
-        fields = ['liked', 'feedback']
+        fields = '__all__'

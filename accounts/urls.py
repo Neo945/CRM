@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import create_jobs, get_company, get_jobs, get_user, login_view, logout_view, reg_view, send_email_data, update_password,create_company
+from .views import create_jobs, get_company, get_jobs, get_user, login_view, logout_view, reg_view, search_company, send_email_data, update_password,create_company
 
 app_name = 'accounts'
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path('company/<int:company_id>', get_company, name='create_job'),
     path('create/job/', create_jobs, name='create_job'),
     path('job/<int:job_id>', get_jobs, name='get_jobs'),
+    path('search/company', search_company, name='get_jobs'),
 ]

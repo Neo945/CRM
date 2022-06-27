@@ -7,6 +7,12 @@ import CopyNav from "../CopyNav/CopyNav";
 import Footer from "../Footer/Footer";
 import "./Leads.css";
 function Leads(props) {
+  const [state, setState] = React.useState({
+    requirements: "",
+    id: "",
+    refered_by_name: "",
+    refered_source: "",
+  });
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
   const [checked, setChecked] = React.useState("All");
@@ -85,6 +91,53 @@ function Leads(props) {
         <option value="Checked">Checked</option>
         <option value="Unhecked">Unhecked</option>
       </select>
+
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="id"
+        value={state.id}
+        onChange={(e) => setState({ ...state, id: e.target.value })}
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="refered_by_name"
+        value={state.refered_by_name}
+        onChange={(e) =>
+          setState({ ...state, refered_by_name: e.target.value })
+        }
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="refered_source"
+        value={state.refered_source}
+        onChange={(e) => setState({ ...state, refered_source: e.target.value })}
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="requirements"
+        value={state.requirements}
+        onChange={(e) => setState({ ...state, requirements: e.target.value })}
+      ></input>
+      <button
+        style={{ display: "block", marginLeft: "100px" }}
+        type="submit"
+        onClick={() => {
+          lookup("POST", `/leads/create/market/${state.id}`, "", state).then(
+            ({ data, status }) => {
+              if (status === 200) {
+                console.log(data);
+              }
+            }
+          );
+        }}
+      >
+        {" "}
+        Submit
+      </button>
       <Footer></Footer>
     </div>
   );
