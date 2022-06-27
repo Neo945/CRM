@@ -89,6 +89,12 @@ function MarketingPage(props) {
         <option value="Checked">Checked</option>
         <option value="Unhecked">Unhecked</option>
       </select>
+      <label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Marketing ID</label>
+<input style={{ display: "block" }} type="text" placeholder="Enter ID">
+        </input>
+<button style={{ display: "block" ,marginLeft:"100px" }} type="submit"> Submit</button>
+      
+<br></br>
       <Footer></Footer>
     </div>
   );

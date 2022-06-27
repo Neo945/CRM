@@ -72,8 +72,14 @@ class AccountsPage extends Component {
           <option value="Unhecked">Unhecked</option>
         </select>
 
+
         <br></br>
-        
+<label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Accounts ID</label>
+<input style={{ display: "block" }} type="text" placeholder="Enter ID">
+        </input>
+<button style={{ display: "block"  }} type="submit"> Submit</button>
+      
+<br></br>
 <Footer></Footer>
       </div>
 

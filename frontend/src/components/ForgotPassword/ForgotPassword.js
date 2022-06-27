@@ -104,7 +104,7 @@ class ForgotPassword extends React.Component {
   }
 
   render() {
-    let url = "src/registrationForm/loginform.js";
+    
     return (
       <div id="main-registration-container ">
         <div id="" className="split3 left3">
@@ -155,7 +155,7 @@ class ForgotPassword extends React.Component {
               <input type="submit" className="buttonfp" value="Register" />
             </center>
 
-            <a href={url}>
+            <a href="/register">
               <center>No Account? Sign Up</center>
             </a>
             <Link to="/login"> Already a user? Sign-in </Link>

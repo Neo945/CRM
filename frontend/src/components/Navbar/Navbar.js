@@ -9,13 +9,13 @@ const Navbar = () => {
   return (
     <header class="header">
       <div class="mid">
-        <img
+        {/* <img
           className="img123"
           src={img}
           alt="logo"
           height={30}
           width={30}
-        ></img>
+        ></img> */}
         <div></div>
         <ul
           class="navbar"
@@ -34,6 +34,10 @@ const Navbar = () => {
               <Link to="/navlead">Leads</Link>
             </li>
             <li>
+              <Link to="/customer/1">Customer </Link>
+            </li>
+
+            <li>
               <Link to="/marketingpage">Marketing</Link>
             </li>
 
@@ -50,6 +54,10 @@ const Navbar = () => {
             <li>
               <Link to="/accountspage">Accounts</Link>
             </li>
+            <li>
+              <Link to="/custjobs">Create Jobs </Link>
+            </li>
+            
           </div>
           <div className="navlogout">
             <li className="logo">

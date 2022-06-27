@@ -1,8 +1,8 @@
-import React, { Component, useEffect } from "react";
+// import React, { Component, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { lookup } from "../../utils";
 
-import React, { Component } from "react";
+import React, { Component,useEffect } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import CopyNav from '../CopyNav/CopyNav';
@@ -93,6 +93,13 @@ import CopyNav from '../CopyNav/CopyNav';
         <option value="Checked">Checked</option>
         <option value="Unhecked">Unhecked</option>
       </select>
+
+      <label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Pre Sales ID</label>
+<input style={{ display: "block" }} type="text" placeholder="Enter ID">
+        </input>
+<button style={{ display: "block" ,marginLeft:"100px" }} type="submit"> Submit</button>
+      
+<br></br>
       <Footer></Footer>
     </div>
   );

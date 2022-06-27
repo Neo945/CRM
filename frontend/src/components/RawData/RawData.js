@@ -206,7 +206,7 @@ function RawData(props) {
 
       <div id="reg">
         <div className="container1">
-          <h1>Raw Data</h1>
+          <h1>Customer Information</h1>
           <form onSubmit={handleSubmit} className="rawform">
             <h3>Contact Information</h3>
             <div className="wrapper">
@@ -448,10 +448,10 @@ function RawData(props) {
             </div>
 
 
-            <div className="wrapper2">
+            <div className="wrapper2 ">
               <center>
-                <input type="submit" name="" value="Submit"></input>
-                <input type="submit" name="" value="Cancel"></input>
+                <input className="btnreg" type="submit" name="" value="Submit"></input>
+                <input className="btnreg"type="submit" name="" value="Cancel"></input>
               </center>
             </div>
           </form>

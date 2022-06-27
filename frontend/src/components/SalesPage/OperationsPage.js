@@ -82,6 +82,12 @@ class OperationsPage extends Component {
         </select>
 
         <br></br>
+        <label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Operation ID</label>
+<input style={{ display: "block" }} type="text" placeholder="Enter ID">
+        </input>
+<button style={{ display: "block" ,marginLeft:"100px" }} type="submit"> Submit</button>
+      
+<br></br>
 <Footer></Footer>
       </div>
 
