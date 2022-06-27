@@ -67,7 +67,7 @@ class OperationSerializer(serializers.ModelSerializer):
 class OperationCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = OperationLead
-        fields = ()
+        fields = ('deal_details',"deal_status",'detail_pricing')
 
 class ClientSerializer(serializers.ModelSerializer):
     job = JobSerializer(many=True, read_only=True)

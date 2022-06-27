@@ -12,6 +12,16 @@ from rest_framework.decorators import api_view
 @api_view(['POST', 'GET'])
 def index(request, token):
     if request.method == 'POST':
+        """
+        Submit feedback
+        method: POST
+        Endpoint: /api/v1/cmrcss/feedback/<str:token>
+        data:
+        {
+            "liked": true,
+            "feedback": "feedback",
+        }
+        """
         serializer = CMRCSSCreateSerializer(data=request.data)
         if serializer.is_valid():
             fernet = Fernet(settings.KEY)

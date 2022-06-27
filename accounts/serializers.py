@@ -15,6 +15,13 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ('name','address','phone','email','website','job')
 
+
+class CompanyCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = ('name','address','phone','email','website')
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
