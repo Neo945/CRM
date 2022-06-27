@@ -37,7 +37,7 @@ const Navbar = () => {
             <Link to="/accountspage">Accounts</Link>
           </li>
           <li>
-              <Link to="/custjobs">Customer Jobs </Link>
+              <Link to="/createjob">Customer Jobs </Link>
             </li>
           
           <li className="logo">

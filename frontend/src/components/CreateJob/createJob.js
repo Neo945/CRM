@@ -190,7 +190,7 @@ function CreateJob(props) {
 
       <div id="reg">
         <div className="container1">
-          <h1>Raw Data</h1>
+          <h1>Job  Information</h1>
           <form onSubmit={handleSubmit} className="rawform">
             <h3>Contact Information</h3>
             <div className="wrapper">
@@ -339,7 +339,7 @@ function CreateJob(props) {
             <input type="file" name="document" onChange={(e) => change(e)} />
             <div className="wrapper2">
               <center>
-                <input type="submit" name="" value="Submit"></input>
+                <input className="btnreg" type="submit" name="" value="Submit"></input>
               </center>
             </div>
           </form>
