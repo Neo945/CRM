@@ -1,7 +1,11 @@
+//import libraries
 import React, { useState } from "react";
 import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
 import { lookup } from "../../utils";
+
+//use state declaration 
+
 function RegisterForm(props) {
   const [state, setState] = useState({
     fields: {
@@ -64,6 +68,9 @@ function RegisterForm(props) {
       initState();
     }
   }
+
+
+  //validation form
 
   function validateForm() {
     let fields = state.fields;
@@ -149,6 +156,7 @@ function RegisterForm(props) {
     <div id="main-registration-container ">
       <div id="rf" className="split2 left2">
         <h3>Registration page</h3>
+  {/* Form  */}
         <form
           className="registerform"
           method="post"
@@ -286,7 +294,7 @@ function RegisterForm(props) {
               value="Register"
             />
           </center>
-
+{/* Link  for sign in*/}
           <Link to="/login"> Already a user? Sign-in </Link>
         </form>
       </div>
