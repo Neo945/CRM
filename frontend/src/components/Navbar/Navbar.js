@@ -4,6 +4,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import img from "../images/logo.jpg";
+import { lookup } from "../../utils";
 
 const Navbar = () => {
   return (
@@ -57,11 +58,22 @@ const Navbar = () => {
             <li>
               <Link to="/createjob">Create Jobs </Link>
             </li>
-            
           </div>
           <div className="navlogout">
             <li className="logo">
-              <Link to="/login">LogOut</Link>
+              <button
+                onClick={() => {
+                  lookup("GET", "/accounts/logout/", "", null).then(
+                    ({ data, status }) => {
+                      if (status === 200) {
+                        localStorage.setItem("user", null);
+                      }
+                    }
+                  );
+                }}
+              >
+                Logout
+              </button>
             </li>
           </div>
         </ul>

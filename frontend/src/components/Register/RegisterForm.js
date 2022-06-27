@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { lookup } from "../../utils";
 function RegisterForm(props) {
   const [state, setState] = useState({
     fields: {
       username: "",
       email: "",
-      mobileno: "",
+      phone: "",
       password1: "",
       password2: "",
       type: "PSLS",
@@ -15,7 +15,7 @@ function RegisterForm(props) {
     errors: {
       username: "",
       email: "",
-      mobileno: "",
+      phone: "",
       password1: "",
       password2: "",
     },
@@ -23,6 +23,7 @@ function RegisterForm(props) {
   const [list, setList] = useState([]);
 
   function handleChange(e) {
+    console.log(e.target.value);
     let fields = state.fields;
     fields[e.target.name] = e.target.value;
     setState({
@@ -34,7 +35,7 @@ function RegisterForm(props) {
     let fields = {};
     fields.username = "";
     fields.email = "";
-    fields.mobileno = "";
+    fields.phone = "";
     fields.password1 = "";
     fields.password2 = "";
     setState({ ...state, fields: fields });
@@ -44,15 +45,22 @@ function RegisterForm(props) {
     e.preventDefault();
     if (validateForm()) {
       // Fetch API call here using state.fields
-      lookup("POST", "/accounts/register/", "", {
+      const temp = {
         ...state.fields,
+        first_name: state.fields.username.split(" ")[0],
+        last_name: state.fields.username.split(" ")[1],
+        username: state.fields.username.split(" ").join(""),
         company: list[0].id,
-      }).then(({ data, status }) => {
-        if (status === 200) {
-          console.log(data);
-          // props.history("/");
+      };
+      console.log(temp);
+      lookup("POST", "/accounts/register/", "", temp).then(
+        ({ data, status }) => {
+          if (status === 200) {
+            console.log(data);
+            // props.history("/");
+          }
         }
-      });
+      );
       initState();
     }
   }
@@ -90,15 +98,15 @@ function RegisterForm(props) {
       }
     }
 
-    if (fields.mobileno.length === 0) {
+    if (fields.phone.length === 0) {
       formIsValid = false;
-      errors.mobileno = "*Please enter your mobile no.";
+      errors.phone = "*Please enter your mobile no.";
     }
 
-    if (fields.mobileno !== 0) {
-      if (!fields["mobileno"].match(/^[0-9]{10}$/)) {
+    if (fields.phone !== 0) {
+      if (!fields["phone"].match(/^[0-9]{10}$/)) {
         formIsValid = false;
-        errors.mobileno = "*Please enter valid mobile no.";
+        errors.phone = "*Please enter valid mobile no.";
       }
     }
 
@@ -174,14 +182,14 @@ function RegisterForm(props) {
           <label>Mobile No:</label>
           <input
             type="text"
-            name="mobileno"
+            name="phone"
             placeholder="Enter Mobile"
-            value={state.fields.mobileno}
+            value={state.fields.phone}
             onChange={handleChange}
             id="mob1"
           />
 
-          <div className="errorMsg">{state.errors.mobileno}</div>
+          <div className="errorMsg">{state.errors.phone}</div>
 
           <label>Password</label>
           <input

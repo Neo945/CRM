@@ -8,12 +8,14 @@ import Footer from "../Footer/Footer";
 function SalesPage(props) {
   const [state, setState] = React.useState({
     id: "",
+    proposal_date: "",
+    proposal_details: "",
   });
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
   const [checked, setChecked] = React.useState("All");
   useEffect(() => {
-    lookup("GET", `/customer/get/job/${jobid}`, "", null).then(
+    lookup("GET", `/leads/sales/job/${jobid}`, "", null).then(
       ({ data, status }) => {
         if (status === 200) {
           console.log(data);
@@ -29,7 +31,7 @@ function SalesPage(props) {
     },
     {
       Header: "Marketing id",
-      accessor: "marketinglead",
+      accessor: "marketinglead.id",
     },
     {
       Header: "Name",
@@ -98,11 +100,27 @@ function SalesPage(props) {
         value={state.id}
         onChange={(e) => setState({ ...state, id: e.target.value })}
       ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="proposal_date"
+        value={state.proposal_date}
+        onChange={(e) => setState({ ...state, proposal_date: e.target.value })}
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="proposal_details"
+        value={state.proposal_details}
+        onChange={(e) =>
+          setState({ ...state, proposal_details: e.target.value })
+        }
+      ></input>
       <button
         style={{ display: "block", marginLeft: "100px" }}
         type="submit"
         onClick={() => {
-          lookup("POST", `/leads/create/operation/${state.id}`, "", state).then(
+          lookup("POST", `/leads/create/presales/${state.id}`, "", state).then(
             ({ data, status }) => {
               if (status === 200) {
                 console.log(data);

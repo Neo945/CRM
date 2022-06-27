@@ -15,14 +15,12 @@ function RawData(props) {
     // state: "",
     // pincode: "",
     // country: "",
-    address: "",
     nameError: "",
     emailError: "",
     websiteError: "",
     companyError: "",
     phoneError: "",
     linkedinError: "",
-    addressError: "",
     // streetError: "",
     // cityError: "",
     // countryError: "",
@@ -59,7 +57,6 @@ function RawData(props) {
     // let pincodeError = "";
     // let stateError = "";
     // let cidError = "";
-    let addressError = "";
     let descriptionError = "";
     let requirementError = "";
     let designationError = "";
@@ -100,32 +97,6 @@ function RawData(props) {
       linkedinError = "Linkedin ID cannot be blank";
     }
 
-    if (!state.address) {
-      addressError = "Street cannot be blank";
-    } else if (state.address.length > 30) {
-      addressError = "Street Name cant be greater than 30 letters ";
-    }
-
-    if (!state.address) {
-      addressError = "City cannot be blank";
-    } else if (state.address.length > 20) {
-      addressError = "City Name cant be greater than 20 letters ";
-    }
-
-    if (!state.address) {
-      addressError = "State cannot be blank";
-    } else if (state.address.length > 20) {
-      addressError = "State Name cant be greater than 20 letters ";
-    }
-
-    if (!state.address) {
-      addressError = "Pincode cannot be blank";
-    }
-
-    if (!state.address) {
-      addressError = "Country cannot be blank";
-    }
-
     if (!state.description) {
       descriptionError = "Description cannot be blank";
     }
@@ -144,7 +115,6 @@ function RawData(props) {
       websiteError ||
       phoneError ||
       linkedinError ||
-      addressError ||
       // cityError ||
       // stateError ||
       descriptionError ||
@@ -161,7 +131,6 @@ function RawData(props) {
         companyError,
         phoneError,
         linkedinError,
-        addressError,
         // cityError,
         // stateError,
         // pincodeError,
@@ -179,6 +148,7 @@ function RawData(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const isValid = validate();
+    console.log("handleSubmit", isValid, state);
     if (isValid) {
       console.log(state);
       // clear form
@@ -364,8 +334,13 @@ function RawData(props) {
 
             <div className="wrapper2">
               <center>
-                <input className="btnreg" type="submit" name="" value="Submit"></input>
-                <input className="btnreg"type="submit" name="" value="Cancel"></input>
+                <input
+                  className="btnreg"
+                  type="submit"
+                  name=""
+                  value="Submit"
+                ></input>
+                {/* <input className="btnreg"type="submit" name="" value="Cancel"></input> */}
               </center>
             </div>
           </form>

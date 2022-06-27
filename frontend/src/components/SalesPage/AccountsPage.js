@@ -12,7 +12,7 @@ function AccountsPage(props) {
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
   useEffect(() => {
-    lookup("GET", `/customerget/client/job/${jobid}`, "", null).then(
+    lookup("GET", `/customer/get/client/job/${jobid}`, "", null).then(
       ({ data, status }) => {
         if (status === 200) {
           console.log(data);
@@ -63,35 +63,6 @@ function AccountsPage(props) {
         pageSizeOptions={[2, 4, 6]}
       />
       <br></br>
-      <br></br>
-
-      <input
-        style={{ display: "block" }}
-        type="text"
-        name="id"
-        value={state.id}
-        onChange={(e) => setState({ ...state, id: e.target.value })}
-      ></input>
-      <button
-        style={{ display: "block", marginLeft: "100px" }}
-        type="submit"
-        onClick={() => {
-          lookup(
-            "GET",
-            `/leads/create/client/operation/${state.id}/job/${jobid}`,
-            "",
-            null
-          ).then(({ data, status }) => {
-            if (status === 200) {
-              console.log(data);
-            }
-          });
-        }}
-      >
-        {" "}
-        Submit
-      </button>
-
       <br></br>
       <Footer></Footer>
     </div>

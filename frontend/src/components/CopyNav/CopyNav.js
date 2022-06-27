@@ -1,6 +1,7 @@
 import React from "react";
 import "./CopyNav.css";
 import { Link } from "react-router-dom";
+import { lookup } from "../../utils";
 const Navbar = () => {
   return (
     <header className="header">
@@ -10,10 +11,9 @@ const Navbar = () => {
             <Link to="/home">Home </Link>
           </li>
 
-            <li>
-              <Link to="/customer">Customer </Link>
-            </li>
-
+          <li>
+            <Link to="/customer">Customer </Link>
+          </li>
 
           <li>
             <Link to="/navlead">Leads</Link>
@@ -37,11 +37,23 @@ const Navbar = () => {
             <Link to="/accountspage">Accounts</Link>
           </li>
           <li>
-              <Link to="/createjob">Customer Jobs </Link>
-            </li>
-          
+            <Link to="/createjob">Customer Jobs </Link>
+          </li>
+
           <li className="logo">
-            <Link to="/login">LogOut</Link>
+            <button
+              onClick={() => {
+                lookup("GET", "/accounts/logout/", "", null).then(
+                  ({ data, status }) => {
+                    if (status === 200) {
+                      localStorage.setItem("user", null);
+                    }
+                  }
+                );
+              }}
+            >
+              Logout
+            </button>
           </li>
         </ul>
       </div>

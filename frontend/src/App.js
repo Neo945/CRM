@@ -23,6 +23,7 @@ import { useEffect, useState } from "react";
 import { lookup } from "./utils";
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  console.log(user);
   useEffect(() => {
     if (window.location.pathname !== "/checkout")
       localStorage.removeItem("purchase");

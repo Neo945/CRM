@@ -11,8 +11,9 @@ import Footer from "../Footer/Footer";
 function PreSales(props) {
   const [state, setState] = React.useState({
     id: "",
-    proposal_details: "",
-    proposal_date: "",
+    detail_pricing: "",
+    deal_details: "",
+    deal_status: "",
   });
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
@@ -29,46 +30,29 @@ function PreSales(props) {
   }, []);
   const columns = [
     {
-      Header: "ID",
-      accessor: "salesleads.marketinglead.leads.customer.id",
+      Header: "Customer ID",
+      accessor: "saleslead.marketinglead.leads.customer.id",
     },
     {
       Header: "Name",
-      accessor: "salesleads.marketinglead.leads.customer.name",
+      accessor: "saleslead.marketinglead.leads.customer.name",
     },
     {
       Header: "IS Done",
-      accessor: "salesleads.marketinglead.leads.customer.is_done",
+      accessor: "is_done",
     },
     {
       Header: "Approved by",
       accessor: "approved_by.first_name",
     },
     {
-      Header: " Sales Leads ",
-      accessor: "salesleads.marketinglead.leads.customer.saleslead",
+      Header: " PreSales ID ",
+      accessor: "id",
     },
     {
       Header: "Date Created",
       accessor: "date_created",
     },
-    {
-      Header: "Updated date",
-      accessor: "salesleads.marketinglead.leads.customer.date_updated",
-    },
-    {
-      Header: "Proposal details",
-      accessor: "salesleads.marketinglead.leads.customer.proposal_details",
-    },
-    {
-      Header: "Proposal Dates",
-      accessor: "salesleads.marketinglead.leads.customer.proposal_date",
-    },
-
-    // {
-    //   Header: "FeedBack",
-    //   accessor: "cmrcss",
-    // },
   ];
 
   return (
@@ -108,22 +92,29 @@ function PreSales(props) {
       <input
         style={{ display: "block" }}
         type="text"
-        name="refered_source"
-        value={state.proposal_details}
-        onChange={(e) => setState({ ...state, refered_source: e.target.value })}
+        name="deal_details"
+        value={state.deal_details}
+        onChange={(e) => setState({ ...state, deal_details: e.target.value })}
       ></input>
       <input
         style={{ display: "block" }}
         type="text"
-        name="requirements"
-        value={state.proposal_details}
-        onChange={(e) => setState({ ...state, requirements: e.target.value })}
+        name="deal_status"
+        value={state.deal_status}
+        onChange={(e) => setState({ ...state, deal_status: e.target.value })}
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="detail_pricing"
+        value={state.detail_pricing}
+        onChange={(e) => setState({ ...state, detail_pricing: e.target.value })}
       ></input>
       <button
         style={{ display: "block", marginLeft: "100px" }}
         type="submit"
         onClick={() => {
-          lookup("POST", `/leads/create/presales/${state.id}`, "", state).then(
+          lookup("POST", `/leads/create/operation/${jobid}`, "", state).then(
             ({ data, status }) => {
               if (status === 200) {
                 console.log(data);

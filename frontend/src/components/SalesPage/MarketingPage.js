@@ -18,7 +18,7 @@ function MarketingPage(props) {
     lookup("GET", `/leads/market/job/${jobid}`, "", null).then(
       ({ data, status }) => {
         if (status === 200) {
-          console.log(data);
+          console.log(data.data);
           setData(data.data);
         }
       }
@@ -63,7 +63,7 @@ function MarketingPage(props) {
     },
     {
       Header: "FeedBack",
-      accessor: "cmrcss",
+      accessor: "cmrcss/feedback",
     },
   ];
 
@@ -105,16 +105,16 @@ function MarketingPage(props) {
       <input
         style={{ display: "block" }}
         type="text"
-        name="refered_source"
-        value={state.sales_pricing}
-        onChange={(e) => setState({ ...state, refered_source: e.target.value })}
+        name="sales_details"
+        value={state.sales_details}
+        onChange={(e) => setState({ ...state, sales_details: e.target.value })}
       ></input>
       <input
         style={{ display: "block" }}
         type="text"
-        name="requirements"
+        name="sales_pricing"
         value={state.sales_pricing}
-        onChange={(e) => setState({ ...state, requirements: e.target.value })}
+        onChange={(e) => setState({ ...state, sales_pricing: e.target.value })}
       ></input>
       <button
         style={{ display: "block", marginLeft: "100px" }}

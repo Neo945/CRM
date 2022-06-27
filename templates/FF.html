@@ -5,6 +5,7 @@
   </div>
   <div class="row">
     <form method="post" class="contact-form">
+      {% csrf_token %}
       <div class="row">
         <div class="col span-1-of-3">
           <label>Did you like the service?</label>
