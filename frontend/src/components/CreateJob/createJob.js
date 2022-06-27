@@ -9,6 +9,8 @@ function CreateJob(props) {
     company: "",
     email: "",
     phone: "",
+    image: null,
+    document: null,
     linkedin_url: "",
     address: "",
     nameError: "",
@@ -20,8 +22,8 @@ function CreateJob(props) {
     addressError: "",
     description: "",
     descriptionError: "",
-    requirement: "",
-    requirementError: "",
+    requirements: "",
+    requirementsError: "",
     designation: "",
     designationError: "",
   });
@@ -43,7 +45,7 @@ function CreateJob(props) {
     let linkedinError = "";
     let addressError = "";
     let descriptionError = "";
-    let requirementError = "";
+    let requirementsError = "";
     let designationError = "";
 
     if (!state.name) {
@@ -56,11 +58,9 @@ function CreateJob(props) {
       websiteError = "Website cannot be blank";
     }
 
-
     if (!state.email.includes("@")) {
       emailError = "Invalid email";
     }
-
 
     if (!state.company) {
       companyError = "Company Name cannot be blank";
@@ -76,11 +76,9 @@ function CreateJob(props) {
       phoneError = "Please Enter Valid phone Number";
     }
 
-
     if (!state.linkedin_url) {
       linkedinError = "Linkedin ID cannot be blank";
     }
-
 
     if (!state.address) {
       addressError = "Street cannot be blank";
@@ -112,8 +110,8 @@ function CreateJob(props) {
       descriptionError = "Description cannot be blank";
     }
 
-    if (!state.requirement) {
-      requirementError = "Requiremnts cannot be blank";
+    if (!state.requirements) {
+      requirementsError = "Requiremnts cannot be blank";
     }
 
     if (!state.designation) {
@@ -128,7 +126,7 @@ function CreateJob(props) {
       linkedinError ||
       addressError ||
       descriptionError ||
-      requirementError||
+      requirementsError ||
       designationError
     ) {
       setState({
@@ -142,7 +140,7 @@ function CreateJob(props) {
         addressError,
         descriptionError,
         designationError,
-        requirementError,
+        requirementsError,
       });
       return false;
     }
@@ -152,22 +150,38 @@ function CreateJob(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const isValid = validate();
-    if (isValid) {
-      console.log(state);
-      // clear form
-      setState(state);
-      lookup("POST", "/customer/create/customer/", "", state.fields).then(
-        ({ data, status }) => {
-          if (status === 200) {
-            console.log(data);
-            // props.history("/");
-          }
-        }
-      );
-
-    }
-  
+    // const isValid = validate();
+    const val = new FormData(event.target);
+    console.log(val);
+    console.log(val.get("image"));
+    // if (isValid) {
+    console.log(state);
+    fetch(`http://localhost:8000/api/v1/accounts/create/job/`, {
+      method: "POST",
+      body: val,
+      credentials: "include",
+      mode: "cors",
+      // headers: {
+      // "Content-Type":
+      // "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+      // Accept: "application/json",
+      // },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+    // clear form
+    // setState(state);
+    // lookup("POST", "/accounts/create/job/", "", state).then(
+    //   ({ data, status }) => {
+    //     if (status === 200) {
+    //       console.log(data);
+    //       // props.history("/");
+    //     }
+    //   }
+    // );
+    // }
   };
 
   return (
@@ -177,10 +191,9 @@ function CreateJob(props) {
       <div id="reg">
         <div className="container1">
           <h1>Raw Data</h1>
-          <form onSubmit={handleSubmit} className="rawform" >
+          <form onSubmit={handleSubmit} className="rawform">
             <h3>Contact Information</h3>
             <div className="wrapper">
-
               <div className="box">
                 <input
                   type="text"
@@ -193,7 +206,7 @@ function CreateJob(props) {
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.nameError}
                 </div>
-                <label for="name"> Customer Name </label>
+                <label htmlFor="name"> Customer Name </label>
               </div>
 
               <div className="box">
@@ -208,12 +221,11 @@ function CreateJob(props) {
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.emailError}
                 </div>
-                <label for="email"> Customer Email ID </label>
+                <label htmlFor="email"> Customer Email ID </label>
               </div>
             </div>
 
             <div className="wrapper">
-              
               <div className="box">
                 <input
                   type="number"
@@ -226,7 +238,7 @@ function CreateJob(props) {
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.phoneError}
                 </div>
-                <label for="phone"> Customer phone Number </label>
+                <label htmlFor="phone"> Customer phone Number </label>
               </div>
 
               <div className="box">
@@ -241,12 +253,11 @@ function CreateJob(props) {
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.websiteError}
                 </div>
-                <label for="website"> Customer Website </label>
+                <label htmlFor="website"> Customer Website </label>
               </div>
             </div>
 
             <div className="wrapper">
-          
               <div className="box">
                 <input
                   type="text"
@@ -259,23 +270,26 @@ function CreateJob(props) {
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.linkedinError}
                 </div>
-                <label for="linkedin_url"> LinkedIn ID </label>
+                <label htmlFor="linkedin_url"> LinkedIn ID </label>
               </div>
 
-              <div className='box'>
-                  <input type="text" placeholder="Enter LinkedIn Company Name" name="company" id="company"
-                    value={state.company}
-                    onChange={e => change(e)}
-                  ></input>
-                  <div style={{ fontSize: 12, color: "red" }}>
-                    {state.companyError}
-                  </div>
-                  <label for="company"> LinkedIn Company Name </label>
+              <div className="box">
+                <input
+                  type="text"
+                  placeholder="Enter LinkedIn Company Name"
+                  name="company"
+                  id="company"
+                  value={state.company}
+                  onChange={(e) => change(e)}
+                ></input>
+                <div style={{ fontSize: 12, color: "red" }}>
+                  {state.companyError}
                 </div>
+                <label htmlFor="company"> LinkedIn Company Name </label>
+              </div>
             </div>
 
             <div className="wrapper">
-              
               <div className="box">
                 <input
                   type="text"
@@ -288,126 +302,44 @@ function CreateJob(props) {
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.designationError}
                 </div>
-                <label for="designation"> Designation</label>
-              </div>
-              </div>
-
-
-            <h3> Customer's Address Information </h3>
-
-            <div className="wrapper">
-              <div className="box">
-                <input
-                  type="text"
-                  placeholder="Enter Street Name"
-                  name="address"
-                  id="address"
-                  value={state.address}
-                  onChange={(e) => change(e)}
-                ></input>
-                <div style={{ fontSize: 12, color: "red" }}>
-                  {state.addressError}
-                </div>
-                <label for="address"> Street Name </label>
-              </div>
-
-              <div className="box">
-                <input
-                  type="text"
-                  placeholder="Enter City Name"
-                  name="address"
-                  id="address"
-                  value={state.address}
-                  onChange={(e) => change(e)}
-                ></input>
-                <div style={{ fontSize: 12, color: "red" }}>
-                  {state.addressError}
-                </div>
-                <label for="address"> City Name </label>
+                <label htmlFor="designation"> Designation</label>
               </div>
             </div>
-
-            <div className="wrapper">
-              <div className="box">
-                <input
-                  type="text"
-                  placeholder="Enter State Name"
-                  name="address"
-                  id="address"
-                  value={state.address}
-                  onChange={(e) => change(e)}
-                ></input>
-                <div style={{ fontSize: 12, color: "red" }}>
-                  {state.addressError}
-                </div>
-                <label for="address"> State Name</label>
-              </div>
-
-              <div className="box">
-                <input
-                  type="number"
-                  placeholder="Enter Pincode"
-                  name="address"
-                  id="address"
-                  value={state.address}
-                  onChange={(e) => change(e)}
-                ></input>
-                <div style={{ fontSize: 12, color: "red" }}>
-                  {state.addressError}
-                </div>
-                <label for="address"> Pincode </label>
-              </div>
-            </div>
-
-            <div className="wrapper">
-              <div className="box">
-                <input
-                  type="text"
-                  placeholder="Enter Country's Name"
-                  name="address"
-                  id="address"
-                  value={state.address}
-                  onChange={(e) => change(e)}
-                ></input>
-                <div style={{ fontSize: 12, color: "red" }}>
-                  {state.addressError}
-                </div>
-                <label for="address"> Country </label>
-              </div>
-            </div>
-
             <h3> Description Information </h3>
             <div className="wrapper1">
               <div className="box">
-                <textarea id="description" 
-                value={state.description}
-                onChange={(e) => change(e)}
+                <textarea
+                  id="description"
+                  name="description"
+                  value={state.description}
+                  onChange={(e) => change(e)}
                 ></textarea>
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.descriptionError}
                 </div>
-                <label for="description"> Customer Description </label>
+                <label htmlFor="description"> Customer Description </label>
               </div>
             </div>
 
             <div className="wrapper1">
               <div className="box">
-                <textarea id="requirement"
-                 value={state.requirement}
-                 onChange={(e) => change(e)}
+                <textarea
+                  id="requirements"
+                  value={state.requirements}
+                  name="requirements"
+                  onChange={(e) => change(e)}
                 ></textarea>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {state.requirementError}
+                  {state.requirementsError}
                 </div>
-                <label htmlFor="requirement"> Customer Requirements </label>
+                <label htmlFor="requirements"> Customer Requirements </label>
               </div>
             </div>
-
-
+            <input type="file" name="image" onChange={(e) => change(e)} />
+            <input type="file" name="document" onChange={(e) => change(e)} />
             <div className="wrapper2">
               <center>
                 <input type="submit" name="" value="Submit"></input>
-                <input type="submit" name="" value="Cancel"></input>
               </center>
             </div>
           </form>

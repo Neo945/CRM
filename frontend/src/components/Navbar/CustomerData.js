@@ -8,6 +8,7 @@ import Footer from "../Footer/Footer";
 import "./Leads.css";
 function CustomerData(props) {
   let { jobid } = useParams();
+  const [checked, setChecked] = React.useState(true);
   const [data, setData] = React.useState([]);
   useEffect(() => {
     lookup("GET", `/customer/get/job/${jobid}`, "", null).then(
@@ -48,6 +49,21 @@ function CustomerData(props) {
     {
       Header: "Created on",
       accessor: "date_created",
+    },
+    {
+      id: "checkbox",
+      accessor: "",
+      Cell: ({ original }) => {
+        return (
+          <input
+            style={{ opacity: "1" }}
+            type="checkbox"
+            className="checkbox"
+            checked={checked}
+            onChange={(e) => setChecked(e.target.checked)}
+          />
+        );
+      },
     },
   ];
 

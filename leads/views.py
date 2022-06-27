@@ -506,7 +506,6 @@ def create_client_from_operations(request, operationsleadid, jobid):
         phone=operationslead.presaleslead.saleslead.marketinglead.lead.customer.phone,
         email=operationslead.presaleslead.saleslead.marketinglead.lead.customer.email,
         website=operationslead.presaleslead.saleslead.marketinglead.lead.customer.website,
-        address=operationslead.presaleslead.saleslead.marketinglead.lead.customer.address,
         description=operationslead.presaleslead.saleslead.marketinglead.lead.customer.description,
         linkedin=operationslead.presaleslead.saleslead.marketinglead.lead.customer.linkedin,
     )
@@ -540,7 +539,6 @@ def create_all_client_from_operations(request, jobid):
             phone=operationslead.presaleslead.saleslead.marketinglead.lead.customer.phone,
             email=operationslead.presaleslead.saleslead.marketinglead.lead.customer.email,
             website=operationslead.presaleslead.saleslead.marketinglead.lead.customer.website,
-            address=operationslead.presaleslead.saleslead.marketinglead.lead.customer.address,
             description=operationslead.presaleslead.saleslead.marketinglead.lead.customer.description,
             linkedin=operationslead.presaleslead.saleslead.marketinglead.lead.customer.linkedin,
         )
