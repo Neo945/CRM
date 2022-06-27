@@ -130,100 +130,100 @@ List of available routes:
 
 **Account routes**:
 
-`POST /api/v1/accounts/register/` - Register a new user
-`POST /api/v1/accounts/login/` - Login a user
-`POST /api/v1/accounts/update/password/` - Update password of a user
-`GET /api/v1/accounts/logout/` - Logout a user
-`GET /api/v1/accounts/get/` - Get logged user
+`POST /api/v1/accounts/register/` - Register a new user\
+`POST /api/v1/accounts/login/` - Login a user\
+`POST /api/v1/accounts/update/password/` - Update password of a user\
+`GET /api/v1/accounts/logout/` - Logout a user\
+`GET /api/v1/accounts/get/` - Get logged user\
 
 _Company routes_:
 
-`POST /api/v1/accounts/create/company/` - Create a new company
-`GET /api/v1/accounts/company/<int:company_id>` - Get a company by id
-`GET /api/v1/accounts/search/company?str=search_string` - Search companies by name
+`POST /api/v1/accounts/create/company/` - Create a new company\
+`GET /api/v1/accounts/company/<int:company_id>` - Get a company by id\
+`GET /api/v1/accounts/search/company?str=search_string` - Search companies by name\
 
 _Job routes_:
 
-`POST /api/v1/accounts/create/job/` - Create a job
-`GET /api/v1/accounts/job/<int:job_id>` - Get a job by id
-`GET /api/v1/accounts/search/job?str=search_string` - Search job by name
+`POST /api/v1/accounts/create/job/` - Create a job\
+`GET /api/v1/accounts/job/<int:job_id>` - Get a job by id\
+`GET /api/v1/accounts/search/job?str=search_string` - Search job by name\
 
 **Feedback routes**:
 
-`POST /api/v1/cmrcss/feedback/<str:token>` - User feedback
+`POST /api/v1/cmrcss/feedback/<str:token>` - User feedback\
 
 **Customer routes**:
 
-`POST /api/v1/customer/create/customer` - Create a customer
-`GET /api/v1/customer/get/<int:customerid>` - Get a customer by id
-`GET /api/v1/customer/add/customer/<int:customerid>/job/<int:jobid>` - Add a customer to a job
-`GET /api/v1/customer/get/job/<int:jobid>` - Get a customer by job id
+`POST /api/v1/customer/create/customer` - Create a customer\
+`GET /api/v1/customer/get/<int:customerid>` - Get a customer by id\
+`GET /api/v1/customer/add/customer/<int:customerid>/job/<int:jobid>` - Add a customer to a job\
+`GET /api/v1/customer/get/job/<int:jobid>` - Get a customer by job id\
 
 _Customer routes_:
 
-`GET /api/v1/customer/get/client/job/<int:jobid>` - Get a client by job id
-`GET /api/v1/customer/get/client/<int:clientid>` - Get a customer by id
+`GET /api/v1/customer/get/client/job/<int:jobid>` - Get a client by job id\
+`GET /api/v1/customer/get/client/<int:clientid>` - Get a customer by id\
 
 **Leads routes**:
 
-`GET /api/v1/leads/create/lead/customer/<int:customerid>` - Create a leads
-`GET /api/v1/leads/lead/<int:leadsid>` - Get a lead by id
-`GET /api/v1/leads/lead/job/<int:jobid>` - Get all leads by job id
-`GET /api/v1/leads/lead/moved/job/<int:jobid>` - Get all checked leads by job id
-`GET /api/v1/leads/lead/not/moved/job/<int:jobid>` - Get all unchecked leads by job id
+`GET /api/v1/leads/create/lead/customer/<int:customerid>` - Create a leads\
+`GET /api/v1/leads/lead/<int:leadsid>` - Get a lead by id\
+`GET /api/v1/leads/lead/job/<int:jobid>` - Get all leads by job id\
+`GET /api/v1/leads/lead/moved/job/<int:jobid>` - Get all checked leads by job id\
+`GET /api/v1/leads/lead/not/moved/job/<int:jobid>` - Get all unchecked leads by job id\
 
 _Marketing leads routes_:
 
-`POST /api/v1/create/market/<int:leadid>` - Create a marketing leads
-`POST /api/v1/create/market/` - Create all marketing leads
-`GET /api/v1/leads/market/<int:marketingleadid>` - Get marketing lead by id
-`POST /api/v1/leads/market/` - Get all marketing lead by id
-`POST /api/v1/leads/market/` - Get all marketing lead by id
-`POST /api/v1/leads/market/moved/` - Get all checked marketing lead by id
-`POST /api/v1/leads/market/not/moved/` - Get all unchecked marketing lead by id
-`GET /api/v1/leads/market/job/<int:jobid>` - Get all marketing leads by job id
-`GET /api/v1/leads/market/moved/job/<int:jobid>` - Get all checked marketing leads by job id
-`GET /api/v1/leads/market/not/moved/job/<int:jobid>` - Get all unchecked marketing leads by job id
+`POST /api/v1/create/market/<int:leadid>` - Create a marketing leads\
+`POST /api/v1/create/market/` - Create all marketing leads\
+`GET /api/v1/leads/market/<int:marketingleadid>` - Get marketing lead by id\
+`POST /api/v1/leads/market/` - Get all marketing lead by id\
+`POST /api/v1/leads/market/` - Get all marketing lead by id\
+`POST /api/v1/leads/market/moved/` - Get all checked marketing lead by id\
+`POST /api/v1/leads/market/not/moved/` - Get all unchecked marketing lead by id\
+`GET /api/v1/leads/market/job/<int:jobid>` - Get all marketing leads by job id\
+`GET /api/v1/leads/market/moved/job/<int:jobid>` - Get all checked marketing leads by job id\
+`GET /api/v1/leads/market/not/moved/job/<int:jobid>` - Get all unchecked marketing leads by job id\
 
 _Sales leads routes_:
 
-`POST /api/v1/leads/create/sales/<int:marketingleadid>` - Create a sales leads
-`POST /api/v1/leads/create/sales/` - Create all sales leads
-`GET /api/v1/leads/sales/<int:salesleadid>` - Get sales lead by id
-`POST /api/v1/leads/sales/` - Get all sales lead by id
-`POST /api/v1/leads/sales/moved/` - Get all checked sales lead by id
-`POST /api/v1/leads/sales/not/moved/` - Get all unchecked sales lead by id
-`GET /api/v1/leads/sales/job/<int:jobid>` - Get all sales leads by job id
-`GET /api/v1/leads/sales/moved/job/<int:jobid>` - Get all checked sales leads by job id
-`GET /api/v1/leads/sales/not/moved/job/<int:jobid>` - Get all unchecked sales leads by job id
+`POST /api/v1/leads/create/sales/<int:marketingleadid>` - Create a sales leads\
+`POST /api/v1/leads/create/sales/` - Create all sales leads\
+`GET /api/v1/leads/sales/<int:salesleadid>` - Get sales lead by id\
+`POST /api/v1/leads/sales/` - Get all sales lead by id\
+`POST /api/v1/leads/sales/moved/` - Get all checked sales lead by id\
+`POST /api/v1/leads/sales/not/moved/` - Get all unchecked sales lead by id\
+`GET /api/v1/leads/sales/job/<int:jobid>` - Get all sales leads by job id\
+`GET /api/v1/leads/sales/moved/job/<int:jobid>` - Get all checked sales leads by job id\
+`GET /api/v1/leads/sales/not/moved/job/<int:jobid>` - Get all unchecked sales leads by job id\
 
 _Presales leads routes_:
 
-`POST /api/v1/create/presales/<int:salesleadid>` - Create a presales leads
-`POST /api/v1/create/presales/` - Create all presales leads
-`GET /api/v1/leads/presales/<int:presalesleadid>` - Get presales lead by id
-`POST /api/v1/leads/presales/` - Get all presales lead by id
-`POST /api/v1/leads/presales/moved/` - Get all checked presales lead by id
-`POST /api/v1/leads/presales/not/moved/` - Get all unchecked presales lead by id
-`GET /api/v1/leads/presales/job/<int:jobid>` - Get all presales leads by job id
-`GET /api/v1/leads/presales/moved/job/<int:jobid>` - Get all checked presales leads by job id
-`GET /api/v1/leads/presales/not/moved/job/<int:jobid>` - Get all unchecked presales leads by job id
+`POST /api/v1/create/presales/<int:salesleadid>` - Create a presales leads\
+`POST /api/v1/create/presales/` - Create all presales leads\
+`GET /api/v1/leads/presales/<int:presalesleadid>` - Get presales lead by id\
+`POST /api/v1/leads/presales/` - Get all presales lead by id\
+`POST /api/v1/leads/presales/moved/` - Get all checked presales lead by id\
+`POST /api/v1/leads/presales/not/moved/` - Get all unchecked presales lead by id\
+`GET /api/v1/leads/presales/job/<int:jobid>` - Get all presales leads by job id\
+`GET /api/v1/leads/presales/moved/job/<int:jobid>` - Get all checked presales leads by job id\
+`GET /api/v1/leads/presales/not/moved/job/<int:jobid>` - Get all unchecked presales leads by job id\
 
 _Operations leads routes_:
 
-`POST /api/v1/create/operation/<int:presalesleadid>` - Create a operation leads
-`POST /api/v1/create/operation/` - Create all operation leads
-`GET /api/v1/leads/operation/<int:operationsleadid>` - Get operation lead by id
-`POST /api/v1/leads/operation/` - Get all operation lead by id
-`POST /api/v1/leads/operation/moved/` - Get all checked operation lead by id
-`POST /api/v1/leads/operation/not/moved/` - Get all unchecked operation lead by id
-`GET /api/v1/leads/operation/job/<int:jobid>` - Get all operation leads by job id
-`GET /api/v1/leads/operation/moved/job/<int:jobid>` - Get all checked operation leads by job id
-`GET /api/v1/leads/operation/not/moved/job/<int:jobid>` - Get all unchecked operation leads by job id
+`POST /api/v1/create/operation/<int:presalesleadid>` - Create a operation leads\
+`POST /api/v1/create/operation/` - Create all operation leads\
+`GET /api/v1/leads/operation/<int:operationsleadid>` - Get operation lead by id\
+`POST /api/v1/leads/operation/` - Get all operation lead by id\
+`POST /api/v1/leads/operation/moved/` - Get all checked operation lead by id\
+`POST /api/v1/leads/operation/not/moved/` - Get all unchecked operation lead by id\
+`GET /api/v1/leads/operation/job/<int:jobid>` - Get all operation leads by job id\
+`GET /api/v1/leads/operation/moved/job/<int:jobid>` - Get all checked operation leads by job id\
+`GET /api/v1/leads/operation/not/moved/job/<int:jobid>` - Get all unchecked operation leads by job id\
 
 _Clients leads routes_:
 
-`GET /api/v1/leads/create/client/operation/<int:operationsleadid>/job/<int:jobid>` - Create client from operations lead
-`GET /api/v1/leads/create/client/job/<int:jobid>` - Create all client from operations lead
+`GET /api/v1/leads/create/client/operation/<int:operationsleadid>/job/<int:jobid>` - Create client from operations lead\
+`GET /api/v1/leads/create/client/job/<int:jobid>` - Create all client from operations lead\
 
 Feel free to contribute
