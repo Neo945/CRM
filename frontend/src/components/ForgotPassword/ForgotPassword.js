@@ -1,3 +1,5 @@
+//importing libraries
+
 import React from "react";
 import "./ForgotPassword.css";
 import { Link } from "react-router-dom";
@@ -27,31 +29,20 @@ class ForgotPassword extends React.Component {
     e.preventDefault();
     if (this.validateForm()) {
       let fields = {};
-      //fields["username"] = "";
       fields["emailid"] = "";
-      //fields["mobileno"] = "";
       fields["password"] = "";
       this.setState({ fields: fields });
       alert("Form submitted");
     }
   }
 
+  // validation Form
+
   validateForm() {
     let fields = this.state.fields;
     let errors = {};
     let formIsValid = true;
 
-    // if (!fields["username"]) {
-    //   formIsValid = false;
-    //   errors["username"] = "*Please enter your username.";
-    // }
-
-    // if (typeof fields["username"] !== "undefined") {
-    //   if (!fields["username"].match(/^[a-zA-Z ]*$/)) {
-    //     formIsValid = false;
-    //     errors["username"] = "*Please enter alphabet characters only.";
-    //   }
-    // }
 
     if (!fields["emailid"]) {
       formIsValid = false;
@@ -59,7 +50,6 @@ class ForgotPassword extends React.Component {
     }
 
     if (typeof fields["emailid"] !== "undefined") {
-      //regular expression for email validation
       var pattern = new RegExp(
         /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
       );
@@ -68,18 +58,6 @@ class ForgotPassword extends React.Component {
         errors["emailid"] = "*Please enter valid email-ID.";
       }
     }
-
-    // if (!fields["mobileno"]) {
-    //   formIsValid = false;
-    //   errors["mobileno"] = "*Please enter your mobile no.";
-    // }
-
-    // if (typeof fields["mobileno"] !== "undefined") {
-    //   if (!fields["mobileno"].match(/^[0-9]{10}$/)) {
-    //     formIsValid = false;
-    //     errors["mobileno"] = "*Please enter valid mobile no.";
-    //   }
-    // }
 
     if (!fields["password"]) {
       formIsValid = false;
@@ -105,7 +83,9 @@ class ForgotPassword extends React.Component {
 
   render() {
     
+
     return (
+      
       <div id="main-registration-container ">
         <div id="" className="split3 left3">
           <div className="centered" />
@@ -115,9 +95,6 @@ class ForgotPassword extends React.Component {
             name="userRegistrationForm"
             onSubmit={this.submituserRegistrationForm}
           >
-            {/* <label>Name</label>
-        <input type="text" name="username" value={this.state.fields.username} onChange={this.handleChange} />
-        <div className="errorMsg">{this.state.errors.username}</div> */}
             <label>Registered Email ID</label>
             <input id="fpemail"
               type="text"
@@ -128,9 +105,6 @@ class ForgotPassword extends React.Component {
               onChange={this.handleChange}
             />
             <div className="errorMsg">{this.state.errors.emailid}</div>
-            {/* <label>Mobile No:</label>
-        <input type="text" name="mobileno" value={this.state.fields.mobileno} onChange={this.handleChange}   />
-        <div className="errorMsg">{this.state.errors.mobileno}</div> */}
             <label>Enter New Password</label>
             <input id="fpnewpass"
               type="password"
@@ -154,7 +128,9 @@ class ForgotPassword extends React.Component {
             <center>
               <input type="submit" className="buttonfp" value="Register" />
             </center>
-
+{/* 
+Links for navigation of login and sign up page */}
+            
             <a href="/register">
               <center>No Account? Sign Up</center>
             </a>

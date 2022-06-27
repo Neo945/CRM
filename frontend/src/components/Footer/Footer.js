@@ -1,9 +1,11 @@
+// import libraries
 import React, { Component } from "react";
 import "./Footer.css";
 export default class Footer extends Component {
   render() {
     return (
       <div>
+        {/* Footer tag */}
         <footer>
           <div className="row">
             <div className="col span-1-of-2">

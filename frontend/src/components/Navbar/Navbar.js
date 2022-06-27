@@ -1,3 +1,5 @@
+//import libraries
+
 import CardsHome from "../CardsHome/CardsHome";
 import React from "react";
 import "./Navbar.css";
@@ -9,13 +11,8 @@ const Navbar = () => {
   return (
     <header class="header">
       <div class="mid">
-        {/* <img
-          className="img123"
-          src={img}
-          alt="logo"
-          height={30}
-          width={30}
-        ></img> */}
+ 
+        {/* Navbar links for routing or navigation from one page to another */}
         <div></div>
         <ul
           class="navbar"
@@ -70,10 +67,6 @@ const Navbar = () => {
       <br></br>
       <br></br>
       <CardsHome></CardsHome>
-      {/* <div class="footer">
-                <p>Footer</p>
-                <p>Contact: 9849329003</p>
-            </div> */}
 
       <Footer />
     </header>

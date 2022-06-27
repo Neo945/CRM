@@ -1,8 +1,13 @@
+//importing libraries
+
 import React, { useState } from "react";
  import './login.css'
 import { Link } from "react-router-dom";
 import { lookup } from "../../utils";
 
+//functional components 
+
+// Declaration of useState
 function Loginform(props) {
   const [state, setState] = useState({
     fields: {
@@ -14,6 +19,7 @@ function Loginform(props) {
       password: "",
     },
   });
+
 
   function handleChange(e) {
     let fields = state.fields;
@@ -48,6 +54,7 @@ function Loginform(props) {
     }
   }
 
+// validation of  login form
   function validateForm() {
     let fields = state.fields;
     let errors = {};
@@ -84,7 +91,9 @@ function Loginform(props) {
     return formIsValid;
   }
 
+  // Html code
   return (
+    //input fields and labels
     <div id="main-registration-container ">
       <div id="register1" className="split1 left1">
         <div className="centered" />
@@ -105,15 +114,6 @@ function Loginform(props) {
             id="username"
           />
           <div className="errorMsg">{state.errors.username}</div>
-          {/* <label>Email ID:</label>
-            <input
-              type="text"
-              name="email"
-              value={state.fields.email}
-              onChange={handleChange}
-              id="email"
-            />
-            <div className="errorMsg">{state.errors.email}</div> */}
           <br></br>
           <label>Password:</label>
           <input
@@ -129,6 +129,8 @@ function Loginform(props) {
           <center>
             <input type="submit" className="button b1" value="Login" />
           </center>
+
+         {/* linking to registration and signup */}
           <Link to="/register"> Not a user? Sign-up </Link>
           <br></br>
           <br></br>
