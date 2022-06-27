@@ -1,87 +1,81 @@
-# Musica api
+# CRM API
+
+Customer relationship manager
+
+- It manages all your company's relationships and interactions with customers and potential customers.
+- It is used to manage customer relationships across the entire customer lifecycle, spanning marketing, sales, presales, operations and customer service interactions
 
 ## Manual Installation
 
 Clone the repo:
 
 ```bash
-git clone --depth 1 https://github.com/aryan-sharma21/Hipoz-api hipoz-api
+git clone --depth 1 https://github.com/neo945/CRM CRM
+```
+
+Create Virtual Environment:
+
+```bash
+pip install virtualenv
+python -m virtualenv venv
+```
+
+Activate Virtual Environment:
+
+Windows:
+
+```bash
+.\venv\Scripts\activate
+```
+
+Linux:
+
+```bash
+source venv/bin/activate
 ```
 
 Install the dependencies:
 
 ```bash
-yarn install
+pip install -r requirements.txt
 ```
 
 ## Table of Contents
 
--   [Hipoz api](#hipoz-api)
-    -   [Manual Installation](#manual-installation)
-    -   [Table of Contents](#table-of-contents)
-    -   [Features](#features)
-    -   [Commands](#commands)
-    -   [Environment Variables](#environment-variables)
-    -   [Project Structure](#project-structure)
-    -   [API Documentation](#api-documentation)
-        -   [API Endpoints](#api-endpoints)
-    -   [Error Handling](#error-handling)
-    -   [Validation](#validation)
-    -   [Authentication](#authentication)
-    -   [Authorization](#authorization)
-    -   [Logging](#logging)
-    -   [Custom Mongoose Plugins](#custom-mongoose-plugins)
-        -   [toJSON](#tojson)
-        -   [paginate](#paginate)
-    -   [Linting](#linting)
+- [CRM api](#crm-api)
+  - [Manual Installation](#manual-installation)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Commands](#commands)
+  - [Environment Variables](#environment-variables)
+  - [Project Structure](#project-structure)
+  - [API Documentation](#api-documentation)
+    - [API Endpoints](#api-endpoints)
 
 ## Technologies
 
--   **NoSQL database**: [MongoDB](https://www.mongodb.com) object data modeling using [Mongoose](https://mongoosejs.com)
--   **Authentication and authorization**: using [passport](http://www.passportjs.org) and [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
--   **Validation**: request data validation using [Joi](https://github.com/hapijs/joi)
--   **Logging**: using [winston](https://github.com/winstonjs/winston) and [morgan](https://github.com/expressjs/morgan)
--   **Testing**: unit and integration tests using [Jest](https://jestjs.io)
--   **Error handling**: centralized error handling mechanism
-<!-- - **API documentation**: with [swagger-jsdoc](https://github.com/Surnet/swagger-jsdoc) and [swagger-ui-express](https://github.com/scottie1984/swagger-ui-express) -->
--   **Process management**: advanced production process management using [PM2](https://pm2.keymetrics.io)
--   **Dependency management**: with [Yarn](https://yarnpkg.com)
--   **Environment variables**: using [dotenv](https://github.com/motdotla/dotenv) and [cross-env](https://github.com/kentcdodds/cross-env#readme)
-    <!-- - **Security**: set security HTTP headers using [helmet](https://helmetjs.github.io) -->
-    <!-- - **Santizing**: sanitize request data against xss and query injection -->
--   **CORS**: Cross-Origin Resource-Sharing enabled using [cors](https://github.com/expressjs/cors)
-    <!-- - **Compression**: gzip compression with [compression](https://github.com/expressjs/compression) -->
-    <!-- - **CI**: continuous integration with [Travis CI](https://travis-ci.org) -->
--   **Docker support**
--   **Linting**: with [ESLint](https://eslint.org)
+- **SQL database**: [SQLite3](https://www.mongodb.com) object data modeling using [Django ORM](https://mongoosejs.com)
+- **Authentication and authorization**: using [Django Session](http://www.passportjs.org) and [Cookie Storage](https://www.npmjs.com/package/jsonwebtoken)
+- **Logging**: using [Django Loggings](https://github.com/winstonjs/winston) and [morgan](https://github.com/expressjs/morgan)
+- **Testing**: using [PostMan](https://jestjs.io)
+- **Process management**: advanced production process management using [PM2](https://pm2.keymetrics.io)
+- **Environment variables**: using [dotenv](https://github.com/motdotla/dotenv) and [cross-env](https://github.com/kentcdodds/cross-env#readme)
+- **CORS**: Cross-Origin Resource-Sharing enabled using [django-cors-headers](https://github.com/expressjs/cors)
+  - **CI/CD**: continuous integration with [GitHub Actions](https://travis-ci.org)
+- **Docker support**
 
 ## Commands
 
 Running locally:
 
 ```bash
-yarn run dev
-```
-
-Running in production:
-
-```bash
-yarn start
+python manage.py runserver
 ```
 
 Testing:
 
 ```bash
-yarn test
-```
-
-Linting:
-
-```bash
-yarn lint
-
-# fix ESLint errors
-yarn lint:fix
+python manage.py test
 ```
 
 ## Environment Variables
@@ -89,139 +83,147 @@ yarn lint:fix
 The environment variables can be found and modified in the `.env` file. They come with these default values:
 
 ```bash
-# Port number
-PORT=5000
+# Ḍjango secret key
+SECRET_KEY=<SECRET_KEY>
 
-# URL of the Mongo DB
-MONGO_URL=mongodb://localhost:27017/database
+# Email SMTP server to send email
+EMAIL_SERVICE=<EMAIL_SERVICE>
 
-# JWT secret key
-JWT_SECRET=mysecretkey
+# User email to send email from
+USER_EMAIL=<USER_EMAIL>
+
+# User email passeword
+USER_PASSWORD=<USER_PASSWORD>
+
+# Linkedin email
+LINKEDIN_EMAIL=<LINKEDIN_EMAIL>
+# Linkedin email
+LINKEDIN_PASSWORD=<LINKEDIN_PASSWORD>
+
+# Encryption key
+KEY=<KEY>
+
+# AWS IAM access key to S3 bucket
+AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+AWS_STORAGE_BUCKET_NAME=<AWS_STORAGE_BUCKET_NAME>
+AWS_S3_REGION_NAME=<AWS_S3_REGION_NAME>
 ```
 
 ## Project Structure
 
 ```
-src\
- |--config\         # Environment variables and configuration related things
- |--controllers\    # Route controllers
- |--middlewares\    # Custom express middlewares
- |--models\         # Mongoose models
- |--routes\         # Routes
- |--utils\          # Utility classes and functions
- |--app.js          # Express app
- |--index.js        # App entry point
+ .\
+ |--crm\                # Main Django application directory
+ |--accounts\           # Account application directory (Login and registration)
+ |--customers\          # Customer application directory (Customer and client)
+ |--leads\              # Customer application directory (Main business leads)
+ |--logs\               # Logged data
+ |--cmrcss\             # CMRCSS application directory (Customer feedback)
+ |--forntend\           # React Js Frontend
+ |--requirements.txt\   # Dependencies
 ```
 
 ### API Endpoints
 
 List of available routes:
 
-**Auth routes**:\
-`POST auth/` -
+**Account routes**:
 
-**User routes**:\
+`POST /api/v1/accounts/register/` - Register a new user\
+`POST /api/v1/accounts/login/` - Login a user\
+`POST /api/v1/accounts/update/password/` - Update password of a user\
+`GET /api/v1/accounts/logout/` - Logout a user\
+`GET /api/v1/accounts/get/` - Get logged user\
 
-## Authentication
+_Company routes_:
 
-To require authentication for certain routes, you can use the `auth` middleware.
+`POST /api/v1/accounts/create/company/` - Create a new company\
+`GET /api/v1/accounts/company/<int:company_id>` - Get a company by id\
+`GET /api/v1/accounts/search/company?str=search_string` - Search companies by name\
 
-```javascript
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
+_Job routes_:
 
-const router = express.Router();
+`POST /api/v1/accounts/create/job/` - Create a job\
+`GET /api/v1/accounts/job/<int:job_id>` - Get a job by id\
+`GET /api/v1/accounts/search/job?str=search_string` - Search job by name\
 
-router.post('/users', auth(), userController.createUser);
-```
+**Feedback routes**:
 
-These routes require a valid JWT access token in the Authorization request header using the Bearer schema. If the request does not contain a valid access token, an Unauthorized (401) error is thrown.
+`POST /api/v1/cmrcss/feedback/<str:token>` - User feedback\
 
-**Generating Access Tokens**:
+**Customer routes**:
 
-An access token can be generated by making a successful call to the register (`POST /v1/auth/register`) or login (`POST /v1/auth/login`) endpoints. The response of these endpoints also contains refresh tokens (explained below).
+`POST /api/v1/customer/create/customer` - Create a customer\
+`GET /api/v1/customer/get/<int:customerid>` - Get a customer by id\
+`GET /api/v1/customer/add/customer/<int:customerid>/job/<int:jobid>` - Add a customer to a job\
+`GET /api/v1/customer/get/job/<int:jobid>` - Get a customer by job id\
 
-An access token is valid for 30 minutes. You can modify this expiration time by changing the `JWT_ACCESS_EXPIRATION_MINUTES` environment variable in the .env file.
+_Customer routes_:
 
-**Refreshing Access Tokens**:
+`GET /api/v1/customer/get/client/job/<int:jobid>` - Get a client by job id\
+`GET /api/v1/customer/get/client/<int:clientid>` - Get a customer by id\
 
-After the access token expires, a new access token can be generated, by making a call to the refresh token endpoint (`POST /v1/auth/refresh-tokens`) and sending along a valid refresh token in the request body. This call returns a new access token and a new refresh token.
+**Leads routes**:
 
-A refresh token is valid for 30 days. You can modify this expiration time by changing the `JWT_REFRESH_EXPIRATION_DAYS` environment variable in the .env file.
+`GET /api/v1/leads/create/lead/customer/<int:customerid>` - Create a leads\
+`GET /api/v1/leads/lead/<int:leadsid>` - Get a lead by id\
+`GET /api/v1/leads/lead/job/<int:jobid>` - Get all leads by job id\
+`GET /api/v1/leads/lead/moved/job/<int:jobid>` - Get all checked leads by job id\
+`GET /api/v1/leads/lead/not/moved/job/<int:jobid>` - Get all unchecked leads by job id\
 
-## Authorization
+_Marketing leads routes_:
 
-The `auth` middleware can also be used to require certain rights/permissions to access a route.
+`POST /api/v1/create/market/<int:leadid>` - Create a marketing leads\
+`POST /api/v1/create/market/` - Create all marketing leads\
+`GET /api/v1/leads/market/<int:marketingleadid>` - Get marketing lead by id\
+`POST /api/v1/leads/market/` - Get all marketing lead by id\
+`POST /api/v1/leads/market/` - Get all marketing lead by id\
+`POST /api/v1/leads/market/moved/` - Get all checked marketing lead by id\
+`POST /api/v1/leads/market/not/moved/` - Get all unchecked marketing lead by id\
+`GET /api/v1/leads/market/job/<int:jobid>` - Get all marketing leads by job id\
+`GET /api/v1/leads/market/moved/job/<int:jobid>` - Get all checked marketing leads by job id\
+`GET /api/v1/leads/market/not/moved/job/<int:jobid>` - Get all unchecked marketing leads by job id\
 
-```javascript
-const express = require('express');
-const auth = require('../../middlewares/auth');
-const userController = require('../../controllers/user.controller');
+_Sales leads routes_:
 
-const router = express.Router();
+`POST /api/v1/leads/create/sales/<int:marketingleadid>` - Create a sales leads\
+`POST /api/v1/leads/create/sales/` - Create all sales leads\
+`GET /api/v1/leads/sales/<int:salesleadid>` - Get sales lead by id\
+`POST /api/v1/leads/sales/` - Get all sales lead by id\
+`POST /api/v1/leads/sales/moved/` - Get all checked sales lead by id\
+`POST /api/v1/leads/sales/not/moved/` - Get all unchecked sales lead by id\
+`GET /api/v1/leads/sales/job/<int:jobid>` - Get all sales leads by job id\
+`GET /api/v1/leads/sales/moved/job/<int:jobid>` - Get all checked sales leads by job id\
+`GET /api/v1/leads/sales/not/moved/job/<int:jobid>` - Get all unchecked sales leads by job id\
 
-router.post('/users', auth('manageUsers'), userController.createUser);
-```
+_Presales leads routes_:
 
-In the example above, an authenticated user can access this route only if that user has the `manageUsers` permission.
+`POST /api/v1/create/presales/<int:salesleadid>` - Create a presales leads\
+`POST /api/v1/create/presales/` - Create all presales leads\
+`GET /api/v1/leads/presales/<int:presalesleadid>` - Get presales lead by id\
+`POST /api/v1/leads/presales/` - Get all presales lead by id\
+`POST /api/v1/leads/presales/moved/` - Get all checked presales lead by id\
+`POST /api/v1/leads/presales/not/moved/` - Get all unchecked presales lead by id\
+`GET /api/v1/leads/presales/job/<int:jobid>` - Get all presales leads by job id\
+`GET /api/v1/leads/presales/moved/job/<int:jobid>` - Get all checked presales leads by job id\
+`GET /api/v1/leads/presales/not/moved/job/<int:jobid>` - Get all unchecked presales leads by job id\
 
-The permissions are role-based. You can view the permissions/rights of each role in the `src/config/roles.js` file.
+_Operations leads routes_:
 
-If the user making the request does not have the required permissions to access this route, a Forbidden (403) error is thrown.
+`POST /api/v1/create/operation/<int:presalesleadid>` - Create a operation leads\
+`POST /api/v1/create/operation/` - Create all operation leads\
+`GET /api/v1/leads/operation/<int:operationsleadid>` - Get operation lead by id\
+`POST /api/v1/leads/operation/` - Get all operation lead by id\
+`POST /api/v1/leads/operation/moved/` - Get all checked operation lead by id\
+`POST /api/v1/leads/operation/not/moved/` - Get all unchecked operation lead by id\
+`GET /api/v1/leads/operation/job/<int:jobid>` - Get all operation leads by job id\
+`GET /api/v1/leads/operation/moved/job/<int:jobid>` - Get all checked operation leads by job id\
+`GET /api/v1/leads/operation/not/moved/job/<int:jobid>` - Get all unchecked operation leads by job id\
 
-## Logging
+_Clients leads routes_:
 
-Import the logger from `src/config/logger.js`. It is using the [Winston](https://github.com/winstonjs/winston) logging library.
+`GET /api/v1/leads/create/client/operation/<int:operationsleadid>/job/<int:jobid>` - Create client from operations lead\
+`GET /api/v1/leads/create/client/job/<int:jobid>` - Create all client from operations lead\
 
-Logging should be done according to the following severity levels (ascending order from most important to least important):
-
-```javascript
-const logger = require('<path to src>/config/logger');
-
-logger.error('message'); // level 0
-logger.warn('message'); // level 1
-logger.info('message'); // level 2
-logger.http('message'); // level 3
-logger.verbose('message'); // level 4
-logger.debug('message'); // level 5
-```
-
-In development mode, log messages of all severity levels will be printed to the console.
-
-In production mode, only `info`, `warn`, and `error` logs will be printed to the console.\
-It is up to the server (or process manager) to actually read them from the console and store them in log files.\
-This app uses pm2 in production mode, which is already configured to store the logs in log files.
-
-Note: API request information (request url, response code, timestamp, etc.) are also automatically logged (using [morgan](https://github.com/expressjs/morgan)).
-
-## Custom Mongoose Plugins
-
-The app also contains 2 custom mongoose plugins that you can attach to any mongoose model schema. You can find the plugins in `src/models/plugins`.
-
-```javascript
-const mongoose = require('mongoose');
-const { toJSON, paginate } = require('./plugins');
-
-const userSchema = mongoose.Schema(
-    {
-        /* schema definition here */
-    },
-    { timestamps: true }
-);
-
-userSchema.plugin(toJSON);
-userSchema.plugin(paginate);
-
-const User = mongoose.model('User', userSchema);
-```
-
-## Linting
-
-Linting is done using [ESLint](https://eslint.org/) and [Prettier](https://prettier.io).
-
-In this app, ESLint is configured to follow the [Airbnb JavaScript style guide](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base) with some modifications. It also extends [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier) to turn off all rules that are unnecessary or might conflict with Prettier.
-
-To modify the ESLint configuration, update the `.eslintrc.json` file. To modify the Prettier configuration, update the `.prettierrc` file.
-
-To prevent a certain file or directory from being linted, add it to `.eslintignore` and `.prettierignore`.
+Feel free to contribute

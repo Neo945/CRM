@@ -12,6 +12,9 @@ import Footer from "../Footer/Footer";
 {/* “const [checked, setChecked] = React.useState” 
  usestate hook for checkbox check and uncheck. */}
 function SalesPage(props) {
+  const [state, setState] = React.useState({
+    id: "",
+  });
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
   const [checked, setChecked] = React.useState("All");
@@ -85,9 +88,7 @@ function SalesPage(props) {
         pageSizeOptions={[2, 4, 6]}
       />
       <br></br>
-
-<br></br>
-<select
+      <select
         style={{ display: "block" }}
         onChange={(e) => {
           console.log(e.target.value);
@@ -99,20 +100,36 @@ function SalesPage(props) {
         <option value="Unhecked">Unhecked</option>
       </select>
 
-      
+      <br></br>
 
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="id"
+        value={state.id}
+        onChange={(e) => setState({ ...state, id: e.target.value })}
+      ></input>
+      <button
+        style={{ display: "block", marginLeft: "100px" }}
+        type="submit"
+        onClick={() => {
+          lookup("POST", `/leads/create/operation/${state.id}`, "", state).then(
+            ({ data, status }) => {
+              if (status === 200) {
+                console.log(data);
+              }
+            }
+          );
+        }}
+      >
+        {" "}
+        Submit
+      </button>
 
-{/* The display property specifies if/how an element is displayed. */}
-<label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Sales ID</label>
-<input style={{ display: "block" }} type="text" placeholder="Enter ID">
-        </input>
-<button style={{ display: "block" ,marginLeft:"100px" }} type="submit"> Submit</button>
-      
-<br></br>
-<Footer></Footer>
-      </div>
-
-    );
-  }
+      <br></br>
+      <Footer></Footer>
+    </div>
+  );
+}
 
 export default SalesPage;

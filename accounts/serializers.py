@@ -6,14 +6,21 @@ from .models import Company, Job, Profile
 class CompanySerializer(serializers.ModelSerializer):
     job = serializers.SerializerMethodField('get_jobs')
 
-    def jobs(self, obj):
+    def get_jobs(self, obj):
         return JobSerializer(Job.objects.filter(company=obj), many=True).data
     
 
 
     class Meta:
         model = Company
-        fields = ('name','address','phone','email','website',)
+        fields = ('name','address','phone','email','website','job')
+
+
+class CompanyCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = ('name','address','phone','email','website')
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

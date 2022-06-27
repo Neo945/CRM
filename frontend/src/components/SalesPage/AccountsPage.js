@@ -12,6 +12,10 @@ import Footer from "../Footer/Footer";
 {/* “const [checked, setChecked] = React.useState” 
  usestate hook for checkbox check and uncheck. */}
 function AccountsPage(props) {
+  const [checked, setChecked] = React.useState("All");
+  const [state, setState] = React.useState({
+    id: "",
+  });
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
 
@@ -59,8 +63,6 @@ function AccountsPage(props) {
     },
   ];
 
-
-     
   return (
     <div className="table">
       <CopyNav />

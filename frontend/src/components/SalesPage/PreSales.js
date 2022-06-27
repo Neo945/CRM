@@ -3,11 +3,11 @@
 import { useParams } from "react-router-dom";
 import { lookup } from "../../utils";
 
-import React, { Component,useEffect } from "react";
+import React, { Component, useEffect } from "react";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
-import CopyNav from '../CopyNav/CopyNav';
- import Footer from "../Footer/Footer";
+import CopyNav from "../CopyNav/CopyNav";
+import Footer from "../Footer/Footer";
 
  // The useParams hook returns an object of key/value pairs of the dynamic 
         // params from the current URL that were matched by the <Route path> .
@@ -16,6 +16,10 @@ import CopyNav from '../CopyNav/CopyNav';
 
  function PreSales(props) {
   let { jobid } = useParams();
+
+  const [state, setState] = React.useState({
+    id: "",
+  });
   const [data, setData] = React.useState([]);
   const [checked, setChecked] = React.useState("All");
    //lookup sends the main data 
@@ -40,7 +44,6 @@ import CopyNav from '../CopyNav/CopyNav';
       accessor: "salesleads.marketinglead.leads.customer.name",
     },
     {
-
       Header: "IS Done",
       accessor: "salesleads.marketinglead.leads.customer.is_done",
     },
@@ -68,7 +71,7 @@ import CopyNav from '../CopyNav/CopyNav';
       Header: "Proposal Dates",
       accessor: "salesleads.marketinglead.leads.customer.proposal_date",
     },
- 
+
     // {
     //   Header: "FeedBack",
     //   accessor: "cmrcss",
@@ -104,6 +107,43 @@ import CopyNav from '../CopyNav/CopyNav';
         <option value="Checked">Checked</option>
         <option value="Unhecked">Unhecked</option>
       </select>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="id"
+        value={state.id}
+        onChange={(e) => setState({ ...state, id: e.target.value })}
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="refered_source"
+        value={state.proposal_details}
+        onChange={(e) => setState({ ...state, refered_source: e.target.value })}
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="requirements"
+        value={state.proposal_details}
+        onChange={(e) => setState({ ...state, requirements: e.target.value })}
+      ></input>
+      <button
+        style={{ display: "block", marginLeft: "100px" }}
+        type="submit"
+        onClick={() => {
+          lookup("POST", `/leads/create/presales/${state.id}`, "", state).then(
+            ({ data, status }) => {
+              if (status === 200) {
+                console.log(data);
+              }
+            }
+          );
+        }}
+      >
+        {" "}
+        Submit
+      </button>
 
         {/* The display property specifies if/how an element is displayed. */}
       <label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Pre Sales ID</label>

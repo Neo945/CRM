@@ -13,6 +13,12 @@ import "./Leads.css";
 {/* “const [checked, setChecked] = React.useState” 
  usestate hook for checkbox check and uncheck. */}
 function Leads(props) {
+  const [state, setState] = React.useState({
+    requirements: "",
+    id: "",
+    refered_by_name: "",
+    refered_source: "",
+  });
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
   const [checked, setChecked] = React.useState("All");
