@@ -1,0 +1,36 @@
+{% include 'index.html' %} {% block content %}
+<section class="section-form">
+  <div class="row">
+    <h2>Nahi karunga</h2>
+  </div>
+  <div class="row">
+    <form method="post" class="contact-form">
+      <div class="row">
+        <div class="col span-1-of-3">
+          <label>Did you like the service?</label>
+        </div>
+        <div class="col span-2-of-3">
+          <input type="checkbox" name="liked" id="liked" checked /> Yes, please
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-1-of-3">
+          <label>Drop us a line</label>
+        </div>
+        <div class="col span-2-of-3">
+          <textarea name="feedback" placeholder="Your feedback"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-1-of-3">
+          <label>&nbsp;</label>
+        </div>
+        <div class="col span-2-of-3">
+          <input type="submit" value="Send it!" />
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock content %}

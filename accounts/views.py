@@ -9,15 +9,29 @@ from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
 from django.core.mail import send_mail
 from accounts.models import Company, Job, Profile
-from accounts.serializers import CompanySerializer, JobCreateSerializer, JobSerializer, ProfileCreateSerializer, ProfileSerializer, UserSerializer
+from accounts.serializers import CompanyCreateSerializer, CompanySerializer, JobCreateSerializer, JobSerializer, ProfileCreateSerializer, ProfileSerializer, UserSerializer
 from django.db.models import Q
 
 # tested
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_company(request):
+    """
+    Create a new company
+    Campany can only be created by admin user
+    method: POST
+    Endpoint: /api/v1/accounts/create/company/
+    data:
+    {
+        'name': 'company name',
+        'address': 'company address',
+        'phone': 'company phone',
+        'email': 'company email eg: example@gmail.com',
+        'website': 'company website eg: https://example.com'
+    }
+    """
     if request.user.is_authenticated and request.user.is_superuser:
-        serializer = CompanySerializer(data=request.data)
+        serializer = CompanyCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({"message":"Company created successfully", "sucess": True, "data": serializer.data}, status=201)
@@ -26,6 +40,12 @@ def create_company(request):
 
 @api_view(['GET'])
 def get_company(request, company_id):
+    """
+    Get a company by id
+    method: GET
+    Endpoint: /api/v1/accounts/company/<int:company_id>
+    data:
+    """
     company = Company.objects.filter(id=company_id)
     if company.exists():
         return Response({"message":"Company created successfully", "sucess": True, "company": CompanySerializer(company.first()).data}, status=200)
@@ -35,12 +55,20 @@ def get_company(request, company_id):
 @api_view(['POST'])
 def reg_view(request):
     """
+    Register a new user
+    method: POST
+    Endpoint: /api/v1/accounts/register/
     {
         "email": "shreesh@gmail.com",
         "password1": "$#p7j!<{L9P3j-1",
         "password2": "$#p7j!<{L9P3j-1",
         "username": "shree1",
-        "csrftoken": "oql2VrzNNrZy7q9blHdipSoi3s4Tenpb2osmfxmmwJyD9aoWRxx86ob4O6z6sWje"
+        'type': 'MRK', 
+        'company':<int:company_id>, 
+        'email':'user email eg: example@gmail.com', 
+        'first_name':'user first name', 
+        'last_name':'user last name',
+        "csrftoken": "{{ csrf_token }}"
     }    
     """
     form = UserCreationForm(request.data or None)
@@ -55,6 +83,9 @@ def reg_view(request):
 @api_view(['POST'])
 def login_view(request):
     """
+    Login a user
+    method: POST
+    Endpoint: /api/v1/accounts/login/
     {
         "email": "shreesh@gmail.com",
         "password": "$#p7j!<{L9P3j-1",
@@ -74,7 +105,11 @@ def login_view(request):
 @permission_classes([IsAuthenticated])
 def update_password(request):
     """
+    Update password of a user
+    method: POST
+    Endpoint: /api/v1/accounts/update/password/
     {
+        "username": "shree1",
         "old_password": "$#p7j!<{L9P3j-1",
         "new_password1": "$#p7j!<{L9P3j-1",
         "new_password2": "$#p7j!<{L9P3j-1",
@@ -94,6 +129,11 @@ def update_password(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def logout_view(request):
+    """
+    Logout a user
+    method: GET
+    Endpoint: /api/v1/accounts/logout/
+    """
     logout(request)
     return Response({"message":"Logout Successful", "sucess": True}, status=200)
 
@@ -101,6 +141,11 @@ def logout_view(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user(request):
+    """
+    Get a logged in user
+    method: GET
+    Endpoint: /api/v1/accounts/get/
+    """
     if request.user.is_authenticated:
         return Response({'message': "user is authenticated", "success": True, 'user': ProfileSerializer(Profile.objects.get(user=request.user)).data})
     return Response({'message': "user is not authenticated","success": False})
@@ -109,6 +154,21 @@ def get_user(request):
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser, FormParser])
 def create_jobs(request):
+    """
+    Create a job
+    method: POST
+    Endpoint: /api/v1/accounts/create/job/
+    {
+        'description': Job description,
+        'linkedin_url': Job linkedin url,
+        'requirements': Job requirements,
+        'image':InMemoryFile,
+        'document': InMemoryFile
+        'name': 'job name',
+        'website': 'job website eg: https://example.com'
+
+    }
+    """
     serializer = JobCreateSerializer(data=request.data)
     if serializer.is_valid():
         user = Profile.objects.get(user=request.user)
@@ -119,6 +179,11 @@ def create_jobs(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_jobs(request, job_id):
+    """
+    Get a job by id
+    method: GET
+    Endpoint: /api/v1/accounts/get/job/<int:job_id>
+    """
     if request.user.is_authenticated:
         return Response({"message":"Job created successfully", "sucess": True, "job": JobSerializer(Job.objects.get(id=job_id)).data}, status=201)
     return Response({"message":"User is not authenticated", "sucess": False}, status=400)
@@ -139,9 +204,21 @@ def send_email_data(request):
 
 @api_view(['GET'])
 def search_company(request):
-    return Response({"sucess": True, "company": CompanySerializer(Company.objects.filter(Q(name__icontains=request.query_params['str']) | Q(address__icontains=request.query_params['str']))).data})
+    """
+    Search a company by name and address
+    method: GET
+    Endpoint: /api/v1/accounts/search/company?str=search_string
+    """
+    compnay = Company.objects.filter(Q(name__icontains=request.query_params['str']) | Q(address__icontains=request.query_params['str'])).values('id', 'name')
+    return Response({"sucess": True, "company": list(compnay)})
 
 
 @api_view(['GET'])
 def search_job(request):
-    return Response({"sucess": True, "company": JobSerializer(Job.objects.filter(Q(name__icontains=request.query_params['str']) | Q(requirements__icontains=request.query_params['str']))).data})
+    """
+    Search a job by name and description
+    method: GET
+    Endpoint: /api/v1/accounts/search/job?str=search_string
+    """
+    job = Job.objects.filter(Q(title__icontains=request.query_params['str']) | Q(description__icontains=request.query_params['str'])).values('id', 'title')
+    return Response({"sucess": True, "company": list(job)})

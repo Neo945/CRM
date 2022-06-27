@@ -1,3 +1,4 @@
+// import libraries
 import React, { Component, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactTable from "react-table-6";
@@ -5,10 +6,17 @@ import "react-table-6/react-table.css";
 import { lookup } from "../../utils";
 import CopyNav from "../CopyNav/CopyNav";
 import Footer from "../Footer/Footer";
+
+// The useParams hook returns an object of key/value pairs of the dynamic 
+        // params from the current URL that were matched by the <Route path> .
+{/* “const [checked, setChecked] = React.useState” 
+ usestate hook for checkbox check and uncheck. */}
 function MarketingPage(props) {
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
   const [checked, setChecked] = React.useState("All");
+
+  //lookup sends the main data 
   useEffect(() => {
     lookup("GET", `/leads/market/job/${jobid}`, "", null).then(
       ({ data, status }) => {
@@ -19,6 +27,8 @@ function MarketingPage(props) {
       }
     );
   }, []);
+
+  //table header  information
   const columns = [
     {
       Header: "ID",
@@ -65,6 +75,7 @@ function MarketingPage(props) {
   return (
     <div className="table">
       <CopyNav />
+      {/* filtering data */}
       <ReactTable
         data={
           checked === "All"
@@ -73,11 +84,13 @@ function MarketingPage(props) {
             ? data.filter((x) => x.is_done)
             : data.filter((x) => !x.is_done)
         }
+        //default fields are 10 per page.
         columns={columns}
         defaultPageSize={10}
         pageSizeOptions={[2, 4, 6]}
       />
       <br></br>
+      
       <select
         style={{ display: "block" }}
         onChange={(e) => {
@@ -85,6 +98,7 @@ function MarketingPage(props) {
           setChecked(e.target.value);
         }}
       >
+
         <option value="All">All</option>
         <option value="Checked">Checked</option>
         <option value="Unhecked">Unhecked</option>
@@ -93,7 +107,7 @@ function MarketingPage(props) {
 <input style={{ display: "block" }} type="text" placeholder="Enter ID">
         </input>
 <button style={{ display: "block" ,marginLeft:"100px" }} type="submit"> Submit</button>
-      
+{/* The display property specifies if/how an element is displayed. */}
 <br></br>
       <Footer></Footer>
     </div>

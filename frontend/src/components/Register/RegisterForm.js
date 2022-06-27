@@ -14,6 +14,7 @@ function RegisterForm(props) {
       mobileno: "",
       password1: "",
       password2: "",
+      type: "PSLS",
     },
     errors: {
       username: "",
@@ -23,6 +24,7 @@ function RegisterForm(props) {
       password2: "",
     },
   });
+  const [list, setList] = useState([]);
 
   function handleChange(e) {
     let fields = state.fields;
@@ -46,14 +48,15 @@ function RegisterForm(props) {
     e.preventDefault();
     if (validateForm()) {
       // Fetch API call here using state.fields
-      lookup("POST", "/accounts/register/", "", state.fields).then(
-        ({ data, status }) => {
-          if (status === 200) {
-            console.log(data);
-            // props.history("/");
-          }
+      lookup("POST", "/accounts/register/", "", {
+        ...state.fields,
+        company: list[0].id,
+      }).then(({ data, status }) => {
+        if (status === 200) {
+          console.log(data);
+          // props.history("/");
         }
-      );
+      });
       initState();
     }
   }
@@ -213,7 +216,7 @@ function RegisterForm(props) {
 
           <div className="errorMsg">{state.errors.password2}</div>
           <input
-            style={{display : 'block'}}
+            style={{ display: "block" }}
             type={"checkbox"}
             id="showPassword"
             name="showPassword"
@@ -230,29 +233,46 @@ function RegisterForm(props) {
 
           <label for="type">Choose type:</label>
 
-          <select name="type" id="type" style={{ display: "block" }}>
+          <select
+            name="type"
+            id="type"
+            style={{ display: "block" }}
+            onChange={handleChange}
+            value={state.fields.type}
+          >
             <option value="MRK">Marketing</option>
             <option value="OPR">Operations</option>
             <option value="SLS">Sales</option>
             <option value="PSLS">Pre Sales</option>
           </select>
 
-           <div>
-            <input list="dropdown1" type="text" placeholder="Search.." name="search" />
+          <div>
+            <input
+              list="dropdown1"
+              type="text"
+              placeholder="Search.."
+              name="search"
+              onChange={(e) => {
+                lookup(
+                  "GET",
+                  `/accounts/search/company?str=${e.target.value}`,
+                  "",
+                  null
+                ).then(({ data, status }) => {
+                  if (status === 200) {
+                    setList(data.company);
+                  }
+                });
+              }}
+            />
             <div>
-              <datalist id = "dropdown1">
-                <option value = "Edge">Edge</option>
-                <option value = "Safari">Safari</option>
-                <option value = "Car">Car</option>
-                <option value = "Cart">Cart</option>
-                <option value = "Saffron">Saffron</option>
+              <datalist id="dropdown1">
+                {list.map((item) => (
+                  <option value={item.name}>{item.id}</option>
+                ))}
               </datalist>
             </div>
-          </div> 
-
-
-
-
+          </div>
 
           <center>
             <input

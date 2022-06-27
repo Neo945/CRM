@@ -98,7 +98,6 @@ function App() {
               <li>
                 <Link to={"/createjob"}> CreateJob </Link>
               </li>
-
             </ol>
           }
         />
@@ -146,13 +145,18 @@ function App() {
           }
         />
 
-
-        <Route path="/salespage" element={<SalesPage history={navigate} />} />
+        <Route
+          path="/salespage/:jobid"
+          element={<SalesPage history={navigate} />}
+        />
 
         <Route path="/home" element={<Navbar history={navigate} />} />
-        <Route path="/presales" element={<PreSales history={navigate} />} />
         <Route
-          path="/operationpage"
+          path="/presales/:jobid"
+          element={<PreSales history={navigate} />}
+        />
+        <Route
+          path="/operationpage/:jobid"
           element={<OperationsPage history={navigate} />}
         />
         <Route

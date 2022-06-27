@@ -19,6 +19,11 @@ from .models import Client, Customer
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_customer(request, customerid):
+    """
+    Get a customer by id
+    method: GET
+    Endpoint: /api/v1/customer/get/<int:customerid>
+    """
     if request.user.is_authenticated:
         costomer = Customer.objects.get(user=customerid)
         return Response({ 'success': True, 'data': CustomerSerializer(costomer).data })
@@ -27,6 +32,22 @@ def get_customer(request, customerid):
 @api_view(['POST'])
 # @permission_classes([IsAuthenticated])
 def create_customer(request):
+    """
+    Create a customer
+    method: POST
+    Endpoint: /api/v1/customer/create/customer/
+    data:
+    {
+        'name': customer name, 
+        'phone': customer phone,, 
+        'email' : customer email,, 
+        'website': customer website,, 
+        'description': customer description,
+        "designation" : customer designation,
+        "company" : customer company,
+        "requirement" : customer requirement,
+    }
+    """
     serializer = CustomerCreateSerializer(data=request.data)
     linkedin_serializer = LinkedinSerializer(data=request.data)
     if serializer.is_valid() and linkedin_serializer.is_valid():
@@ -53,6 +74,11 @@ def create_customer(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def add_customer_to_job(request, customerid, jobid):
+    """
+    Add a customer to a job
+    method: GET
+    Endpoint: /api/v1/customer/add/customer/<int:customerid>/job/<int:jobid>
+    """
     customer = Customer.objects.get(id=customerid)
     job = Job.objects.get(id=jobid)
     if customer.job.filter(id=jobid).exists():
@@ -73,17 +99,33 @@ def add_customer_to_job(request, customerid, jobid):
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated])
 def get_customer_by_job(request, jobid):
+    """
+    Get a customer by job id
+    method: GET
+    Endpoint: /api/v1/customer/get/job/<int:jobid>
+    """
     customers = Customer.objects.filter(job=jobid)
     return Response({ 'success': True, 'data': CustomerSerializer(customers, many=True).data })
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_clients_by_job(request, jobid):
+    """
+    Get a client by job id
+    method: GET
+    Endpoint: /api/v1/customer/get/client/job/<int:jobid>
+    """
+
     client = Client.objects.filter(job=jobid)
     return Response({ 'success': True, 'data': ClientSerializer(client, many=True).data })
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_client(request, clientid):
+    """
+    Get a customer by id
+    method: GET
+    Endpoint: /api/v1/customer/get/client/<int:clientid>
+    """
     client = Client.objects.filter(id=clientid)
     return Response({ 'success': True, 'data': ClientSerializer(client).data })

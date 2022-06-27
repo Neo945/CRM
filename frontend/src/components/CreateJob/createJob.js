@@ -1,8 +1,11 @@
+//import libraries as required
 import React, { useState } from "react";
 import "./createJob.css";
 import { lookup } from "../../utils";
 
 function CreateJob(props) {
+  // defining state
+  // useState Hook allows us to track state in a function component. 
   const [state, setState] = useState({
     name: "",
     website: "",
@@ -28,6 +31,7 @@ function CreateJob(props) {
     designationError: "",
   });
 
+    // required to change the target value
   const change = (e) => {
     props.onChange({ [e.target.name]: e.target.value });
     setState({
@@ -36,6 +40,8 @@ function CreateJob(props) {
     });
   };
 
+
+   // validation initiation
   const validate = () => {
     let nameError = "";
     let emailError = "";
@@ -48,6 +54,8 @@ function CreateJob(props) {
     let requirementsError = "";
     let designationError = "";
 
+
+    //error validation  logic
     if (!state.name) {
       nameError = "Lead Owner cannot be blank";
     } else if (state.name.length > 30) {
@@ -148,6 +156,7 @@ function CreateJob(props) {
     return true;
   };
 
+  //This function will receive the form data if form validation is successful.
   const handleSubmit = (event) => {
     event.preventDefault();
     // const isValid = validate();
