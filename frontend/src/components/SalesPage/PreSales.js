@@ -1,3 +1,4 @@
+// import libraries
 // import React, { Component, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { lookup } from "../../utils";
@@ -8,10 +9,16 @@ import "react-table-6/react-table.css";
 import CopyNav from '../CopyNav/CopyNav';
  import Footer from "../Footer/Footer";
 
+ // The useParams hook returns an object of key/value pairs of the dynamic 
+        // params from the current URL that were matched by the <Route path> .
+{/* “const [checked, setChecked] = React.useState” 
+ usestate hook for checkbox check and uncheck. */}
+
  function PreSales(props) {
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);
   const [checked, setChecked] = React.useState("All");
+   //lookup sends the main data 
   useEffect(() => {
     lookup("GET", `/leads/presales/job/${jobid}`, "", null).then(
       ({ data, status }) => {
@@ -22,6 +29,7 @@ import CopyNav from '../CopyNav/CopyNav';
       }
     );
   }, []);
+  //table header  information
   const columns = [
     {
       Header: "ID",
@@ -70,6 +78,7 @@ import CopyNav from '../CopyNav/CopyNav';
   return (
     <div className="table">
       <CopyNav />
+       {/* filtering data */}
       <ReactTable
         data={
           checked === "All"
@@ -79,6 +88,7 @@ import CopyNav from '../CopyNav/CopyNav';
             : data.filter((x) => !x.is_done)
         }
         columns={columns}
+        //default fields are 10 per page.
         defaultPageSize={10}
         pageSizeOptions={[2, 4, 6]}
       />
@@ -95,6 +105,7 @@ import CopyNav from '../CopyNav/CopyNav';
         <option value="Unhecked">Unhecked</option>
       </select>
 
+        {/* The display property specifies if/how an element is displayed. */}
       <label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Pre Sales ID</label>
 <input style={{ display: "block" }} type="text" placeholder="Enter ID">
         </input>

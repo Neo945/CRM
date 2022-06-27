@@ -3,6 +3,8 @@ import "./rawdata.css";
 import { lookup } from "../../utils";
 
 function RawData(props) {
+  // defining state
+  // useState Hook allows us to track state in a function component. 
   const [state, setState] = useState({
     name: "",
     website: "",
@@ -38,6 +40,7 @@ function RawData(props) {
     designationError: "",
   });
 
+  // required to change the target value
   const change = (e) => {
     props.onChange({ [e.target.name]: e.target.value });
     setState({
@@ -46,6 +49,7 @@ function RawData(props) {
     });
   };
 
+  // validation initiation
   const validate = () => {
     let nameError = "";
     let emailError = "";
@@ -68,6 +72,7 @@ function RawData(props) {
     //   cidError = "Customer ID cannot be blank";
     // }
 
+//error validation  logic
     if (!state.name) {
       nameError = "Lead Owner cannot be blank";
     } else if (state.name.length > 30) {
@@ -176,6 +181,7 @@ function RawData(props) {
     return true;
   };
 
+  //This function will receive the form data if form validation is successful.
   const handleSubmit = (event) => {
     event.preventDefault();
     const isValid = validate();
