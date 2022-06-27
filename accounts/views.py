@@ -107,7 +107,7 @@ def get_user(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser, FormParser, JSONParser])
+@parser_classes([MultiPartParser, FormParser])
 def create_jobs(request):
     serializer = JobCreateSerializer(data=request.data)
     if serializer.is_valid():

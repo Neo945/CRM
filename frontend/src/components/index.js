@@ -10,6 +10,7 @@ import PreSales from "./SalesPage/PreSales";
 import OperationsPage from "./SalesPage/OperationsPage";
 import MarketingPage from "./SalesPage/MarketingPage";
 import AccountsPage from "./SalesPage/AccountsPage";
+import CreateJob from "./CreateJob/createJob";
 
 export {
   Register,
@@ -24,4 +25,5 @@ export {
   MarketingPage,
   AccountsPage,
   Leads,
+  CreateJob,
 };

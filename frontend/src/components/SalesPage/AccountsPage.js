@@ -1,89 +1,76 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
-import CopyNav from '../CopyNav/CopyNav';
- import Footer from "../Footer/Footer";
-class AccountsPage extends Component {
+import { lookup } from "../../utils";
+import CopyNav from "../CopyNav/CopyNav";
+import Footer from "../Footer/Footer";
+function AccountsPage(props) {
+  let { jobid } = useParams();
+  const [data, setData] = React.useState([]);
+  useEffect(() => {
+    lookup("GET", `/customerget/client/job/${jobid}`, "", null).then(
+      ({ data, status }) => {
+        if (status === 200) {
+          console.log(data);
+          setData(data.data);
+        }
+      }
+    );
+  }, []);
 
-  render() {
-    const data = [
-      {
-        Customerid:"1001",
-        Marketingid:"1111",
-        Name: "Ayaan",
-        Email:"abc@gmail.com",
-        Phone: 7419638521,
-        ReferredSource: "Adv",
-        Createdon:"CRM",
-        Createdby:"any"
-      },
-   
-    ];
-    const columns = [
-      {
-        Header: "Customer id",
-        accessor: "Customerid",
-      },
-      {
-        Header: "Marketing id",
-        accessor: "Marketingid",
-      },
-      {
-        Header: "Name",
-        accessor: "Name",
-      },
-      {
-        Header: "Email",
-        accessor: "Email",
-      },
-      {
-        Header: "Phone",
-        accessor: "Phone",
-      },
-      {
-        Header: "Reffered Source",
-        accessor: "ReferredSource",
-      },
-      {
-        Header: "Created on",
-        accessor: "Createdon",
-      },
-      {
-        Header: "Created by",
-        accessor: "Createdby",
-      },
-    ];
-    
-    return (
+  const columns = [
+    {
+      Header: "Client ID",
+      accessor: "id",
+    },
+    {
+      Header: "Operation ID",
+      accessor: "operations.id",
+    },
+    {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Email",
+      accessor: "email",
+    },
+    {
+      Header: "Phone",
+      accessor: "phone",
+    },
+    {
+      Header: "Created on",
+      accessor: "date_created",
+    },
+    {
+      Header: "Created by",
+      accessor: "operations.aproved_by.first_name",
+    },
+  ];
+
+
      
-      <div className="table">
-        <CopyNav/>
-        <ReactTable
-          data={data}
-          columns={columns}
-          defaultPageSize={10}
-          pageSizeOptions={[2, 4, 6]}
+  return (
+    <div className="table">
+      <CopyNav />
+      <ReactTable
+        data={data}
+        columns={columns}
+        defaultPageSize={10}
+        pageSizeOptions={[2, 4, 6]}
       />
-<br></br>
-
-<select style={{ display: "block" }}>
-          <option value="All">All</option>
-          <option value="Checked">Checked</option>
-          <option value="Unhecked">Unhecked</option>
-        </select>
-
-
-        <br></br>
+      <br></br>
+      <br></br>
 <label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Accounts ID</label>
 <input style={{ display: "block" }} type="text" placeholder="Enter ID">
         </input>
 <button style={{ display: "block"  }} type="submit"> Submit</button>
       
 <br></br>
-<Footer></Footer>
-      </div>
-
-    );
-  }
+      <Footer></Footer>
+    </div>
+  );
 }
 export default AccountsPage;

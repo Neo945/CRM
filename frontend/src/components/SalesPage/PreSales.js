@@ -7,6 +7,7 @@ import ReactTable from "react-table-6";
 import "react-table-6/react-table.css";
 import CopyNav from '../CopyNav/CopyNav';
  import Footer from "../Footer/Footer";
+
  function PreSales(props) {
   let { jobid } = useParams();
   const [data, setData] = React.useState([]);

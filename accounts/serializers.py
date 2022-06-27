@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 from .models import Company, Job, Profile
 
 class CompanySerializer(serializers.ModelSerializer):
+    job = serializers.SerializerMethodField('get_jobs')
+
+    def jobs(self, obj):
+        return JobSerializer(Job.objects.filter(company=obj), many=True).data
+    
+
+
     class Meta:
         model = Company
         fields = ('name','address','phone','email','website',)
@@ -26,11 +33,11 @@ class ProfileCreateSerializer(serializers.ModelSerializer):
         fields = ('type', 'company', 'email', 'first_name', 'last_name')
 
 class JobSerializer(serializers.ModelSerializer):
-    company = CompanySerializer(read_only=True)
-    created_by = ProfileSerializer(read_only=True)
+    # company = CompanySerializer(read_only=True)
+    # created_by = ProfileSerializer(read_only=True)
     class Meta:
         model = Job
-        fields = ('name','description','company','linkedin_url','requirements','image', 'created_by')
+        fields = ('name','description','linkedin_url','requirements','image', 'created_by')
 
 
 class JobCreateSerializer(serializers.ModelSerializer):

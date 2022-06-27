@@ -1,20 +1,17 @@
 import React, { useState } from "react";
-import "./rawdata.css";
+import "./createJob.css";
 import { lookup } from "../../utils";
 
-function RawData(props) {
+function CreateJob(props) {
   const [state, setState] = useState({
     name: "",
     website: "",
     company: "",
     email: "",
     phone: "",
+    image: null,
+    document: null,
     linkedin_url: "",
-    // street: "",
-    // city: "",
-    // state: "",
-    // pincode: "",
-    // country: "",
     address: "",
     nameError: "",
     emailError: "",
@@ -23,17 +20,10 @@ function RawData(props) {
     phoneError: "",
     linkedinError: "",
     addressError: "",
-    // streetError: "",
-    // cityError: "",
-    // countryError: "",
-    // pincodeError: "",
-    // stateError: "",
-    // cid: "",
-    // cidError: "",
     description: "",
     descriptionError: "",
-    requirement: "",
-    requirementError: "",
+    requirements: "",
+    requirementsError: "",
     designation: "",
     designationError: "",
   });
@@ -53,20 +43,10 @@ function RawData(props) {
     let companyError = "";
     let phoneError = "";
     let linkedinError = "";
-    // let streetError = "";
-    // let cityError = "";
-    // let countryError = "";
-    // let pincodeError = "";
-    // let stateError = "";
-    // let cidError = "";
     let addressError = "";
     let descriptionError = "";
-    let requirementError = "";
+    let requirementsError = "";
     let designationError = "";
-
-    // if (!state.cid) {
-    //   cidError = "Customer ID cannot be blank";
-    // }
 
     if (!state.name) {
       nameError = "Lead Owner cannot be blank";
@@ -130,8 +110,8 @@ function RawData(props) {
       descriptionError = "Description cannot be blank";
     }
 
-    if (!state.requirement) {
-      requirementError = "Requiremnts cannot be blank";
+    if (!state.requirements) {
+      requirementsError = "Requiremnts cannot be blank";
     }
 
     if (!state.designation) {
@@ -145,12 +125,8 @@ function RawData(props) {
       phoneError ||
       linkedinError ||
       addressError ||
-      // cityError ||
-      // stateError ||
       descriptionError ||
-      // pincodeError ||
-      // countryError ||
-      requirementError ||
+      requirementsError ||
       designationError
     ) {
       setState({
@@ -162,13 +138,9 @@ function RawData(props) {
         phoneError,
         linkedinError,
         addressError,
-        // cityError,
-        // stateError,
-        // pincodeError,
-        // countryError,
         descriptionError,
         designationError,
-        requirementError,
+        requirementsError,
       });
       return false;
     }
@@ -178,20 +150,38 @@ function RawData(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const isValid = validate();
-    if (isValid) {
-      console.log(state);
-      // clear form
-      setState(state);
-      lookup("POST", "/customer/create/customer/", "", state).then(
-        ({ data, status }) => {
-          if (status === 200) {
-            console.log(data);
-            // props.history("/");
-          }
-        }
-      );
-    }
+    // const isValid = validate();
+    const val = new FormData(event.target);
+    console.log(val);
+    console.log(val.get("image"));
+    // if (isValid) {
+    console.log(state);
+    fetch(`http://localhost:8000/api/v1/accounts/create/job/`, {
+      method: "POST",
+      body: val,
+      credentials: "include",
+      mode: "cors",
+      // headers: {
+      // "Content-Type":
+      // "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+      // Accept: "application/json",
+      // },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+    // clear form
+    // setState(state);
+    // lookup("POST", "/accounts/create/job/", "", state).then(
+    //   ({ data, status }) => {
+    //     if (status === 200) {
+    //       console.log(data);
+    //       // props.history("/");
+    //     }
+    //   }
+    // );
+    // }
   };
 
   return (
@@ -200,25 +190,10 @@ function RawData(props) {
 
       <div id="reg">
         <div className="container1">
-          <h1>Customer Information</h1>
+          <h1>Raw Data</h1>
           <form onSubmit={handleSubmit} className="rawform">
             <h3>Contact Information</h3>
             <div className="wrapper">
-              {/* <div className="box">
-                <input
-                  type="text"
-                  placeholder="Enter Customer ID"
-                  name="cid"
-                  id="cid"
-                  value={state.cid}
-                  onChange={(e) => change(e)}
-                ></input>
-                <div style={{ fontSize: 12, color: "red" }}>
-                  {state.cidError}
-                </div>
-                <label htmlFor="name"> Customer ID </label>
-              </div> */}
-
               <div className="box">
                 <input
                   type="text"
@@ -330,15 +305,14 @@ function RawData(props) {
                 <label htmlFor="designation"> Designation</label>
               </div>
             </div>
-
             <h3> Description Information </h3>
             <div className="wrapper1">
               <div className="box">
                 <textarea
                   id="description"
+                  name="description"
                   value={state.description}
                   onChange={(e) => change(e)}
-                  name="description"
                 ></textarea>
                 <div style={{ fontSize: 12, color: "red" }}>
                   {state.descriptionError}
@@ -350,22 +324,22 @@ function RawData(props) {
             <div className="wrapper1">
               <div className="box">
                 <textarea
-                  id="requirement"
-                  value={state.requirement}
-                  name="requirement"
+                  id="requirements"
+                  value={state.requirements}
+                  name="requirements"
                   onChange={(e) => change(e)}
                 ></textarea>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {state.requirementError}
+                  {state.requirementsError}
                 </div>
-                <label htmlFor="requirement"> Customer Requirements </label>
+                <label htmlFor="requirements"> Customer Requirements </label>
               </div>
             </div>
-
+            <input type="file" name="image" onChange={(e) => change(e)} />
+            <input type="file" name="document" onChange={(e) => change(e)} />
             <div className="wrapper2">
               <center>
-                <input className="btnreg" type="submit" name="" value="Submit"></input>
-                <input className="btnreg"type="submit" name="" value="Cancel"></input>
+                <input type="submit" name="" value="Submit"></input>
               </center>
             </div>
           </form>
@@ -374,5 +348,4 @@ function RawData(props) {
     </div>
   );
 }
-
-export default RawData;
+export default CreateJob;
