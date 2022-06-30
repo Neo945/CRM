@@ -8,10 +8,12 @@ import CopyNav from "../CopyNav/CopyNav";
 import Footer from "../Footer/Footer";
 import "./Leads.css";
 
-// The useParams hook returns an object of key/value pairs of the dynamic 
-        // params from the current URL that were matched by the <Route path> .
-{/* “const [checked, setChecked] = React.useState” 
- usestate hook for checkbox check and uncheck. */}
+// The useParams hook returns an object of key/value pairs of the dynamic
+// params from the current URL that were matched by the <Route path> .
+{
+  /* “const [checked, setChecked] = React.useState” 
+ usestate hook for checkbox check and uncheck. */
+}
 function Leads(props) {
   const [state, setState] = React.useState({
     requirements: "",
@@ -23,7 +25,7 @@ function Leads(props) {
   const [data, setData] = React.useState([]);
   const [checked, setChecked] = React.useState("All");
 
-    //lookup sends the main data 
+  //lookup sends the main data
   useEffect(() => {
     lookup("GET", `/leads/lead/job/${jobid}`, "", null).then(
       ({ data, status }) => {
@@ -35,7 +37,7 @@ function Leads(props) {
     );
   }, []);
 
-      //table header  information
+  //table header  information
   const columns = [
     {
       Header: "Lead ID",
@@ -63,7 +65,7 @@ function Leads(props) {
     },
     {
       Header: "Is Done",
-      accessor: "is_done",
+      accessor: "cmrcss.feedback",
     },
   ];
 
@@ -103,11 +105,52 @@ function Leads(props) {
         <option value="Unhecked">Unhecked</option>
       </select>
 
-      {/* The display property specifies if/how an element is displayed. */}
-      <label style={{ display: "block",textAlign:"left",fontSize:"15px",color:"black",fontWeight:"bold" }}>Pre Sales ID</label>
-<input style={{ display: "block" }} type="text" placeholder="Enter ID">
-        </input>
-<button style={{ display: "block" ,marginLeft:"100px" }} type="submit"> Submit</button>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="id"
+        value={state.id}
+        onChange={(e) => setState({ ...state, id: e.target.value })}
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="refered_by_name"
+        value={state.refered_by_name}
+        onChange={(e) =>
+          setState({ ...state, refered_by_name: e.target.value })
+        }
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="refered_source"
+        value={state.refered_source}
+        onChange={(e) => setState({ ...state, refered_source: e.target.value })}
+      ></input>
+      <input
+        style={{ display: "block" }}
+        type="text"
+        name="requirements"
+        value={state.requirements}
+        onChange={(e) => setState({ ...state, requirements: e.target.value })}
+      ></input>
+      <button
+        style={{ display: "block", marginLeft: "100px" }}
+        type="submit"
+        onClick={() => {
+          lookup("POST", `/leads/create/market/${state.id}`, "", state).then(
+            ({ data, status }) => {
+              if (status === 200) {
+                console.log(data);
+              }
+            }
+          );
+        }}
+      >
+        {" "}
+        Submit
+      </button>
       <Footer></Footer>
     </div>
   );

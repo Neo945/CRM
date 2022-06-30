@@ -44,7 +44,7 @@ class JobSerializer(serializers.ModelSerializer):
     # created_by = ProfileSerializer(read_only=True)
     class Meta:
         model = Job
-        fields = ('name','description','linkedin_url','requirements','image', 'created_by')
+        fields = ('name','description','linkedin_url','requirements','image', 'created_by', 'document')
 
 
 class JobCreateSerializer(serializers.ModelSerializer):

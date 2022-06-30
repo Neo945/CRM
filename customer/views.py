@@ -6,6 +6,7 @@ from django.conf import settings
 import urllib.request
 from django.core.mail import EmailMessage
 from accounts.models import Job
+from accounts.serializers import JobSerializer
 from customer.serializers import  CustomerCreateSerializer, CustomerSerializer, LinkedinSerializer
 from django.conf import settings
 from django.core.mail import send_mail
@@ -57,18 +58,19 @@ def create_customer(request):
         print(customer)
         if not request.data.get('job'):
             return Response({ 'success': True })
-        job = Job.objects.get(id=request.data['job'])
-        if customer.job.filter(id=job).exists():
-            return Response({ 'success': False, 'data': 'Customer already added to job' })
+        job = Job.objects.get(id=request.data.get('job'))
+        js = JobSerializer(job)
         customer.job.add(job)
         subject = "Show some interest"
-        response = urllib.request.urlopen(job.document)
-        message = f"Click here to see the job <a href='https://127.0.0.1:8000/api/v1/leads/create/lead/customer/{customer.id}'>{customer.name}</a>"
-        recipient_list = [customer.email]
+        message = f"Click here to see the job <a href='http://127.0.0.1:8000/api/v1/leads/create/lead/customer/{customer.id}'>{customer.name}</a>"
+        recipient_list = ['shreeshsrivastava.35.e.fe@gmail.com']
         mail = EmailMessage(subject, message, settings.EMAIL_HOST_USER, recipient_list)
         mail.content_subtype = "html"
+        response = urllib.request.urlopen(js.data['document'])
         mail.attach("Attachments.pdf", response.read(), "application/pdf")
-        if send_mail( subject, message, settings.EMAIL_HOST_USER, recipient_list ) != 0:
+        response = urllib.request.urlopen(js.data['document'])
+        mail.attach("image.png", response.read(), "image/png")
+        if mail.send() != 0:
             return Response({"message":"Email sent successfully", 'data': CustomerSerializer(customer).data, "sucess": True}, status=200)
         return Response({ 'success': True, "message": "Not able to send email but data saved", 'data': CustomerSerializer(customer).data })
     return Response({ 'success': False, 'data': serializer.errors })

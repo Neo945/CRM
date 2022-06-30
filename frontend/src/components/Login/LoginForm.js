@@ -1,11 +1,11 @@
 //importing libraries
 
 import React, { useState } from "react";
- import './login.css'
+import "./login.css";
 import { Link } from "react-router-dom";
 import { lookup } from "../../utils";
 
-//functional components 
+//functional components
 
 // Declaration of useState
 function Loginform(props) {
@@ -19,7 +19,6 @@ function Loginform(props) {
       password: "",
     },
   });
-
 
   function handleChange(e) {
     let fields = state.fields;
@@ -44,8 +43,9 @@ function Loginform(props) {
       console.log(state.fields);
       lookup("POST", "/accounts/login/", "", state.fields).then(
         ({ data, status }) => {
-          if (status === 200) {
+          if (status === 201) {
             console.log(data);
+            alert("Login successfully");
             initState();
             // props.history("/");
           }
@@ -54,7 +54,7 @@ function Loginform(props) {
     }
   }
 
-// validation of  login form
+  // validation of  login form
   function validateForm() {
     let fields = state.fields;
     let errors = {};
@@ -65,7 +65,6 @@ function Loginform(props) {
       errors.username = "*Please enter your username.";
     }
 
-   
     if (!fields.password) {
       formIsValid = false;
       errors.password = "*Please enter your password.";
@@ -98,7 +97,8 @@ function Loginform(props) {
       <div id="register1" className="split1 left1">
         <div className="centered" />
         <h2>Login Page</h2>
-        <form className="loginform"
+        <form
+          className="loginform"
           method="post"
           name="userRegistrationForm"
           onSubmit={submituserRegistrationForm}
@@ -130,7 +130,7 @@ function Loginform(props) {
             <input type="submit" className="button b1" value="Login" />
           </center>
 
-         {/* linking to registration and signup */}
+          {/* linking to registration and signup */}
           <Link to="/register"> Not a user? Sign-up </Link>
           <br></br>
           <br></br>
@@ -139,9 +139,7 @@ function Loginform(props) {
       </div>
 
       <div className="split1 right1">
-        <div className="centered">
-        
-        </div>
+        <div className="centered"></div>
       </div>
     </div>
   );

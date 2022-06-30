@@ -15,7 +15,7 @@ from cryptography.fernet import Fernet
 
 # tested
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def create_leads(request, customerid):
     """
     Create a leads
@@ -112,7 +112,7 @@ def create_marketing_leads(request, leadid):
         message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token.decode()) + "'>Click here to give feedback</a>"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [lead.customer.email]
-        if send_mail( subject, message, email_from, recipient_list ):
+        if send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message ):
             return Response({'status': 'success', "data": MarketingSerializer(instance).data})
         return Response({'status': 'success',"data": MarketingSerializer(instance).data})
     return Response({'status': 'failure'})
@@ -152,7 +152,7 @@ def create_all_marketing_leads(request):
             message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token.decode()) + "'>Click here to give feedback</a>"
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [lead.customer.email]
-            if send_mail( subject, message, email_from, recipient_list ):
+            if send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message ):
                 return Response({'status': 'success', "data": MarketingSerializer(instance).data})
             return Response({'status': 'success'})
     return Response({'status': 'failure'})
@@ -284,7 +284,7 @@ def create_sales_leads(request, marketingleadid):
         message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token.decode()) + "'>Click here to give feedback</a>"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [lead.leads.customer.email]
-        if send_mail( subject, message, email_from, recipient_list ):
+        if send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message ):
             return Response({'status': 'success'})
         return Response({'status': 'success'})
     return Response({'status': 'failure'})
@@ -323,7 +323,7 @@ def create_all_sales_leads(request):
             message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token.decode()) + "'>Click here to give feedback</a>"
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [lead1.leads.customer.email]
-            if send_mail( subject, message, email_from, recipient_list ):
+            if send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message ):
                 return Response({'status': 'success'})
             return Response({'status': 'success'})
     return Response({'status': 'failure'})
@@ -457,7 +457,7 @@ def create_presales_leads(request, salesleadid):
         message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token.decode()) + "'>Click here to give feedback</a>"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [lead.marketinglead.leads.customer.email]
-        if send_mail( subject, message, email_from, recipient_list ):
+        if send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message ):
             return Response({'status': 'success'})
         return Response({'status': 'success'})
     return Response({'status': 'failure'})
@@ -496,7 +496,7 @@ def create_all_presales_leads(request):
             message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token.decode()) + "'>Click here to give feedback</a>"
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [lead1.marketinglead.leads.customer.email]
-            if send_mail( subject, message, email_from, recipient_list ):
+            if send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message ):
                 return Response({'status': 'success'})
             return Response({'status': 'success'})
     return Response({'status': 'failure'})
@@ -619,7 +619,7 @@ def create_operation_leads(request, presalesleadid):
         return Response({'status': 'Not Authorized'})
     leads = PreSalesLead.objects.filter(id=presalesleadid)
     serializer = OperationCreateSerializer(data=request.data)
-    print(serializer.is_valid())
+    print(serializer.is_valid(),presalesleadid)
     print(serializer.errors)
     print(leads.exists())
     if serializer.is_valid() and leads.exists():
@@ -637,7 +637,7 @@ def create_operation_leads(request, presalesleadid):
         message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token.decode()) + "'>Click here to give feedback</a>"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [lead.saleslead.marketinglead.leads.customer.email]
-        if send_mail( subject, message, email_from, recipient_list ):
+        if send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message ):
             return Response({'status': 'success'})
         return Response({'status': 'success'})
     return Response({'status': 'failure'})
@@ -677,7 +677,7 @@ def create_all_operations_leads(request):
             message = "Please give us your feedback on the customer. <a href='http://localhost:8000/api/v1/cmrcss/feedback/" + str(token.decode()) + "'>Click here to give feedback</a>"
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [lead1.saleslead.marketinglead.lead.customer.email]
-            if send_mail( subject, message, email_from, recipient_list ):
+            if send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message ):
                 return Response({'status': 'success'})
             return Response({'status': 'success'})
     return Response({'status': 'failure'})
@@ -809,7 +809,7 @@ def create_client_from_operations(request, operationsleadid, jobid):
     message = "Congratulations! You have been selected as a client for the job: " + Job.objects.get(id=jobid).name + ".\n\n"
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [operationslead.presaleslead.saleslead.marketinglead.leads.customer.email]
-    send_mail( subject, message, email_from, recipient_list )
+    send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message )
     operationslead.is_done = True
     operationslead.deal_status = 'APR'
     operationslead.save()
@@ -834,7 +834,7 @@ def create_all_client_from_operations(request, jobid):
         message = "Congratulations! You have been selected as a client for the job: " + Job.objects.get(id=jobid).name + ".\n\n"
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [operationslead.presaleslead.saleslead.marketinglead.lead.customer.email]
-        send_mail( subject, message, email_from, recipient_list )
+        send_mail( subject=subject, from_email=email_from, recipient_list=recipient_list, message=message, html_message=message )
         operationslead.is_done = True
         operationslead.save()
         client = Client.objects.create(

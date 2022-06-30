@@ -4,7 +4,7 @@ import { lookup } from "../../utils";
 
 function RawData(props) {
   // defining state
-  // useState Hook allows us to track state in a function component. 
+  // useState Hook allows us to track state in a function component.
   const [state, setState] = useState({
     name: "",
     website: "",
@@ -23,6 +23,7 @@ function RawData(props) {
     companyError: "",
     phoneError: "",
     linkedinError: "",
+    job: "",
     // streetError: "",
     // cityError: "",
     // countryError: "",
@@ -69,7 +70,7 @@ function RawData(props) {
     //   cidError = "Customer ID cannot be blank";
     // }
 
-//error validation  logic
+    //error validation  logic
     if (!state.name) {
       nameError = "Lead Owner cannot be blank";
     } else if (state.name.length > 30) {
@@ -304,6 +305,20 @@ function RawData(props) {
                   {state.designationError}
                 </div>
                 <label htmlFor="designation"> Designation</label>
+              </div>
+            </div>
+
+            <div className="wrapper">
+              <div className="box">
+                <input
+                  type="text"
+                  placeholder="Enter Job"
+                  name="job"
+                  id="job"
+                  value={state.job}
+                  onChange={(e) => change(e)}
+                ></input>
+                <label htmlFor="designation"> Job</label>
               </div>
             </div>
 

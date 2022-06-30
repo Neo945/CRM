@@ -13,8 +13,8 @@ def checkMRK(x):
     return Profile.objects.get(user=x).type == 'MRK'
 class MarketingLead(models.Model):
     cmrcss = models.ForeignKey('cmrcss.CMRCSS', on_delete=models.CASCADE, null=True)
-    leads = models.OneToOneField('Leads', on_delete=models.CASCADE)
-    approved_by = models.OneToOneField('accounts.Profile', on_delete=models.CASCADE, validators=[checkMRK])
+    leads = models.ForeignKey('Leads', on_delete=models.CASCADE)
+    approved_by = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE, validators=[checkMRK])
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     is_done = models.BooleanField(default=False)
@@ -28,8 +28,8 @@ def checkSLS(x):
     return Profile.objects.get(user=x).type == 'SLS'
 class SalesLead(models.Model):
     cmrcss = models.ForeignKey('cmrcss.CMRCSS', on_delete=models.CASCADE, null=True)
-    approved_by = models.OneToOneField('accounts.Profile', on_delete=models.CASCADE, validators=[checkSLS])
-    marketinglead = models.OneToOneField('MarketingLead', on_delete=models.CASCADE)
+    approved_by = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE, validators=[checkSLS])
+    marketinglead = models.ForeignKey('MarketingLead', on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     is_done = models.BooleanField(default=False)
@@ -41,9 +41,9 @@ class SalesLead(models.Model):
 def checkPSLS(x):
     return Profile.objects.get(user=x).type == 'PSLS'
 class PreSalesLead(models.Model):
-    approved_by = models.OneToOneField('accounts.Profile', on_delete=models.CASCADE, validators=[checkPSLS])
+    approved_by = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE, validators=[checkPSLS])
     cmrcss = models.ForeignKey('cmrcss.CMRCSS', on_delete=models.CASCADE, null=True)
-    saleslead = models.OneToOneField('SalesLead', on_delete=models.CASCADE)
+    saleslead = models.ForeignKey('SalesLead', on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     is_done = models.BooleanField(default=False)
@@ -55,8 +55,8 @@ def checkOPR(x):
     return Profile.objects.get(user=x).type == 'OPR'
 class OperationLead(models.Model):
     cmrcss = models.ForeignKey('cmrcss.CMRCSS', on_delete=models.CASCADE, null=True)
-    presaleslead = models.OneToOneField('PreSalesLead', on_delete=models.CASCADE)
-    approved_by = models.OneToOneField('accounts.Profile', on_delete=models.CASCADE, validators=[checkOPR])
+    presaleslead = models.ForeignKey('PreSalesLead', on_delete=models.CASCADE)
+    approved_by = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE, validators=[checkOPR])
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     is_done = models.BooleanField(default=False)
@@ -68,5 +68,5 @@ class OperationLead(models.Model):
 
 
     deal_details = models.TextField(null=True)
-    deal_status = models.CharField(max_length=200, null=True, choices=Status.choices)
+    deal_status = models.CharField(max_length=200, default='PND', choices=Status.choices)
     detail_pricing = models.TextField(null=True)

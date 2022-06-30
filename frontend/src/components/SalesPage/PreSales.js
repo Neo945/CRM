@@ -49,10 +49,6 @@ function PreSales(props) {
       accessor: "saleslead.marketinglead.leads.customer.name",
     },
     {
-      Header: "IS Done",
-      accessor: "is_done",
-    },
-    {
       Header: "Approved by",
       accessor: "approved_by.first_name",
     },
@@ -63,6 +59,10 @@ function PreSales(props) {
     {
       Header: "Date Created",
       accessor: "date_created",
+    },
+    {
+      Header: "Feedback",
+      accessor: "cmrcss.feedback",
     },
   ];
 
@@ -127,7 +127,7 @@ function PreSales(props) {
         style={{ display: "block", marginLeft: "100px" }}
         type="submit"
         onClick={() => {
-          lookup("POST", `/leads/create/operation/${jobid}`, "", state).then(
+          lookup("POST", `/leads/create/operation/${state.id}`, "", state).then(
             ({ data, status }) => {
               if (status === 200) {
                 console.log(data);

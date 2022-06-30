@@ -12,7 +12,6 @@ const Navbar = () => {
   return (
     <header class="header">
       <div class="mid">
- 
         {/* Navbar links for routing or navigation from one page to another */}
         <div></div>
         <ul
@@ -64,6 +63,7 @@ const Navbar = () => {
                     ({ data, status }) => {
                       if (status === 200) {
                         localStorage.setItem("user", null);
+                        alert("Logged out successfully");
                       }
                     }
                   );

@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 import "./createJob.css";
 import { lookup } from "../../utils";
+import getCookie from "../../utils/getCookies";
 
 function CreateJob(props) {
   // defining state
-  // useState Hook allows us to track state in a function component. 
+  // useState Hook allows us to track state in a function component.
   const [state, setState] = useState({
     name: "",
     website: "",
@@ -31,7 +32,7 @@ function CreateJob(props) {
     designationError: "",
   });
 
-    // required to change the target value
+  // required to change the target value
   const change = (e) => {
     props.onChange({ [e.target.name]: e.target.value });
     setState({
@@ -40,8 +41,7 @@ function CreateJob(props) {
     });
   };
 
-
-   // validation initiation
+  // validation initiation
   const validate = () => {
     let nameError = "";
     let emailError = "";
@@ -53,7 +53,6 @@ function CreateJob(props) {
     let descriptionError = "";
     let requirementsError = "";
     let designationError = "";
-
 
     //error validation  logic
     if (!state.name) {
@@ -170,6 +169,9 @@ function CreateJob(props) {
       body: val,
       credentials: "include",
       mode: "cors",
+      headers: {
+        "X-CSRFToken": getCookie("csrftoken"),
+      },
       // headers: {
       // "Content-Type":
       // "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
@@ -199,7 +201,7 @@ function CreateJob(props) {
 
       <div id="reg">
         <div className="container1">
-          <h1>Job  Information</h1>
+          <h1>Job Information</h1>
           <form onSubmit={handleSubmit} className="rawform">
             <h3>Contact Information</h3>
             <div className="wrapper">
@@ -348,7 +350,12 @@ function CreateJob(props) {
             <input type="file" name="document" onChange={(e) => change(e)} />
             <div className="wrapper2">
               <center>
-                <input className="btnreg" type="submit" name="" value="Submit"></input>
+                <input
+                  className="btnreg"
+                  type="submit"
+                  name=""
+                  value="Submit"
+                ></input>
               </center>
             </div>
           </form>

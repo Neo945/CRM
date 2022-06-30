@@ -74,7 +74,7 @@ function MarketingPage(props) {
     },
     {
       Header: "FeedBack",
-      accessor: "cmrcss/feedback",
+      accessor: "cmrcss.feedback",
     },
   ];
 

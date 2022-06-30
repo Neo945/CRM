@@ -61,7 +61,7 @@ function AccountsPage(props) {
     },
     {
       Header: "Created by",
-      accessor: "operations.aproved_by.first_name",
+      accessor: "operations.approved_by.first_name",
     },
   ];
 

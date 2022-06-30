@@ -47,6 +47,7 @@ const Navbar = () => {
                   ({ data, status }) => {
                     if (status === 200) {
                       localStorage.setItem("user", null);
+                      alert("Logged out successfully");
                     }
                   }
                 );
